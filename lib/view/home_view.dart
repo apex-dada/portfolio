@@ -42,53 +42,60 @@ class HomeView extends StatelessWidget {
 
           Widget buildBody() {
             if (isMobile) {
-              // Mobile Layout (Single Column)
+              // Mobile Layout (Single Column following natural eye flow)
               return const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                 child: Column(
                   children: [
-                    SizedBox(height: 220, child: ProfileInfoSection()),
+                    SizedBox(height: 240, child: ProfileInfoSection()), // Hero Section
                     SizedBox(height: 16),
-                    SizedBox(height: 240, child: PortfolioMockupOneSection()),
+                    SizedBox(height: 240, child: ProfileImageSection()), // Profile Image
                     SizedBox(height: 16),
-                    SizedBox(height: 240, child: PortfolioMockupTwoSection()),
+                    SizedBox(height: 220, child: PortfolioMockupOneSection()), // Featured Project 1
                     SizedBox(height: 16),
-                    SizedBox(height: 160, child: SocialContainers()),
+                    SizedBox(height: 220, child: PortfolioMockupTwoSection()), // Featured Project 2
                     SizedBox(height: 16),
-                    SizedBox(height: 240, child: ProfileImageSection()),
+                    SizedBox(height: 200, child: AboutSection()), // About
                     SizedBox(height: 16),
-                    SizedBox(height: 200, child: AboutSection()),
+                    SizedBox(height: 200, child: StackSection()), // Tech Stack
                     SizedBox(height: 16),
-                    SizedBox(height: 100, child: ToggleSection()),
+                    SizedBox(height: 260, child: WorkflowSection()), // Workflow
                     SizedBox(height: 16),
-                    SizedBox(height: 200, child: StackSection()),
+                    SizedBox(height: 180, child: NewsletterSection()), // Contact
                     SizedBox(height: 16),
-                    SizedBox(height: 180, child: NewsletterSection()),
+                    SizedBox(height: 160, child: SocialContainers()), // Supplementary Socials
                     SizedBox(height: 16),
-                    SizedBox(height: 240, child: WorkflowSection()),
+                    SizedBox(height: 80, child: ToggleSection()), // Theme Switcher
                   ],
                 ),
               );
             }
 
-            // Desktop Layout (Structured Row/Column Grid)
+            // Desktop Layout (Grid structure optimized for visual hierarchy and flow)
             return const Padding(
               padding: EdgeInsets.symmetric(horizontal: 32, vertical: 20),
               child: Column(
                 children: [
-                  // Row 1
+                  // Row 1: Hero (flex 5), Profile Image (flex 3), Social/Toggle Column (flex 2)
                   SizedBox(
-                    height: 190,
+                    height: 220,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Expanded(flex: 4, child: ProfileInfoSection()),
+                        Expanded(flex: 5, child: ProfileInfoSection()),
                         SizedBox(width: 16),
-                        Expanded(flex: 2, child: PortfolioMockupOneSection()),
+                        Expanded(flex: 3, child: ProfileImageSection()),
                         SizedBox(width: 16),
-                        Expanded(flex: 2, child: PortfolioMockupTwoSection()),
-                        SizedBox(width: 16),
-                        Expanded(flex: 2, child: SocialContainers()),
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            children: [
+                              Expanded(child: SocialContainers()),
+                              SizedBox(height: 16),
+                              Expanded(child: ToggleSection()),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -99,27 +106,27 @@ class HomeView extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // Left side grid column (Profile, About, Toggle, Stack, Newsletter)
+                        // Left side grid column (Featured Projects, About, Stack, Contact)
                         Expanded(
                           flex: 8,
                           child: Column(
                             children: [
-                              // Row 2 Left
+                              // Row 2 Left (Featured Projects & About)
                               SizedBox(
                                 height: 200,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
-                                    Expanded(flex: 2, child: ProfileImageSection()),
+                                    Expanded(flex: 3, child: PortfolioMockupOneSection()),
                                     SizedBox(width: 16),
-                                    Expanded(flex: 3, child: AboutSection()),
+                                    Expanded(flex: 3, child: PortfolioMockupTwoSection()),
                                     SizedBox(width: 16),
-                                    SizedBox(width: 200, child: ToggleSection()),
+                                    Expanded(flex: 4, child: AboutSection()),
                                   ],
                                 ),
                               ),
                               SizedBox(height: 16),
-                              // Row 3 Left
+                              // Row 3 Left (Tech Stack & Contact)
                               SizedBox(
                                 height: 170,
                                 child: Row(
@@ -135,7 +142,7 @@ class HomeView extends StatelessWidget {
                           ),
                         ),
                         SizedBox(width: 16),
-                        // Right side grid column (Workflow)
+                        // Right side grid column (Workflow Timeline - spans Row 2 & 3 height)
                         Expanded(
                           flex: 2,
                           child: WorkflowSection(),

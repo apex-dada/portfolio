@@ -9,34 +9,99 @@ class ProfileInfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeViewModel = context.watch<HomeViewModel>();
+    final isDark = homeViewModel.isDarkMode;
+
+    // Subtle lighting glow effect (spotlight) using low-opacity accent color
+    // Dark mode: very soft cyan/blue glow (6% opacity)
+    // Light mode: very soft amber/gold glow (6% opacity)
+    final accentGlowColor = isDark 
+        ? const Color(0x0F40C4FF) 
+        : const Color(0x0FDF9F00);
+        
+    final baseGradient = isDark
+        ? const RadialGradient(
+            center: Alignment(-0.6, -0.6),
+            radius: 1.3,
+            colors: [
+              Color(0xFF1E1E1E),
+              Color(0xFF101010),
+            ],
+          )
+        : const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFF5F5F7),
+            ],
+          );
 
     return BentoCard(
-      backgroundColor: homeViewModel.cardColor,
-      borderColor: homeViewModel.borderColor,
-      hoverBorderColor: homeViewModel.hoverBorderColor,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
+      backgroundGradient: baseGradient,
+      borderWidth: 2.2, // Thicker border for hero visual weight
+      borderColor: isDark ? const Color(0xFF333333) : const Color(0xFFCCCCCC),
+      hoverBorderColor: isDark ? const Color(0xFF555555) : const Color(0xFF999999),
+      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
+      shadows: [
+        BoxShadow(
+          color: isDark ? const Color(0x66000000) : const Color(0x1F7F7F7F),
+          blurRadius: 20,
+          offset: const Offset(0, 10),
+        ),
+      ],
+      child: Stack(
         children: [
-          Text(
-            "Hi, I'm Kazi Woaej Mariz —",
-            style: TextStyle(
-              color: homeViewModel.primaryTextColor,
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-              letterSpacing: -0.5,
+          // Subtle lighting spotlight layer
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: const Alignment(-0.8, -0.8),
+                  radius: 1.1,
+                  colors: [
+                    accentGlowColor,
+                    Colors.transparent,
+                  ],
+                ),
+              ),
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            "Mobile application developer, building high-quality Android & iOS experiences based in Bangladesh",
-            style: TextStyle(
-              color: homeViewModel.secondaryTextColor,
-              fontSize: 15,
-              height: 1.4,
-              fontWeight: FontWeight.w400,
-            ),
+          // Hero Content
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "FLUTTER DEVELOPER",
+                style: TextStyle(
+                  color: isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF),
+                  fontSize: 10,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 2.0,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                "Hi, I'm Kazi Woaej Mariz",
+                style: TextStyle(
+                  color: homeViewModel.primaryTextColor,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: -1.0,
+                  height: 1.15,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                "Mobile application developer, building high-quality Android & iOS experiences based in Bangladesh.",
+                style: TextStyle(
+                  color: homeViewModel.secondaryTextColor,
+                  fontSize: 15.5,
+                  height: 1.45,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
           ),
         ],
       ),

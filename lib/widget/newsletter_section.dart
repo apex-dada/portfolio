@@ -9,6 +9,7 @@ class NewsletterSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeViewModel = context.watch<HomeViewModel>();
+    final isDark = homeViewModel.isDarkMode;
 
     return BentoCard(
       backgroundColor: homeViewModel.cardColor,
@@ -20,15 +21,25 @@ class NewsletterSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
+            "CONTACT",
+            style: TextStyle(
+              color: isDark ? Colors.white38 : Colors.black38,
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2.0,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
             "Have a project in mind?",
             style: TextStyle(
               color: homeViewModel.primaryTextColor,
               fontSize: 15,
               fontWeight: FontWeight.bold,
-              height: 1.4,
+              height: 1.3,
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           LayoutBuilder(
             builder: (context, constraints) {
               final useColumn = constraints.maxWidth < 280;
@@ -39,7 +50,7 @@ class NewsletterSection extends StatelessWidget {
                     Container(
                       height: 40,
                       decoration: BoxDecoration(
-                        color: homeViewModel.isDarkMode ? const Color(0xFF1A1A1A) : const Color(0xFFF2F2F7),
+                        color: isDark ? const Color(0xFF1A1A1A) : const Color(0xFFF2F2F7),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(color: homeViewModel.borderColor),
                       ),
@@ -61,7 +72,7 @@ class NewsletterSection extends StatelessWidget {
                       onPressed: () => homeViewModel.showSnackBar(context, "Project request sent successfully!"),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: homeViewModel.primaryTextColor,
-                        foregroundColor: homeViewModel.isDarkMode ? Colors.black : Colors.white,
+                        foregroundColor: isDark ? Colors.black : Colors.white,
                         elevation: 0,
                         minimumSize: const Size(double.infinity, 40),
                         shape: RoundedRectangleBorder(
@@ -69,7 +80,7 @@ class NewsletterSection extends StatelessWidget {
                         ),
                       ),
                       child: const Text(
-                        "Sent",
+                        "Send",
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                       ),
                     ),
@@ -83,7 +94,7 @@ class NewsletterSection extends StatelessWidget {
                     child: Container(
                       height: 40,
                       decoration: BoxDecoration(
-                        color: homeViewModel.isDarkMode ? const Color(0xFF1A1A1A) : const Color(0xFFF2F2F7),
+                        color: isDark ? const Color(0xFF1A1A1A) : const Color(0xFFF2F2F7),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(color: homeViewModel.borderColor),
                       ),
@@ -106,7 +117,7 @@ class NewsletterSection extends StatelessWidget {
                     onPressed: () => homeViewModel.showSnackBar(context, "Project request sent successfully!"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: homeViewModel.primaryTextColor,
-                      foregroundColor: homeViewModel.isDarkMode ? Colors.black : Colors.white,
+                      foregroundColor: isDark ? Colors.black : Colors.white,
                       elevation: 0,
                       minimumSize: const Size(100, 40),
                       shape: RoundedRectangleBorder(
@@ -114,7 +125,7 @@ class NewsletterSection extends StatelessWidget {
                       ),
                     ),
                     child: const Text(
-                      "Sent",
+                      "Send",
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                     ),
                   ),

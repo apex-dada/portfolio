@@ -66,6 +66,21 @@ class BentoCard extends StatelessWidget {
   /// Width of the card (optional).
   final double? width;
 
+  /// Custom background gradient.
+  final Gradient? backgroundGradient;
+
+  /// Custom border width. Defaults to 1.5.
+  final double borderWidth;
+
+  /// Custom box shadows.
+  final List<BoxShadow>? shadows;
+
+  /// Custom glass blur value. Defaults to 16.0.
+  final double glassBlur;
+
+  /// Custom glass overlay color.
+  final Color? glassColor;
+
   const BentoCard({
     super.key,
     this.child,
@@ -88,6 +103,11 @@ class BentoCard extends StatelessWidget {
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.height,
     this.width,
+    this.backgroundGradient,
+    this.borderWidth = 1.5,
+    this.shadows,
+    this.glassBlur = 16.0,
+    this.glassColor,
   });
 
   /// Factory constructor for a simple text card (like the Introduction card).
@@ -180,6 +200,16 @@ class BentoCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(borderRadius),
       child: Stack(
         children: [
+          // Background Color / Gradient Layer
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                color: backgroundColor,
+                gradient: backgroundGradient,
+              ),
+            ),
+          ),
+
           // Background Image Layer (Asset)
           if (backgroundImagePath != null)
             Positioned.fill(
@@ -288,7 +318,7 @@ class BentoCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.transparent,
                       borderRadius: BorderRadius.circular(borderRadius),
-                      boxShadow: [
+                      boxShadow: shadows ?? [
                         BoxShadow(
                           color: isDark
                               ? (viewModel.isHovered ? const Color(0x66000000) : const Color(0x33000000))
@@ -303,12 +333,12 @@ class BentoCard extends StatelessWidget {
                         borderRadius: borderRadius,
                         side: BorderSide(
                           color: finalBorderColor,
-                          width: 1.5,
+                          width: borderWidth,
                         ),
                       ),
-                      settings: const LiquidGlassSettings(
-                        blur: 16.0,
-                        glassColor: Colors.transparent,
+                      settings: LiquidGlassSettings(
+                        blur: glassBlur,
+                        glassColor: glassColor ?? Colors.transparent,
                       ),
                       child: cardContent,
                     ),

@@ -9,13 +9,12 @@ class AboutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeViewModel = context.watch<HomeViewModel>();
+    final isDark = homeViewModel.isDarkMode;
 
     return BentoCard(
       backgroundColor: homeViewModel.cardColor,
       borderColor: homeViewModel.borderColor,
       hoverBorderColor: homeViewModel.hoverBorderColor,
-      title: "ABOUT",
-      titleStyle: homeViewModel.titleStyle,
       onTap: () => homeViewModel.launchURL(
         context,
         'https://www.linkedin.com/in/kazi-woaej-mariz-3586501b9/',
@@ -24,7 +23,7 @@ class AboutSection extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: homeViewModel.isDarkMode ? const Color(0xFF1E1E1E) : const Color(0xFFF0F0F2),
+          color: isDark ? const Color(0xFF1E1E1E) : const Color(0xFFF0F0F2),
           border: Border.all(color: homeViewModel.borderColor),
         ),
         child: Icon(
@@ -38,16 +37,21 @@ class AboutSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "ABOUT",
-            style: homeViewModel.titleStyle,
+            "ABOUT ME",
+            style: TextStyle(
+              color: isDark ? Colors.white38 : Colors.black38,
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2.0,
+            ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 14),
           Text(
-            "Passionate about mobile application development and enjoy solving problems.",
+            "Passionate about mobile application development and enjoy solving complex user-experience problems.",
             style: TextStyle(
               color: homeViewModel.primaryTextColor,
-              fontSize: 20,
-              height: 1.4,
+              fontSize: 18.5,
+              height: 1.45,
               fontWeight: FontWeight.w500,
             ),
           ),
