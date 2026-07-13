@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -5,13 +6,22 @@ class HomeViewModel extends ChangeNotifier {
   bool _isDarkMode = true;
   bool get isDarkMode => _isDarkMode;
 
+  bool _isChangingTheme = false;
+  bool get isChangingTheme => _isChangingTheme;
+
   final ScrollController mainScrollController = ScrollController();
   final GlobalKey portfolioKey = GlobalKey();
   final GlobalKey contactKey = GlobalKey();
 
   void toggleTheme() {
     _isDarkMode = !_isDarkMode;
+    _isChangingTheme = true;
     notifyListeners();
+
+    Timer(const Duration(seconds: 1), () {
+      _isChangingTheme = false;
+      notifyListeners();
+    });
   }
 
   // Theme-derived values matching the original designs

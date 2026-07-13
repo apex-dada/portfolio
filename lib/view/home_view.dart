@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:portfolio/viewmodel/home_viewmodel.dart';
 import 'package:portfolio/widget/app_bar_section.dart';
 import 'package:portfolio/widget/profile_info_section.dart';
@@ -163,12 +164,15 @@ class HomeView extends StatelessWidget {
                     ),
                     Expanded(
                       child: Align(
-                        alignment: Alignment.topCenter,
+                        alignment: Alignment.center,
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(maxWidth: 1200),
                           child: SingleChildScrollView(
                             controller: homeViewModel.mainScrollController,
-                            child: buildBody(),
+                            child: Skeletonizer(
+                              enabled: homeViewModel.isChangingTheme,
+                              child: buildBody(),
+                            ),
                           ),
                         ),
                       ),
