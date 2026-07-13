@@ -11,7 +11,56 @@ class HomeViewModel extends ChangeNotifier {
 
   final ScrollController mainScrollController = ScrollController();
   final GlobalKey portfolioKey = GlobalKey();
+  final GlobalKey experienceKey = GlobalKey();
+  final GlobalKey aboutKey = GlobalKey();
   final GlobalKey contactKey = GlobalKey();
+
+  String _activeSection = 'Home';
+  String get activeSection => _activeSection;
+
+  HomeViewModel() {
+    mainScrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (!mainScrollController.hasClients) return;
+
+    if (mainScrollController.offset < 50) {
+      if (_activeSection != 'Home') {
+        _activeSection = 'Home';
+        notifyListeners();
+      }
+      return;
+    }
+
+    final keys = {
+      'Projects': portfolioKey,
+      'Experience': experienceKey,
+      'About': aboutKey,
+      'Contact': contactKey,
+    };
+
+    String currentSection = 'Home';
+    double closestDistance = double.infinity;
+
+    keys.forEach((section, key) {
+      final context = key.currentContext;
+      if (context != null) {
+        final box = context.findRenderObject() as RenderBox;
+        final position = box.localToGlobal(Offset.zero);
+        final distance = position.dy.abs();
+        if (distance < closestDistance && position.dy < 350) {
+          closestDistance = distance;
+          currentSection = section;
+        }
+      }
+    });
+
+    if (_activeSection != currentSection) {
+      _activeSection = currentSection;
+      notifyListeners();
+    }
+  }
 
   void toggleTheme() {
     _isDarkMode = !_isDarkMode;
@@ -98,6 +147,7 @@ class HomeViewModel extends ChangeNotifier {
 
   @override
   void dispose() {
+    mainScrollController.removeListener(_onScroll);
     mainScrollController.dispose();
     super.dispose();
   }

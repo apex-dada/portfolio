@@ -11,7 +11,6 @@ class SocialContainers extends StatelessWidget {
     final homeViewModel = context.watch<HomeViewModel>();
 
     return SizedBox(
-      key: homeViewModel.contactKey,
       child: Column(
         children: [
           Expanded(

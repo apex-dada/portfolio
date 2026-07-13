@@ -13,6 +13,7 @@ class AboutSection extends StatelessWidget {
     final isDark = homeViewModel.isDarkMode;
 
     return BentoCard(
+      key: homeViewModel.aboutKey,
       backgroundColor: homeViewModel.cardColor,
       borderColor: homeViewModel.borderColor,
       hoverBorderColor: homeViewModel.hoverBorderColor,

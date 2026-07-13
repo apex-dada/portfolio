@@ -12,6 +12,7 @@ class WorkflowSection extends StatelessWidget {
     final homeViewModel = context.watch<HomeViewModel>();
 
     return BentoCard(
+      key: homeViewModel.experienceKey,
       backgroundColor: homeViewModel.cardColor,
       borderColor: homeViewModel.borderColor,
       hoverBorderColor: homeViewModel.hoverBorderColor,

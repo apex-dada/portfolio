@@ -13,6 +13,7 @@ class NewsletterSection extends StatelessWidget {
     final isDark = homeViewModel.isDarkMode;
 
     return BentoCard(
+      key: homeViewModel.contactKey,
       backgroundColor: homeViewModel.cardColor,
       borderColor: homeViewModel.borderColor,
       hoverBorderColor: homeViewModel.hoverBorderColor,

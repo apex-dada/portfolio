@@ -13,10 +13,63 @@ class AppBarSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeViewModel = context.watch<HomeViewModel>();
+    final isDark = homeViewModel.isDarkMode;
+    final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
     
     final appBarPadding = isMobile
         ? const EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0, bottom: 4.0)
         : const EdgeInsets.only(left: 32.0, right: 32.0, top: 16.0, bottom: 4.0);
+
+    Widget buildActions() {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Theme Switch
+          IconButton(
+            onPressed: homeViewModel.toggleTheme,
+            icon: Icon(
+              isDark ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
+              color: homeViewModel.primaryTextColor,
+              size: 20,
+            ),
+            splashRadius: 20,
+            tooltip: "Toggle Theme",
+          ),
+          const SizedBox(width: 8),
+          // Resume Button
+          if (isMobile)
+            IconButton(
+              onPressed: () => homeViewModel.launchURL(context, 'https://github.com/apex-dada'),
+              icon: Icon(
+                Icons.file_download_outlined,
+                color: accentColor,
+                size: 20,
+              ),
+              tooltip: "Resume",
+            )
+          else
+            ElevatedButton.icon(
+              onPressed: () => homeViewModel.launchURL(context, 'https://github.com/apex-dada'),
+              icon: const Icon(Icons.file_download_outlined, size: 16),
+              label: const Text("Resume"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                foregroundColor: accentColor,
+                shadowColor: Colors.transparent,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(
+                    color: accentColor.withOpacity(0.4),
+                    width: 1.5,
+                  ),
+                ),
+              ),
+            ),
+        ],
+      );
+    }
 
     return Padding(
       padding: appBarPadding,
@@ -33,7 +86,7 @@ class AppBarSection extends StatelessWidget {
           glassColor: Colors.transparent,
         ),
         child: Container(
-          height: 50,
+          height: 54, // Breathing room
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,28 +101,53 @@ class AppBarSection extends StatelessWidget {
                   letterSpacing: -0.5,
                 ),
               ),
-              // Nav Items
-              Row(
-                children: [
-                  HoverNavItem(
-                    label: "Home",
-                    isDarkMode: homeViewModel.isDarkMode,
-                    onTap: homeViewModel.scrollToTop,
-                  ),
-                  const SizedBox(width: 24),
-                  HoverNavItem(
-                    label: "Portfolio",
-                    isDarkMode: homeViewModel.isDarkMode,
-                    onTap: () => homeViewModel.scrollToKey(homeViewModel.portfolioKey),
-                  ),
-                  const SizedBox(width: 24),
-                  HoverNavItem(
-                    label: "Contact",
-                    isDarkMode: homeViewModel.isDarkMode,
-                    onTap: () => homeViewModel.scrollToKey(homeViewModel.contactKey),
-                  ),
-                ],
-              ),
+              // Nav Items (Desktop Only)
+              if (!isMobile)
+                Row(
+                  children: [
+                    HoverNavItem(
+                      label: "Home",
+                      isActive: homeViewModel.activeSection == "Home",
+                      activeColor: accentColor,
+                      isDarkMode: isDark,
+                      onTap: homeViewModel.scrollToTop,
+                    ),
+                    const SizedBox(width: 28), // Improved spacing
+                    HoverNavItem(
+                      label: "Projects",
+                      isActive: homeViewModel.activeSection == "Projects",
+                      activeColor: accentColor,
+                      isDarkMode: isDark,
+                      onTap: () => homeViewModel.scrollToKey(homeViewModel.portfolioKey),
+                    ),
+                    const SizedBox(width: 28),
+                    HoverNavItem(
+                      label: "Experience",
+                      isActive: homeViewModel.activeSection == "Experience",
+                      activeColor: accentColor,
+                      isDarkMode: isDark,
+                      onTap: () => homeViewModel.scrollToKey(homeViewModel.experienceKey),
+                    ),
+                    const SizedBox(width: 28),
+                    HoverNavItem(
+                      label: "About",
+                      isActive: homeViewModel.activeSection == "About",
+                      activeColor: accentColor,
+                      isDarkMode: isDark,
+                      onTap: () => homeViewModel.scrollToKey(homeViewModel.aboutKey),
+                    ),
+                    const SizedBox(width: 28),
+                    HoverNavItem(
+                      label: "Contact",
+                      isActive: homeViewModel.activeSection == "Contact",
+                      activeColor: accentColor,
+                      isDarkMode: isDark,
+                      onTap: () => homeViewModel.scrollToKey(homeViewModel.contactKey),
+                    ),
+                  ],
+                ),
+              // Actions
+              buildActions(),
             ],
           ),
         ),
