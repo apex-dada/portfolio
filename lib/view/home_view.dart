@@ -106,7 +106,7 @@ class _HomeViewState extends State<HomeView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Hi, I'm Kazi —",
+                "Hi, I'm Kazi Woaej Mariz —",
                 style: TextStyle(
                   color: primaryTextColor,
                   fontSize: 26,
@@ -501,6 +501,7 @@ class _HomeViewState extends State<HomeView> {
                   child: LogoCarousel(),
                 ),
               ),
+              const SizedBox(height: 12),
             ],
           ),
         );
@@ -583,13 +584,13 @@ class _HomeViewState extends State<HomeView> {
               const SizedBox(height: 16),
               SizedBox(height: 200, child: buildAboutCard()),
               const SizedBox(height: 16),
-              SizedBox(height: 240, child: buildWorkflowCard()),
-              const SizedBox(height: 16),
-              SizedBox(height: 180, child: buildNewsletterCard()),
+              SizedBox(height: 100, child: buildToggleCard()),
               const SizedBox(height: 16),
               SizedBox(height: 200, child: buildStackCard()),
               const SizedBox(height: 16),
-              SizedBox(height: 100, child: buildToggleCard()),
+              SizedBox(height: 180, child: buildNewsletterCard()),
+              const SizedBox(height: 16),
+              SizedBox(height: 240, child: buildWorkflowCard()),
             ],
           ),
         );
@@ -617,32 +618,53 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             const SizedBox(height: 16),
-            // Row 2
+            // Rows 2 & 3 (Combined grid for vertical alignment of workflow)
             SizedBox(
-              height: 200,
+              height: 386,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Expanded(flex: 2, child: buildProfileCard()),
+                  // Left side grid column (Profile, About, Toggle, Stack, Newsletter)
+                  Expanded(
+                    flex: 8,
+                    child: Column(
+                      children: [
+                        // Row 2 Left
+                        SizedBox(
+                          height: 200,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(flex: 2, child: buildProfileCard()),
+                              const SizedBox(width: 16),
+                              Expanded(flex: 3, child: buildAboutCard()),
+                              const SizedBox(width: 16),
+                              Expanded(flex: 3, child: buildToggleCard()),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        // Row 3 Left (Green marked area)
+                        SizedBox(
+                          height: 170,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(flex: 6, child: buildStackCard()),
+                              const SizedBox(width: 16),
+                              Expanded(flex: 2, child: buildNewsletterCard()),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(width: 16),
-                  Expanded(flex: 3, child: buildAboutCard()),
-                  const SizedBox(width: 16),
-                  Expanded(flex: 3, child: buildNewsletterCard()),
-                  const SizedBox(width: 16),
-                  Expanded(flex: 2, child: buildStackCard()),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            // Row 3
-            SizedBox(
-              height: 170,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(flex: 8, child: buildWorkflowCard()),
-                  const SizedBox(width: 16),
-                  Expanded(flex: 2, child: buildToggleCard()),
+                  // Right side grid column (Red marked area)
+                  Expanded(
+                    flex: 2,
+                    child: buildWorkflowCard(),
+                  ),
                 ],
               ),
             ),
@@ -998,7 +1020,7 @@ class _LogoCarouselState extends State<LogoCarousel> {
     final displayLogos = List.generate(50, (i) => _logos).expand((x) => x).toList();
 
     return SizedBox(
-      height: 108,
+      height: 96,
       child: ListView.builder(
         controller: _scrollController,
         scrollDirection: Axis.horizontal,
@@ -1007,10 +1029,10 @@ class _LogoCarouselState extends State<LogoCarousel> {
         itemBuilder: (context, index) {
           final logo = displayLogos[index];
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 4.0, bottom: 12.0),
             child: Container(
-              height: 100,
-              width: 100,
+              height: 80,
+              width: 80,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
