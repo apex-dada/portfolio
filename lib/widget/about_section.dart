@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/viewmodel/home_viewmodel.dart';
 import 'package:portfolio/widget/bento_card.dart';
@@ -38,21 +39,24 @@ class AboutSection extends StatelessWidget {
         children: [
           Text(
             "ABOUT ME",
-            style: TextStyle(
+            style: GoogleFonts.outfit(
               color: isDark ? Colors.white38 : Colors.black38,
               fontSize: 10,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w800,
               letterSpacing: 2.0,
             ),
           ),
-          const SizedBox(height: 14),
-          Text(
-            "Passionate about mobile application development and enjoy solving complex user-experience problems.",
-            style: TextStyle(
-              color: homeViewModel.primaryTextColor,
-              fontSize: 18.5,
-              height: 1.45,
-              fontWeight: FontWeight.w500,
+          const SizedBox(height: 16), // Increased spacing
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 450), // Constrain paragraph width
+            child: Text(
+              "Passionate about mobile application development and enjoy solving complex user-experience problems.",
+              style: GoogleFonts.inter(
+                color: homeViewModel.primaryTextColor,
+                fontSize: 17.5, // Body size
+                height: 1.55, // Increased line height for legibility
+                fontWeight: FontWeight.w400, // Body weight (400-500)
+              ),
             ),
           ),
         ],

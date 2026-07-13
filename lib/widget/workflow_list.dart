@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/viewmodel/workflow_viewmodel.dart';
 
@@ -90,10 +91,10 @@ class WorkflowList extends StatelessWidget {
                           Expanded(
                             child: Text(
                               step,
-                              style: TextStyle(
+                              style: GoogleFonts.inter(
                                 color: primaryTextColor,
-                                                fontSize: 14.5,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),

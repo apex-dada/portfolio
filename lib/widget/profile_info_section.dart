@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/viewmodel/home_viewmodel.dart';
 import 'package:portfolio/widget/bento_card.dart';
@@ -73,32 +74,35 @@ class ProfileInfoSection extends StatelessWidget {
             children: [
               Text(
                 "FLUTTER DEVELOPER",
-                style: TextStyle(
+                style: GoogleFonts.outfit(
                   color: isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF),
                   fontSize: 10,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 2.0,
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16), // Increased spacing
               Text(
                 "Hi, I'm Kazi Woaej Mariz",
-                style: TextStyle(
+                style: GoogleFonts.outfit(
                   color: homeViewModel.primaryTextColor,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 34, // Large Display size
+                  fontWeight: FontWeight.w800, // Display weight (700-800)
                   letterSpacing: -1.0,
                   height: 1.15,
                 ),
               ),
-              const SizedBox(height: 12),
-              Text(
-                "Mobile application developer, building high-quality Android & iOS experiences based in Bangladesh.",
-                style: TextStyle(
-                  color: homeViewModel.secondaryTextColor,
-                  fontSize: 15.5,
-                  height: 1.45,
-                  fontWeight: FontWeight.w400,
+              const SizedBox(height: 18), // Increased spacing
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 480), // Reduced paragraph width for readability
+                child: Text(
+                  "Mobile application developer, building high-quality Android & iOS experiences based in Bangladesh.",
+                  style: GoogleFonts.inter(
+                    color: homeViewModel.secondaryTextColor,
+                    fontSize: 15, // Body size
+                    height: 1.5, // Line height for readability
+                    fontWeight: FontWeight.w400, // Body weight
+                  ),
                 ),
               ),
             ],

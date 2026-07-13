@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/viewmodel/bento_card_viewmodel.dart';
 
 /// A highly customizable, interactive card widget designed for Bento Grid layouts.
@@ -241,11 +242,11 @@ class BentoCard extends StatelessWidget {
                       Text(
                         title!.toUpperCase(),
                         style: titleStyle ??
-                            TextStyle(
+                            GoogleFonts.outfit(
                               color: isDark ? Colors.white38 : Colors.black38,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.5,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 2.0,
                             ),
                       ),
                       const SizedBox(height: 12),
@@ -255,11 +256,11 @@ class BentoCard extends StatelessWidget {
                         child: Text(
                           description!,
                           style: descriptionStyle ??
-                              TextStyle(
+                              GoogleFonts.inter(
                                 color: isDark ? const Color(0xDEFFFFFF) : Colors.black87,
-                                fontSize: 16,
+                                fontSize: 15.5,
                                 height: 1.5,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w400,
                               ),
                         ),
                       ),

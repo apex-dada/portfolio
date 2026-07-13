@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/viewmodel/home_viewmodel.dart';
@@ -40,7 +41,7 @@ class AppBarSection extends StatelessWidget {
               // Logo
               Text(
                 "Mariz.",
-                style: TextStyle(
+                style: GoogleFonts.outfit(
                   color: homeViewModel.primaryTextColor,
                   fontSize: 20,
                   fontWeight: FontWeight.w900,

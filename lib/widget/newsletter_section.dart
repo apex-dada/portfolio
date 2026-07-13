@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/viewmodel/home_viewmodel.dart';
 import 'package:portfolio/widget/bento_card.dart';
@@ -22,20 +23,20 @@ class NewsletterSection extends StatelessWidget {
         children: [
           Text(
             "CONTACT",
-            style: TextStyle(
+            style: GoogleFonts.outfit(
               color: isDark ? Colors.white38 : Colors.black38,
               fontSize: 10,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w800,
               letterSpacing: 2.0,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             "Have a project in mind?",
-            style: TextStyle(
+            style: GoogleFonts.outfit(
               color: homeViewModel.primaryTextColor,
               fontSize: 15,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w700, // Section title weight (600-700)
               height: 1.3,
             ),
           ),
@@ -57,10 +58,18 @@ class NewsletterSection extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       alignment: Alignment.centerLeft,
                       child: TextField(
-                        style: TextStyle(color: homeViewModel.primaryTextColor, fontSize: 14),
+                        style: GoogleFonts.inter(
+                          color: homeViewModel.primaryTextColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500, // Input weight
+                        ),
                         decoration: InputDecoration(
                           hintText: "Your email address",
-                          hintStyle: TextStyle(color: homeViewModel.secondaryTextColor, fontSize: 14),
+                          hintStyle: GoogleFonts.inter(
+                            color: homeViewModel.secondaryTextColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400, // Hint weight
+                          ),
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
@@ -79,9 +88,12 @@ class NewsletterSection extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text(
+                      child: Text(
                         "Send",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w600, // Button label weight
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ],
@@ -101,10 +113,18 @@ class NewsletterSection extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       alignment: Alignment.centerLeft,
                       child: TextField(
-                        style: TextStyle(color: homeViewModel.primaryTextColor, fontSize: 14),
+                        style: GoogleFonts.inter(
+                          color: homeViewModel.primaryTextColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500, // Input weight
+                        ),
                         decoration: InputDecoration(
                           hintText: "Your email address",
-                          hintStyle: TextStyle(color: homeViewModel.secondaryTextColor, fontSize: 14),
+                          hintStyle: GoogleFonts.inter(
+                            color: homeViewModel.secondaryTextColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400, // Hint weight
+                          ),
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
@@ -124,9 +144,12 @@ class NewsletterSection extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       "Send",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w600, // Button label weight
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                 ],

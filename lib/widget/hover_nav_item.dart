@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/viewmodel/hover_nav_item_viewmodel.dart';
 
@@ -33,11 +34,11 @@ class HoverNavItem extends StatelessWidget {
               onTap: onTap,
               child: AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 150),
-                style: TextStyle(
+                style: GoogleFonts.outfit(
                   color: color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  fontFamily: 'Inter',
+                  letterSpacing: 0.5,
                 ),
                 child: Text(label),
               ),
