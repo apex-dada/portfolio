@@ -511,6 +511,7 @@ class _HomeViewState extends State<HomeView> {
           backgroundColor: cardColor,
           borderColor: borderColor,
           hoverBorderColor: hoverBorderColor,
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
           child: Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -520,7 +521,7 @@ class _HomeViewState extends State<HomeView> {
                   color: primaryTextColor,
                   size: 24,
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 12),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -639,7 +640,7 @@ class _HomeViewState extends State<HomeView> {
                               const SizedBox(width: 16),
                               Expanded(flex: 3, child: buildAboutCard()),
                               const SizedBox(width: 16),
-                              Expanded(flex: 3, child: buildToggleCard()),
+                              SizedBox(width: 200, child: buildToggleCard()),
                             ],
                           ),
                         ),
@@ -650,9 +651,9 @@ class _HomeViewState extends State<HomeView> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Expanded(flex: 6, child: buildStackCard()),
+                              Expanded(flex: 5, child: buildStackCard()),
                               const SizedBox(width: 16),
-                              Expanded(flex: 2, child: buildNewsletterCard()),
+                              Expanded(flex: 3, child: buildNewsletterCard()),
                             ],
                           ),
                         ),
@@ -766,7 +767,12 @@ class _HomeViewState extends State<HomeView> {
         child: SafeArea(
           child: Column(
             children: [
-              buildAppBar(isMobile),
+              Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1200),
+                  child: buildAppBar(isMobile),
+                ),
+              ),
               Expanded(
                 child: Center(
                   child: ConstrainedBox(
