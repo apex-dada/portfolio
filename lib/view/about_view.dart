@@ -73,7 +73,7 @@ class AboutView extends StatelessWidget {
             SizedBox(height: 16),
             // Row 2: Education (flex 4), Hobbies (flex 6)
             SizedBox(
-              height: 270,
+              height: 310,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -86,7 +86,7 @@ class AboutView extends StatelessWidget {
             SizedBox(height: 16),
             // Row 3: Core Values (flex 5), Soft Skills (flex 5)
             SizedBox(
-              height: 280,
+              height: 300,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [

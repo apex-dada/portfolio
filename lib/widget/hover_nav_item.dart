@@ -52,23 +52,29 @@ class HoverNavItem extends StatelessWidget {
                     child: Text(label),
                   ),
                   const SizedBox(height: 4),
-                  AnimatedOpacity(
-                    duration: const Duration(milliseconds: 200),
-                    opacity: isActive ? 1.0 : 0.0,
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      width: isActive ? 5 : 0,
-                      height: 5,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: resolvedActiveColor,
-                        boxShadow: [
-                          BoxShadow(
-                            color: resolvedActiveColor.withOpacity(0.5),
-                            blurRadius: 4,
-                            spreadRadius: 1,
-                          ),
-                        ],
+                  SizedBox(
+                    height: 6, // Stable height to prevent vertical shifting
+                    child: Center(
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.easeOutCubic,
+                        width: isActive
+                            ? 6.0
+                            : (viewModel.isHovered ? 24.0 : 0.0),
+                        height: isActive ? 6.0 : 2.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(isActive ? 99 : 1),
+                          color: resolvedActiveColor,
+                          boxShadow: isActive
+                              ? [
+                                  BoxShadow(
+                                    color: resolvedActiveColor.withOpacity(0.6),
+                                    blurRadius: 6,
+                                    spreadRadius: 2,
+                                  ),
+                                ]
+                              : null,
+                        ),
                       ),
                     ),
                   ),

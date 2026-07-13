@@ -48,7 +48,6 @@ class AboutHobbiesSection extends StatelessWidget {
             children: [
               AboutHobbyChip(label: "Gaming 🎮", icon: Icons.gamepad_outlined),
               AboutHobbyChip(label: "Music 🎵", icon: Icons.music_note_outlined),
-              AboutHobbyChip(label: "Traveling ✈️", icon: Icons.explore_outlined),
               AboutHobbyChip(label: "Photography 📷", icon: Icons.camera_alt_outlined),
             ],
           ),

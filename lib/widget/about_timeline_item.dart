@@ -39,7 +39,7 @@ class AboutTimelineItem extends StatelessWidget {
             if (!isLast)
               Container(
                 width: 2,
-                height: 55,
+                height: 42,
                 color: homeViewModel.borderColor,
               ),
           ],
@@ -74,7 +74,7 @@ class AboutTimelineItem extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 8),
             ],
           ),
         ),

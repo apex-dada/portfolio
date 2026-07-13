@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portfolio/viewmodel/home_viewmodel.dart';
-import 'package:portfolio/view/about_view.dart';
-import 'package:portfolio/view/projects_view.dart';
-import 'package:portfolio/view/experience_view.dart';
-import 'package:portfolio/view/contact_view.dart';
 import 'package:portfolio/widget/hover_nav_item.dart';
+import 'package:portfolio/widget/available_badge.dart';
 
 class AppBarSection extends StatelessWidget {
   final bool isMobile;
@@ -33,76 +31,21 @@ class AppBarSection extends StatelessWidget {
     
     final isSubPage = isAboutPage || isProjectsPage || isExperiencePage || isContactPage;
 
-    void navigateToPage(BuildContext context, Widget page) {
-      if (isSubPage) {
-        Navigator.pop(context);
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => page),
-          );
-        });
-      } else {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => page),
-        );
-      }
-    }
+    final width = MediaQuery.of(context).size.width;
+    final isMobileView = width < 600;
+    final isTabletView = width >= 600 && width < 900;
     
-    final appBarPadding = isMobile
+    final appBarPadding = isMobileView
         ? const EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0, bottom: 4.0)
-        : const EdgeInsets.only(left: 32.0, right: 32.0, top: 16.0, bottom: 4.0);
+        : (isTabletView
+            ? const EdgeInsets.only(left: 24.0, right: 24.0, top: 12.0, bottom: 4.0)
+            : const EdgeInsets.only(left: 32.0, right: 32.0, top: 16.0, bottom: 4.0));
 
     Widget buildActions() {
-      return Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Theme Switch
-          IconButton(
-            onPressed: homeViewModel.toggleTheme,
-            icon: Icon(
-              isDark ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
-              color: homeViewModel.primaryTextColor,
-              size: 20,
-            ),
-            splashRadius: 20,
-            tooltip: "Toggle Theme",
-          ),
-          const SizedBox(width: 8),
-          // Resume Button
-          if (isMobile)
-            IconButton(
-              onPressed: () => homeViewModel.launchURL(context, 'https://github.com/apex-dada'),
-              icon: Icon(
-                Icons.file_download_outlined,
-                color: accentColor,
-                size: 20,
-              ),
-              tooltip: "Resume",
-            )
-          else
-            ElevatedButton.icon(
-              onPressed: () => homeViewModel.launchURL(context, 'https://github.com/apex-dada'),
-              icon: const Icon(Icons.file_download_outlined, size: 16),
-              label: const Text("Resume"),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                foregroundColor: accentColor,
-                shadowColor: Colors.transparent,
-                elevation: 0,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  side: BorderSide(
-                    color: accentColor.withOpacity(0.4),
-                    width: 1.5,
-                  ),
-                ),
-              ),
-            ),
-        ],
-      );
+      if (isMobileView) {
+        return const SizedBox.shrink();
+      }
+      return const AvailableBadge();
     }
 
     return Padding(
@@ -120,7 +63,7 @@ class AppBarSection extends StatelessWidget {
           glassColor: Colors.transparent,
         ),
         child: Container(
-          height: 54, // Breathing room
+          height: 54.0, // Standard height since there is no stacked CTA button
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,7 +72,7 @@ class AppBarSection extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   if (isSubPage) {
-                    Navigator.of(context).pop();
+                    context.go('/');
                   } else {
                     homeViewModel.scrollToTop();
                   }
@@ -158,7 +101,7 @@ class AppBarSection extends StatelessWidget {
                       isDarkMode: isDark,
                       onTap: () {
                         if (isSubPage) {
-                          Navigator.of(context).pop();
+                          context.go('/');
                         } else {
                           homeViewModel.scrollToTop();
                         }
@@ -172,7 +115,7 @@ class AppBarSection extends StatelessWidget {
                       isDarkMode: isDark,
                       onTap: () {
                         if (!isProjectsPage) {
-                          navigateToPage(context, const ProjectsView());
+                          context.go('/projects');
                         }
                       },
                     ),
@@ -184,7 +127,7 @@ class AppBarSection extends StatelessWidget {
                       isDarkMode: isDark,
                       onTap: () {
                         if (!isExperiencePage) {
-                          navigateToPage(context, const ExperienceView());
+                          context.go('/experience');
                         }
                       },
                     ),
@@ -196,7 +139,7 @@ class AppBarSection extends StatelessWidget {
                       isDarkMode: isDark,
                       onTap: () {
                         if (!isAboutPage) {
-                          navigateToPage(context, const AboutView());
+                          context.go('/about');
                         }
                       },
                     ),
@@ -208,7 +151,7 @@ class AppBarSection extends StatelessWidget {
                       isDarkMode: isDark,
                       onTap: () {
                         if (!isContactPage) {
-                          navigateToPage(context, const ContactView());
+                          context.go('/contact');
                         }
                       },
                     ),

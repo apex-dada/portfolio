@@ -18,7 +18,7 @@ class AboutSoftSkillsSection extends StatelessWidget {
       backgroundColor: homeViewModel.cardColor,
       borderColor: homeViewModel.borderColor,
       hoverBorderColor: homeViewModel.hoverBorderColor,
-      padding: const EdgeInsets.all(28.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -50,6 +50,9 @@ class AboutSoftSkillsSection extends StatelessWidget {
               AboutSkillBadge(name: "🧩 Critical Thinker"),
               AboutSkillBadge(name: "📚 Self-Educator"),
               AboutSkillBadge(name: "⏳ Adaptable"),
+              AboutSkillBadge(name: "🎨 Photoshop"),
+              AboutSkillBadge(name: "📐 Graphics Design"),
+              AboutSkillBadge(name: "📷 Photography"),
             ],
           ),
         ],

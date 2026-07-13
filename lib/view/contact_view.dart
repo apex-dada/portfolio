@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:portfolio/viewmodel/home_viewmodel.dart';
 import 'package:portfolio/widget/app_bar_section.dart';
 import 'package:portfolio/widget/contact_form_card.dart';
-import 'package:portfolio/widget/contact_info_card.dart';
 import 'package:portfolio/widget/contact_socials_card.dart';
 
 class ContactView extends StatelessWidget {
@@ -36,8 +35,6 @@ class ContactView extends StatelessWidget {
             children: [
               ContactFormCard(),
               SizedBox(height: 16),
-              ContactInfoCard(),
-              SizedBox(height: 16),
               SizedBox(height: 160, child: ContactSocialsCard()),
             ],
           ),
@@ -49,17 +46,10 @@ class ContactView extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 32, vertical: 24),
         child: Column(
           children: [
-            // Row 1: Form (flex 6), Details (flex 4)
+            // Row 1: Form Card (full width)
             SizedBox(
               height: 340,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(flex: 6, child: ContactFormCard()),
-                  SizedBox(width: 16),
-                  Expanded(flex: 4, child: ContactInfoCard()),
-                ],
-              ),
+              child: ContactFormCard(),
             ),
             SizedBox(height: 16),
             // Row 2: Social accounts (flex 10)

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/view/home_view.dart';
 import 'package:portfolio/viewmodel/home_viewmodel.dart';
+import 'package:portfolio/router/app_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<HomeViewModel>(
         builder: (context, homeViewModel, _) {
           final isDark = homeViewModel.isDarkMode;
-          return MaterialApp(
+          return MaterialApp.router(
             title: 'Portfolio Bento',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
                 ThemeData(brightness: isDark ? Brightness.dark : Brightness.light).textTheme,
               ),
             ),
-            home: const HomeView(),
+            routerConfig: appRouter,
           );
         },
       ),
