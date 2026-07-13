@@ -677,8 +677,8 @@ class _HomeViewState extends State<HomeView> {
     // App Bar Builder
     Widget buildAppBar(bool isMobile) {
       final appBarPadding = isMobile
-          ? const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 4.0)
-          : const EdgeInsets.only(left: 32.0, right: 32.0, top: 12.0, bottom: 4.0);
+          ? const EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0, bottom: 4.0)
+          : const EdgeInsets.only(left: 32.0, right: 32.0, top: 16.0, bottom: 4.0);
 
       return Padding(
         padding: appBarPadding,
@@ -774,7 +774,8 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
               Expanded(
-                child: Center(
+                child: Align(
+                  alignment: Alignment.topCenter,
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 1200),
                     child: SingleChildScrollView(
