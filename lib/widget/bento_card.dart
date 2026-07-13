@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
+import 'package:provider/provider.dart';
+import 'package:portfolio/viewmodel/bento_card_viewmodel.dart';
 
 /// A highly customizable, interactive card widget designed for Bento Grid layouts.
 /// Supports text, icons, custom background images, action buttons, and hover animations.
-class BentoCard extends StatefulWidget {
+class BentoCard extends StatelessWidget {
   /// Custom child widget to display inside the card.
   final Widget? child;
 
@@ -163,68 +165,6 @@ class BentoCard extends StatefulWidget {
   }
 
   @override
-  State<BentoCard> createState() => _BentoCardState();
-}
-
-class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMixin {
-  bool _isHovered = false;
-  bool _isPressed = false;
-
-  late final AnimationController _hoverController;
-  late final Animation<double> _scaleAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _hoverController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 200),
-    );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.02).animate(
-      CurvedAnimation(parent: _hoverController, curve: Curves.easeOutCubic),
-    );
-  }
-
-  @override
-  void dispose() {
-    _hoverController.dispose();
-    super.dispose();
-  }
-
-  void _handleHover(bool isHovered) {
-    if (!widget.isHoverable) return;
-    setState(() {
-      _isHovered = isHovered;
-    });
-    if (isHovered) {
-      _hoverController.forward();
-    } else {
-      _hoverController.reverse();
-    }
-  }
-
-  void _handleTapDown(TapDownDetails details) {
-    if (widget.onTap == null) return;
-    setState(() {
-      _isPressed = true;
-    });
-  }
-
-  void _handleTapUp(TapUpDetails details) {
-    if (widget.onTap == null) return;
-    setState(() {
-      _isPressed = false;
-    });
-  }
-
-  void _handleTapCancel() {
-    if (widget.onTap == null) return;
-    setState(() {
-      _isPressed = false;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
@@ -233,48 +173,44 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
     final defaultBorderColor = isDark ? const Color(0xFF262626) : const Color(0xFFE5E5EA);
     final defaultHoverBorderColor = isDark ? const Color(0xFF444444) : const Color(0xFFD1D1D6);
 
-    final finalBorderColor = _isHovered
-        ? (widget.hoverBorderColor ?? defaultHoverBorderColor)
-        : (widget.borderColor ?? defaultBorderColor);
-
-    final resolvedPadding = widget.padding ?? const EdgeInsets.all(24.0);
+    final resolvedPadding = padding ?? const EdgeInsets.all(24.0);
 
     // Build the main card structure
     Widget cardContent = ClipRRect(
-      borderRadius: BorderRadius.circular(widget.borderRadius),
+      borderRadius: BorderRadius.circular(borderRadius),
       child: Stack(
         children: [
           // Background Image Layer (Asset)
-          if (widget.backgroundImagePath != null)
+          if (backgroundImagePath != null)
             Positioned.fill(
               child: Image.asset(
-                widget.backgroundImagePath!,
+                backgroundImagePath!,
                 fit: BoxFit.cover,
               ),
             ),
 
           // Background Image Layer (Custom Widget)
-          if (widget.backgroundImage != null)
+          if (backgroundImage != null)
             Positioned.fill(
-              child: widget.backgroundImage!,
+              child: backgroundImage!,
             ),
 
           // Text content or custom child layout
           Padding(
             padding: resolvedPadding,
-            child: widget.child ??
+            child: child ??
                 Column(
-                  crossAxisAlignment: widget.crossAxisAlignment,
-                  mainAxisAlignment: widget.mainAxisAlignment,
+                  crossAxisAlignment: crossAxisAlignment,
+                  mainAxisAlignment: mainAxisAlignment,
                   children: [
-                    if (widget.leading != null) ...[
-                      widget.leading!,
+                    if (leading != null) ...[
+                      leading!,
                       const SizedBox(height: 16),
                     ],
-                    if (widget.title != null) ...[
+                    if (title != null) ...[
                       Text(
-                        widget.title!.toUpperCase(),
-                        style: widget.titleStyle ??
+                        title!.toUpperCase(),
+                        style: titleStyle ??
                             TextStyle(
                               color: isDark ? Colors.white38 : Colors.black38,
                               fontSize: 12,
@@ -284,11 +220,11 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
                       ),
                       const SizedBox(height: 12),
                     ],
-                    if (widget.description != null)
+                    if (description != null)
                       Expanded(
                         child: Text(
-                          widget.description!,
-                          style: widget.descriptionStyle ??
+                          description!,
+                          style: descriptionStyle ??
                               TextStyle(
                                 color: isDark ? const Color(0xDEFFFFFF) : Colors.black87,
                                 fontSize: 16,
@@ -297,11 +233,11 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
                               ),
                         ),
                       ),
-                    if (widget.trailing != null) ...[
+                    if (trailing != null) ...[
                       const Spacer(),
                       Align(
                         alignment: Alignment.bottomRight,
-                        child: widget.trailing,
+                        child: trailing,
                       ),
                     ],
                   ],
@@ -311,58 +247,78 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
       ),
     );
 
-    // Wrap with AnimatedScale & AnimatedContainer for micro-interactions
-    Widget interactiveCard = MouseRegion(
-      onEnter: (_) => _handleHover(true),
-      onExit: (_) => _handleHover(false),
-      cursor: widget.onTap != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
-      child: GestureDetector(
-        onTapDown: _handleTapDown,
-        onTapUp: _handleTapUp,
-        onTapCancel: _handleTapCancel,
-        onTap: widget.onTap,
-        child: ScaleTransition(
-          scale: _scaleAnimation,
-          child: AnimatedScale(
-            scale: _isPressed ? 0.98 : 1.0,
-            duration: const Duration(milliseconds: 100),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              height: widget.height,
-              width: widget.width,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(widget.borderRadius),
-                boxShadow: [
-                  BoxShadow(
-                    color: isDark
-                        ? (_isHovered ? const Color(0x66000000) : const Color(0x33000000))
-                        : (_isHovered ? const Color(0x339E9E9E) : const Color(0x1A9E9E9E)),
-                    blurRadius: _isHovered ? 16 : 8,
-                    offset: Offset(0, _isHovered ? 8 : 4),
-                  ),
-                ],
-              ),
-              child: LiquidGlass.withOwnLayer(
-                shape: LiquidRoundedRectangle(
-                  borderRadius: widget.borderRadius,
-                  side: BorderSide(
-                    color: finalBorderColor,
-                    width: 1.5,
+    return ChangeNotifierProvider(
+      create: (_) => BentoCardViewModel(),
+      child: Consumer<BentoCardViewModel>(
+        builder: (context, viewModel, _) {
+          final finalBorderColor = viewModel.isHovered
+              ? (hoverBorderColor ?? defaultHoverBorderColor)
+              : (borderColor ?? defaultBorderColor);
+
+          return MouseRegion(
+            onEnter: (_) {
+              if (isHoverable) viewModel.setHovered(true);
+            },
+            onExit: (_) {
+              if (isHoverable) viewModel.setHovered(false);
+            },
+            cursor: onTap != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
+            child: GestureDetector(
+              onTapDown: (_) {
+                if (onTap != null) viewModel.setPressed(true);
+              },
+              onTapUp: (_) {
+                if (onTap != null) viewModel.setPressed(false);
+              },
+              onTapCancel: () {
+                if (onTap != null) viewModel.setPressed(false);
+              },
+              onTap: onTap,
+              child: AnimatedScale(
+                scale: isHoverable && viewModel.isHovered ? 1.02 : 1.0,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeOutCubic,
+                child: AnimatedScale(
+                  scale: viewModel.isPressed ? 0.98 : 1.0,
+                  duration: const Duration(milliseconds: 100),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    height: height,
+                    width: width,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(borderRadius),
+                      boxShadow: [
+                        BoxShadow(
+                          color: isDark
+                              ? (viewModel.isHovered ? const Color(0x66000000) : const Color(0x33000000))
+                              : (viewModel.isHovered ? const Color(0x339E9E9E) : const Color(0x1A9E9E9E)),
+                          blurRadius: viewModel.isHovered ? 16 : 8,
+                          offset: Offset(0, viewModel.isHovered ? 8 : 4),
+                        ),
+                      ],
+                    ),
+                    child: LiquidGlass.withOwnLayer(
+                      shape: LiquidRoundedRectangle(
+                        borderRadius: borderRadius,
+                        side: BorderSide(
+                          color: finalBorderColor,
+                          width: 1.5,
+                        ),
+                      ),
+                      settings: const LiquidGlassSettings(
+                        blur: 16.0,
+                        glassColor: Colors.transparent,
+                      ),
+                      child: cardContent,
+                    ),
                   ),
                 ),
-                settings: const LiquidGlassSettings(
-                  blur: 16.0,
-                  glassColor: Colors.transparent,
-                ),
-                child: cardContent,
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
-
-    return interactiveCard;
   }
 }
