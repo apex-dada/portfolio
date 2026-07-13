@@ -126,6 +126,14 @@ class ContactSocialsCard extends StatelessWidget {
               buildSocialButton(Icons.mail_outline_rounded, "Email", () {
                 homeViewModel.sendEmail(context);
               }),
+              const SizedBox(width: 16),
+              buildSocialButton(Icons.discord, "Discord", () {
+                homeViewModel.launchURL(context, 'https://discord.gg');
+              }),
+              const SizedBox(width: 16),
+              buildTextSocialButton("wa", "WhatsApp", () {
+                homeViewModel.launchURL(context, 'https://wa.me/');
+              }),
             ],
           ),
         ],

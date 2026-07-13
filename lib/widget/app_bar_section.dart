@@ -65,100 +65,109 @@ class AppBarSection extends StatelessWidget {
         child: Container(
           height: 54.0, // Standard height since there is no stacked CTA button
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              // Logo
-              GestureDetector(
-                onTap: () {
-                  if (isSubPage) {
-                    context.go('/');
-                  } else {
-                    homeViewModel.scrollToTop();
-                  }
-                },
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: Text(
-                    "Mariz.",
-                    style: GoogleFonts.outfit(
-                      color: homeViewModel.primaryTextColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: -0.5,
+              // Logo (Align Left)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    if (isSubPage) {
+                      context.go('/');
+                    } else {
+                      homeViewModel.scrollToTop();
+                    }
+                  },
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Text(
+                      "Mariz.",
+                      style: GoogleFonts.outfit(
+                        color: homeViewModel.primaryTextColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: -0.5,
+                      ),
                     ),
                   ),
                 ),
               ),
-              // Nav Items (Desktop Only)
+              // Nav Items (Absolute Center - Desktop Only)
               if (!isMobile)
-                Row(
-                  children: [
-                    HoverNavItem(
-                      label: "Home",
-                      isActive: !isSubPage && homeViewModel.activeSection == "Home",
-                      activeColor: accentColor,
-                      isDarkMode: isDark,
-                      onTap: () {
-                        if (isSubPage) {
-                          context.go('/');
-                        } else {
-                          homeViewModel.scrollToTop();
-                        }
-                      },
-                    ),
-                    const SizedBox(width: 28), // Improved spacing
-                    HoverNavItem(
-                      label: "Projects",
-                      isActive: isProjectsPage,
-                      activeColor: accentColor,
-                      isDarkMode: isDark,
-                      onTap: () {
-                        if (!isProjectsPage) {
-                          context.go('/projects');
-                        }
-                      },
-                    ),
-                    const SizedBox(width: 28),
-                    HoverNavItem(
-                      label: "Experience",
-                      isActive: isExperiencePage,
-                      activeColor: accentColor,
-                      isDarkMode: isDark,
-                      onTap: () {
-                        if (!isExperiencePage) {
-                          context.go('/experience');
-                        }
-                      },
-                    ),
-                    const SizedBox(width: 28),
-                    HoverNavItem(
-                      label: "About",
-                      isActive: isAboutPage,
-                      activeColor: accentColor,
-                      isDarkMode: isDark,
-                      onTap: () {
-                        if (!isAboutPage) {
-                          context.go('/about');
-                        }
-                      },
-                    ),
-                    const SizedBox(width: 28),
-                    HoverNavItem(
-                      label: "Contact",
-                      isActive: isContactPage,
-                      activeColor: accentColor,
-                      isDarkMode: isDark,
-                      onTap: () {
-                        if (!isContactPage) {
-                          context.go('/contact');
-                        }
-                      },
-                    ),
-                  ],
+                Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      HoverNavItem(
+                        label: "Home",
+                        isActive: !isSubPage && homeViewModel.activeSection == "Home",
+                        activeColor: accentColor,
+                        isDarkMode: isDark,
+                        onTap: () {
+                          if (isSubPage) {
+                            context.go('/');
+                          } else {
+                            homeViewModel.scrollToTop();
+                          }
+                        },
+                      ),
+                      const SizedBox(width: 28), // Improved spacing
+                      HoverNavItem(
+                        label: "Projects",
+                        isActive: isProjectsPage,
+                        activeColor: accentColor,
+                        isDarkMode: isDark,
+                        onTap: () {
+                          if (!isProjectsPage) {
+                            context.go('/projects');
+                          }
+                        },
+                      ),
+                      const SizedBox(width: 28),
+                      HoverNavItem(
+                        label: "Experience",
+                        isActive: isExperiencePage,
+                        activeColor: accentColor,
+                        isDarkMode: isDark,
+                        onTap: () {
+                          if (!isExperiencePage) {
+                            context.go('/experience');
+                          }
+                        },
+                      ),
+                      const SizedBox(width: 28),
+                      HoverNavItem(
+                        label: "About",
+                        isActive: isAboutPage,
+                        activeColor: accentColor,
+                        isDarkMode: isDark,
+                        onTap: () {
+                          if (!isAboutPage) {
+                            context.go('/about');
+                          }
+                        },
+                      ),
+                      const SizedBox(width: 28),
+                      HoverNavItem(
+                        label: "Contact",
+                        isActive: isContactPage,
+                        activeColor: accentColor,
+                        isDarkMode: isDark,
+                        onTap: () {
+                          if (!isContactPage) {
+                            context.go('/contact');
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              // Actions
-              buildActions(),
+              // Actions (Align Right)
+              Align(
+                alignment: Alignment.centerRight,
+                child: buildActions(),
+              ),
             ],
           ),
         ),

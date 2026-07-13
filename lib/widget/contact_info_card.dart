@@ -13,33 +13,28 @@ class ContactInfoCard extends StatelessWidget {
     final isDark = homeViewModel.isDarkMode;
     final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
 
-    Widget buildInfoRow(String title, String detail, IconData icon) {
+    Widget buildInfoRow(String title, String detail) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: accentColor, size: 18),
-            const SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: GoogleFonts.outfit(
-                    color: homeViewModel.secondaryTextColor,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                Text(
-                  detail,
-                  style: GoogleFonts.inter(
-                    color: homeViewModel.primaryTextColor,
-                    fontSize: 13.5,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
+            Text(
+              title,
+              style: GoogleFonts.outfit(
+                color: homeViewModel.secondaryTextColor,
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              detail,
+              style: GoogleFonts.inter(
+                color: homeViewModel.primaryTextColor,
+                fontSize: 13.5,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),
@@ -65,11 +60,11 @@ class ContactInfoCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          buildInfoRow("📬 PRIMARY MAIL", "kaziwoaej@gmail.com", Icons.mail_outline_rounded),
+          buildInfoRow("PRIMARY MAIL", "kaziwoaej@gmail.com"),
           Divider(color: homeViewModel.borderColor.withOpacity(0.5), height: 16),
-          buildInfoRow("💬 DISCORD", "woaej#0000", Icons.chat_bubble_outline_rounded),
+          buildInfoRow("DISCORD", "woaej#0000"),
           Divider(color: homeViewModel.borderColor.withOpacity(0.5), height: 16),
-          buildInfoRow("⚡ AVAILABILITY", "Open to Freelance & Full-time", Icons.check_circle_outline_rounded),
+          buildInfoRow("AVAILABILITY", "Open to Freelance & Full-time"),
         ],
       ),
     );
