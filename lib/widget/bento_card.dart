@@ -196,17 +196,45 @@ class BentoCard extends StatelessWidget {
 
     final resolvedPadding = padding ?? const EdgeInsets.all(24.0);
 
+    final resolvedGradient = backgroundGradient != null
+        ? (backgroundGradient is LinearGradient
+            ? LinearGradient(
+                begin: (backgroundGradient as LinearGradient).begin,
+                end: (backgroundGradient as LinearGradient).end,
+                colors: (backgroundGradient as LinearGradient).colors
+                    .map((c) => c.withOpacity(isDark ? 0.15 : 0.25))
+                    .toList(),
+                stops: (backgroundGradient as LinearGradient).stops,
+                tileMode: (backgroundGradient as LinearGradient).tileMode,
+                transform: (backgroundGradient as LinearGradient).transform,
+              )
+            : backgroundGradient is RadialGradient
+                ? RadialGradient(
+                    center: (backgroundGradient as RadialGradient).center,
+                    radius: (backgroundGradient as RadialGradient).radius,
+                    colors: (backgroundGradient as RadialGradient).colors
+                        .map((c) => c.withOpacity(isDark ? 0.15 : 0.25))
+                        .toList(),
+                    stops: (backgroundGradient as RadialGradient).stops,
+                    tileMode: (backgroundGradient as RadialGradient).tileMode,
+                    focal: (backgroundGradient as RadialGradient).focal,
+                    focalRadius: (backgroundGradient as RadialGradient).focalRadius,
+                    transform: (backgroundGradient as RadialGradient).transform,
+                  )
+                : backgroundGradient)
+        : null;
+
     // Build the main card structure
     Widget cardContent = ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
       child: Stack(
         children: [
-          // Background Color / Gradient Layer
+          // Background Color / Gradient Layer (Glassified)
           Positioned.fill(
             child: Container(
               decoration: BoxDecoration(
-                color: backgroundColor,
-                gradient: backgroundGradient,
+                color: Colors.transparent,
+                gradient: resolvedGradient,
               ),
             ),
           ),
@@ -339,7 +367,9 @@ class BentoCard extends StatelessWidget {
                       ),
                       settings: LiquidGlassSettings(
                         blur: glassBlur,
-                        glassColor: glassColor ?? Colors.transparent,
+                        glassColor: glassColor ?? (backgroundColor != null
+                            ? backgroundColor!.withOpacity(isDark ? 0.15 : 0.25)
+                            : (isDark ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.02))),
                       ),
                       child: cardContent,
                     ),

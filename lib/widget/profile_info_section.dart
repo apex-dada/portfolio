@@ -68,44 +68,50 @@ class ProfileInfoSection extends StatelessWidget {
             ),
           ),
           // Hero Content
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "FLUTTER DEVELOPER",
-                style: GoogleFonts.outfit(
-                  color: isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF),
-                  fontSize: 10,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 2.0,
-                ),
-              ),
-              const SizedBox(height: 16), // Increased spacing
-              Text(
-                "Hi, I'm Kazi Woaej Mariz",
-                style: GoogleFonts.outfit(
-                  color: homeViewModel.primaryTextColor,
-                  fontSize: 34, // Large Display size
-                  fontWeight: FontWeight.w800, // Display weight (700-800)
-                  letterSpacing: -1.0,
-                  height: 1.15,
-                ),
-              ),
-              const SizedBox(height: 18), // Increased spacing
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 480), // Reduced paragraph width for readability
-                child: Text(
-                  "Mobile application developer, building high-quality Android & iOS experiences based in Bangladesh.",
-                  style: GoogleFonts.inter(
-                    color: homeViewModel.secondaryTextColor,
-                    fontSize: 15, // Body size
-                    height: 1.5, // Line height for readability
-                    fontWeight: FontWeight.w400, // Body weight
+          Center(
+            child: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "FLUTTER DEVELOPER",
+                    style: GoogleFonts.outfit(
+                      color: isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF),
+                      fontSize: 10,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 2.0,
+                    ),
                   ),
-                ),
+                  const SizedBox(height: 16), // Increased spacing
+                  Text(
+                    "Hi, I'm Kazi Woaej Mariz",
+                    style: GoogleFonts.outfit(
+                      color: homeViewModel.primaryTextColor,
+                      fontSize: 34, // Large Display size
+                      fontWeight: FontWeight.w800, // Display weight (700-800)
+                      letterSpacing: -1.0,
+                      height: 1.15,
+                    ),
+                  ),
+                  const SizedBox(height: 18), // Increased spacing
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 480), // Reduced paragraph width for readability
+                    child: Text(
+                      "Mobile application developer, building high-quality Android & iOS experiences based in Bangladesh.",
+                      style: GoogleFonts.inter(
+                        color: homeViewModel.secondaryTextColor,
+                        fontSize: 15, // Body size
+                        height: 1.5, // Line height for readability
+                        fontWeight: FontWeight.w400, // Body weight
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/viewmodel/home_viewmodel.dart';
 import 'package:portfolio/widget/bento_card.dart';
@@ -27,31 +28,41 @@ class ToggleSection extends StatelessWidget {
             const SizedBox(width: 12),
             GestureDetector(
               onTap: homeViewModel.toggleTheme,
-              child: Container(
+              child: SizedBox(
                 width: 50,
                 height: 28,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: homeViewModel.isDarkMode ? const Color(0xFF262626) : const Color(0xFFE5E5EA),
-                  border: Border.all(color: homeViewModel.borderColor),
-                ),
-                padding: const EdgeInsets.all(2),
-                child: AnimatedAlign(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeOutCubic,
-                  alignment: homeViewModel.isDarkMode ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Container(
-                    width: 22,
-                    height: 22,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: homeViewModel.primaryTextColor,
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color(0x1A000000),
-                          blurRadius: 4,
-                        )
-                      ],
+                child: LiquidGlass.withOwnLayer(
+                  shape: LiquidRoundedRectangle(
+                    borderRadius: 15,
+                    side: BorderSide(
+                      color: homeViewModel.borderColor,
+                      width: 1.0,
+                    ),
+                  ),
+                  settings: LiquidGlassSettings(
+                    blur: 8.0,
+                    glassColor: homeViewModel.isDarkMode ? const Color(0x1AFFFFFF) : const Color(0x1A000000),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2),
+                    child: AnimatedAlign(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeOutCubic,
+                      alignment: homeViewModel.isDarkMode ? Alignment.centerRight : Alignment.centerLeft,
+                      child: Container(
+                        width: 22,
+                        height: 22,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: homeViewModel.primaryTextColor,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color(0x1A000000),
+                              blurRadius: 4,
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),

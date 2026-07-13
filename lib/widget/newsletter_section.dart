@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/viewmodel/home_viewmodel.dart';
 import 'package:portfolio/widget/bento_card.dart';
@@ -49,31 +50,43 @@ class NewsletterSection extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Container(
+                    SizedBox(
                       height: 40,
-                      decoration: BoxDecoration(
-                        color: isDark ? const Color(0xFF1A1A1A) : const Color(0xFFF2F2F7),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: homeViewModel.borderColor),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      alignment: Alignment.centerLeft,
-                      child: TextField(
-                        style: GoogleFonts.inter(
-                          color: homeViewModel.primaryTextColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500, // Input weight
-                        ),
-                        decoration: InputDecoration(
-                          hintText: "Your email address",
-                          hintStyle: GoogleFonts.inter(
-                            color: homeViewModel.secondaryTextColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400, // Hint weight
+                      child: LiquidGlass.withOwnLayer(
+                        shape: LiquidRoundedRectangle(
+                          borderRadius: 12,
+                          side: BorderSide(
+                            color: homeViewModel.borderColor,
+                            width: 1.0,
                           ),
-                          border: InputBorder.none,
-                          isDense: true,
-                          contentPadding: EdgeInsets.zero,
+                        ),
+                        settings: LiquidGlassSettings(
+                          blur: 8.0,
+                          glassColor: isDark ? const Color(0x1F000000) : const Color(0x0FFFFFFF),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: TextField(
+                              style: GoogleFonts.inter(
+                                color: homeViewModel.primaryTextColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              decoration: InputDecoration(
+                                hintText: "Your email address",
+                                hintStyle: GoogleFonts.inter(
+                                  color: homeViewModel.secondaryTextColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                border: InputBorder.none,
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -104,31 +117,43 @@ class NewsletterSection extends StatelessWidget {
               return Row(
                 children: [
                   Expanded(
-                    child: Container(
+                    child: SizedBox(
                       height: 40,
-                      decoration: BoxDecoration(
-                        color: isDark ? const Color(0xFF1A1A1A) : const Color(0xFFF2F2F7),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: homeViewModel.borderColor),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      alignment: Alignment.centerLeft,
-                      child: TextField(
-                        style: GoogleFonts.inter(
-                          color: homeViewModel.primaryTextColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500, // Input weight
-                        ),
-                        decoration: InputDecoration(
-                          hintText: "Your email address",
-                          hintStyle: GoogleFonts.inter(
-                            color: homeViewModel.secondaryTextColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400, // Hint weight
+                      child: LiquidGlass.withOwnLayer(
+                        shape: LiquidRoundedRectangle(
+                          borderRadius: 12,
+                          side: BorderSide(
+                            color: homeViewModel.borderColor,
+                            width: 1.0,
                           ),
-                          border: InputBorder.none,
-                          isDense: true,
-                          contentPadding: EdgeInsets.zero,
+                        ),
+                        settings: LiquidGlassSettings(
+                          blur: 8.0,
+                          glassColor: isDark ? const Color(0x1F000000) : const Color(0x0FFFFFFF),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: TextField(
+                              style: GoogleFonts.inter(
+                                color: homeViewModel.primaryTextColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              decoration: InputDecoration(
+                                hintText: "Your email address",
+                                hintStyle: GoogleFonts.inter(
+                                  color: homeViewModel.secondaryTextColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                border: InputBorder.none,
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/viewmodel/home_viewmodel.dart';
 import 'package:portfolio/widget/bento_card.dart';
@@ -21,17 +22,28 @@ class AboutSection extends StatelessWidget {
         context,
         'https://www.linkedin.com/in/kazi-woaej-mariz-3586501b9/',
       ),
-      trailing: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: isDark ? const Color(0xFF1E1E1E) : const Color(0xFFF0F0F2),
-          border: Border.all(color: homeViewModel.borderColor),
-        ),
-        child: Icon(
-          Icons.arrow_outward_rounded,
-          color: homeViewModel.primaryTextColor,
-          size: 16,
+      trailing: SizedBox(
+        width: 34,
+        height: 34,
+        child: LiquidGlass.withOwnLayer(
+          shape: LiquidRoundedRectangle(
+            borderRadius: 17, // Circle shape via border radius
+            side: BorderSide(
+              color: homeViewModel.borderColor,
+              width: 1.0,
+            ),
+          ),
+          settings: LiquidGlassSettings(
+            blur: 8.0,
+            glassColor: isDark ? const Color(0x1AFFFFFF) : const Color(0x1A000000),
+          ),
+          child: Center(
+            child: Icon(
+              Icons.arrow_outward_rounded,
+              color: homeViewModel.primaryTextColor,
+              size: 16,
+            ),
+          ),
         ),
       ),
       child: Column(
