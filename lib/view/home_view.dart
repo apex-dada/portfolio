@@ -19,11 +19,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => HomeViewModel(),
-      child: Consumer<HomeViewModel>(
-        builder: (context, homeViewModel, _) {
-          final size = MediaQuery.of(context).size;
+    final homeViewModel = context.watch<HomeViewModel>();
+    final size = MediaQuery.of(context).size;
           final isMobile = size.width < 900;
 
           final backgroundDecoration = homeViewModel.isDarkMode
@@ -189,8 +186,5 @@ class HomeView extends StatelessWidget {
               ),
             ),
           );
-        },
-      ),
-    );
   }
 }
