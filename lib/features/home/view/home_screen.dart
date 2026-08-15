@@ -4,8 +4,8 @@ import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/shared/widgets/app_bar_widget.dart';
 import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
 import 'package:portfolio/features/home/widgets/profile_info_widget.dart';
-import 'package:portfolio/features/projects/widgets/project_bangla_film_picks_card.dart';
-import 'package:portfolio/features/projects/widgets/project_nestkeeper_card.dart';
+import 'package:portfolio/features/home/widgets/portfolio_mockup_one_widget.dart';
+import 'package:portfolio/features/home/widgets/portfolio_mockup_two_widget.dart';
 import 'package:portfolio/features/home/widgets/social_containers_widget.dart';
 import 'package:portfolio/features/home/widgets/profile_image_widget.dart';
 import 'package:portfolio/features/home/widgets/about_me_widget.dart';
@@ -28,9 +28,9 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 16),
             SizedBox(height: 240, child: ProfileImageWidget()), // Profile Image
             SizedBox(height: 16),
-            SizedBox(height: 320, child: ProjectBanglaFilmPicksCard()), // Featured Project 1
+            SizedBox(height: 220, child: PortfolioMockupOneWidget()), // Featured Project 1
             SizedBox(height: 16),
-            SizedBox(height: 320, child: ProjectNestKeeperCard()), // Featured Project 2
+            SizedBox(height: 220, child: PortfolioMockupTwoWidget()), // Featured Project 2
             SizedBox(height: 16),
             SizedBox(height: 200, child: AboutMeWidget()), // About
             SizedBox(height: 16),
@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: 16),
           // Rows 2 & 3 (Combined grid for vertical alignment of workflow)
           SizedBox(
-            height: 416,
+            height: 386,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -90,13 +90,13 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       // Row 2 Left (Featured Projects & About)
                       SizedBox(
-                        height: 230,
+                        height: 200,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Expanded(flex: 3, child: ProjectBanglaFilmPicksCard()),
+                            Expanded(flex: 3, child: PortfolioMockupOneWidget()),
                             SizedBox(width: 16),
-                            Expanded(flex: 3, child: ProjectNestKeeperCard()),
+                            Expanded(flex: 3, child: PortfolioMockupTwoWidget()),
                             SizedBox(width: 16),
                             Expanded(flex: 4, child: AboutMeWidget()),
                           ],
