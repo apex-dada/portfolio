@@ -73,8 +73,11 @@ class TechStackWidget extends StatelessWidget {
                 spacing: 10,
                 runSpacing: 10,
                 children: _stackItems.map((item) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                  return BentoCard(
+                    backgroundColor: isDark ? const Color(0xFF1E2129) : const Color(0xFFF4F6F9),
+                    borderColor: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
+                    hoverBorderColor: isDark ? const Color(0x33FFFFFF) : const Color(0x33000000),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
