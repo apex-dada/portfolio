@@ -58,7 +58,6 @@ class HeroProfileWidget extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 12),
                 // Main Title
                 RichText(
                   text: TextSpan(
