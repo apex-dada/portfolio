@@ -174,66 +174,10 @@ class HeroProfileWidget extends StatelessWidget {
 
         Widget rightPhoto = ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Image.asset(
-                'assets/images/IMG_0741 (1).jpg',
-                fit: BoxFit.cover,
-                cacheWidth: 800,
-              ),
-
-              // Available overlay badge at photo bottom
-              Positioned(
-                left: 14,
-                bottom: 14,
-                right: 14,
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.75),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.white12),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 8,
-                            height: 8,
-                            decoration: const BoxDecoration(
-                              color: greenAccent,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            "Available for work",
-                            style: GoogleFonts.inter(
-                              color: Colors.white,
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 3),
-                      Text(
-                        "Open to exciting opportunities and collaborations.",
-                        style: GoogleFonts.inter(
-                          color: Colors.white70,
-                          fontSize: 10.5,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+          child: Image.asset(
+            'assets/images/IMG_0741 (1).jpg',
+            fit: BoxFit.cover,
+            cacheWidth: 800,
           ),
         );
 
