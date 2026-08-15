@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
-import 'package:portfolio/core/widgets/bento_card.dart';
 
 class SocialGridWidget extends StatelessWidget {
   const SocialGridWidget({super.key});
@@ -10,10 +9,6 @@ class SocialGridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
-    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
-    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
-    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
-
     final iconColor = isDark ? Colors.white.withValues(alpha: 0.85) : Colors.black87;
 
     final socialItems = [
@@ -66,11 +61,8 @@ class SocialGridWidget extends StatelessWidget {
       },
     ];
 
-    return BentoCard(
-      backgroundColor: cardColor,
-      borderColor: borderColor,
-      hoverBorderColor: hoverBorderColor,
-      padding: const EdgeInsets.all(16),
+    return Container(
+      color: Colors.transparent,
       child: Column(
         children: [
           Expanded(
