@@ -4,8 +4,8 @@ import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/shared/widgets/app_bar_widget.dart';
 import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
 import 'package:portfolio/features/home/widgets/profile_info_widget.dart';
-import 'package:portfolio/features/home/widgets/portfolio_mockup_one_widget.dart';
-import 'package:portfolio/features/home/widgets/portfolio_mockup_two_widget.dart';
+import 'package:portfolio/features/home/widgets/home_stats_card.dart';
+import 'package:portfolio/features/home/widgets/home_services_card.dart';
 import 'package:portfolio/features/home/widgets/social_containers_widget.dart';
 import 'package:portfolio/features/home/widgets/profile_image_widget.dart';
 import 'package:portfolio/features/home/widgets/about_me_widget.dart';
@@ -28,9 +28,9 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 16),
             SizedBox(height: 240, child: ProfileImageWidget()), // Profile Image
             SizedBox(height: 16),
-            SizedBox(height: 220, child: PortfolioMockupOneWidget()), // Featured Project 1
+            SizedBox(height: 180, child: HomeStatsCard()), // Key Stats
             SizedBox(height: 16),
-            SizedBox(height: 220, child: PortfolioMockupTwoWidget()), // Featured Project 2
+            SizedBox(height: 180, child: HomeServicesCard()), // What I Do
             SizedBox(height: 16),
             SizedBox(height: 200, child: AboutMeWidget()), // About
             SizedBox(height: 16),
@@ -94,9 +94,9 @@ class HomeScreen extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Expanded(flex: 3, child: PortfolioMockupOneWidget()),
+                            Expanded(flex: 3, child: HomeStatsCard()),
                             SizedBox(width: 16),
-                            Expanded(flex: 3, child: PortfolioMockupTwoWidget()),
+                            Expanded(flex: 3, child: HomeServicesCard()),
                             SizedBox(width: 16),
                             Expanded(flex: 4, child: AboutMeWidget()),
                           ],
