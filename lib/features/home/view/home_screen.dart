@@ -5,7 +5,7 @@ import 'package:portfolio/shared/widgets/app_bar_widget.dart';
 import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
 import 'package:portfolio/features/home/widgets/profile_info_widget.dart';
 import 'package:portfolio/features/home/widgets/home_stats_card.dart';
-import 'package:portfolio/features/home/widgets/home_services_card.dart';
+import 'package:portfolio/features/home/widgets/home_github_card.dart';
 import 'package:portfolio/features/home/widgets/social_containers_widget.dart';
 import 'package:portfolio/features/home/widgets/profile_image_widget.dart';
 import 'package:portfolio/features/home/widgets/about_me_widget.dart';
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 16),
             SizedBox(height: 180, child: HomeStatsCard()), // Key Stats
             SizedBox(height: 16),
-            SizedBox(height: 180, child: HomeServicesCard()), // What I Do
+            SizedBox(height: 180, child: HomeGithubCard()), // GitHub & Open Source
             SizedBox(height: 16),
             SizedBox(height: 200, child: AboutMeWidget()), // About
             SizedBox(height: 16),
@@ -96,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Expanded(flex: 3, child: HomeStatsCard()),
                             SizedBox(width: 16),
-                            Expanded(flex: 3, child: HomeServicesCard()),
+                            Expanded(flex: 3, child: HomeGithubCard()),
                             SizedBox(width: 16),
                             Expanded(flex: 4, child: AboutMeWidget()),
                           ],
