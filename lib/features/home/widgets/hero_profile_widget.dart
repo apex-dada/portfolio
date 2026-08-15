@@ -19,34 +19,6 @@ class HeroProfileWidget extends StatelessWidget {
 
     const greenAccent = Color(0xFF3DDC84);
 
-    Widget buildSocialLink({
-      required IconData icon,
-      required String label,
-      required VoidCallback onTap,
-    }) {
-      return GestureDetector(
-        onTap: onTap,
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(icon, size: 14, color: isDark ? Colors.white60 : Colors.black54),
-              const SizedBox(width: 5),
-              Text(
-                label,
-                style: GoogleFonts.inter(
-                  color: isDark ? Colors.white70 : Colors.black54,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
     return LayoutBuilder(
       builder: (context, constraints) {
         final isMobile = constraints.maxWidth < 750;
@@ -146,36 +118,6 @@ class HeroProfileWidget extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-
-                // Social & Location Bar
-                Wrap(
-                  spacing: 16,
-                  runSpacing: 8,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    buildSocialLink(
-                      icon: Icons.code_rounded,
-                      label: "GitHub",
-                      onTap: () => context.read<HomeViewModel>().launchURL(context, 'https://github.com/apex-dada'),
-                    ),
-                    buildSocialLink(
-                      icon: Icons.work_rounded,
-                      label: "LinkedIn",
-                      onTap: () => context.read<HomeViewModel>().launchURL(context, 'https://linkedin.com'),
-                    ),
-                    buildSocialLink(
-                      icon: Icons.email_rounded,
-                      label: "Email",
-                      onTap: () => context.read<HomeViewModel>().launchURL(context, 'mailto:woaejmariz@gmail.com'),
-                    ),
-                    buildSocialLink(
-                      icon: Icons.location_on_rounded,
-                      label: "Bangladesh",
-                      onTap: () {},
                     ),
                   ],
                 ),
