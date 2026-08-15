@@ -67,9 +67,9 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Expanded(flex: 9, child: WhatIDoWidget()),
                       SizedBox(height: 14),
-                      Expanded(flex: 7, child: StayInTouchWidget()),
+                      Expanded(flex: 9, child: StayInTouchWidget()),
                       SizedBox(height: 14),
-                      Expanded(flex: 14, child: TechStackWidget()),
+                      Expanded(flex: 12, child: TechStackWidget()),
                     ],
                   ),
                 ),
