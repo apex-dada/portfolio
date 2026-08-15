@@ -66,8 +66,6 @@ class _LogoCarouselState extends State<LogoCarousel>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return SizedBox(
       height: 96,
       child: Stack(
@@ -97,7 +95,7 @@ class _LogoCarouselState extends State<LogoCarousel>
                     height: 80,
                     width: 80,
                     decoration: BoxDecoration(
-                      color: isDark ? const Color(0x44000000) : const Color(0x77FFFFFF),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: const [
                         BoxShadow(
