@@ -112,7 +112,7 @@ class _ImagePreviewDialogState extends State<ImagePreviewDialog> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                     decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.4),
+                      color: Colors.transparent,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
@@ -146,9 +146,9 @@ class _ImagePreviewDialogState extends State<ImagePreviewDialog> {
                         ),
                         child: Container(
                           padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.black.withValues(alpha: 0.4),
+                            color: Colors.transparent,
                           ),
                           child: const Icon(Icons.zoom_out_map_rounded, color: Colors.white, size: 20),
                         ),
@@ -172,9 +172,9 @@ class _ImagePreviewDialogState extends State<ImagePreviewDialog> {
                         ),
                         child: Container(
                           padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.black.withValues(alpha: 0.4),
+                            color: Colors.transparent,
                           ),
                           child: const Icon(Icons.close_rounded, color: Colors.white, size: 20),
                         ),
@@ -211,9 +211,9 @@ class _ImagePreviewDialogState extends State<ImagePreviewDialog> {
                   ),
                   child: Container(
                     padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.black.withValues(alpha: 0.4),
+                      color: Colors.transparent,
                     ),
                     child: const Icon(Icons.chevron_left_rounded, color: Colors.white, size: 28),
                   ),
@@ -246,9 +246,9 @@ class _ImagePreviewDialogState extends State<ImagePreviewDialog> {
                   ),
                   child: Container(
                     padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.black.withValues(alpha: 0.4),
+                      color: Colors.transparent,
                     ),
                     child: const Icon(Icons.chevron_right_rounded, color: Colors.white, size: 28),
                   ),
