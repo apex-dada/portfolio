@@ -18,6 +18,8 @@ class TechStackWidget extends StatelessWidget {
   static const List<TechStackItem> _stackItems = [
     TechStackItem("Flutter", logoAsset: "assets/stack/flutter.png"),
     TechStackItem("Dart", logoAsset: "assets/stack/dart.png"),
+    TechStackItem("Android", logoAsset: "assets/stack/android-logo.jpg"),
+    TechStackItem("iOS", fallbackIcon: Icons.apple_rounded),
     TechStackItem("Bloc", logoAsset: "assets/stack/block.png"),
     TechStackItem("Riverpod", logoAsset: "assets/stack/riverpod_logo.png"),
     TechStackItem("Firebase", logoAsset: "assets/stack/firebase.png"),
