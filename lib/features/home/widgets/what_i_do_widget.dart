@@ -15,8 +15,6 @@ class WhatIDoWidget extends StatelessWidget {
     final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
     final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
 
-    const greenAccent = Color(0xFF3DDC84);
-
     Widget buildItem({
       required IconData icon,
       required String title,
@@ -76,7 +74,7 @@ class WhatIDoWidget extends StatelessWidget {
           // Header Bar
           Row(
             children: [
-              const Icon(Icons.work_outline_rounded, size: 16, color: greenAccent),
+              const Icon(Icons.work_outline_rounded, size: 16, color: Colors.white),
               const SizedBox(width: 8),
               Text(
                 "What I Do",
