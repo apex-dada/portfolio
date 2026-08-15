@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
+import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 
 class PortfolioMockupTwoWidget extends StatelessWidget {
   const PortfolioMockupTwoWidget({super.key});
@@ -33,36 +34,45 @@ class PortfolioMockupTwoWidget extends StatelessWidget {
           Positioned(
             left: 16,
             bottom: 16,
-            child: Container(
-              height: 34,
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              decoration: BoxDecoration(
-                color: isDark ? const Color(0xCC000000) : const Color(0xCCFFFFFF),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
+            child: LiquidGlass.withOwnLayer(
+              shape: const LiquidRoundedRectangle(
+                borderRadius: 12,
+                side: BorderSide(
+                  color: Color(0x1F000000),
                   width: 1,
                 ),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.laptop_chromebook_rounded,
-                    color: primaryTextColor,
-                    size: 14,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    "02 / Web App: Dashboard",
-                    style: TextStyle(
+              settings: const LiquidGlassSettings(
+                blur: 16.0,
+                glassColor: Colors.transparent,
+              ),
+              child: Container(
+                height: 34,
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                decoration: BoxDecoration(
+                  color: isDark ? const Color(0x55000000) : const Color(0x77FFFFFF),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.laptop_chromebook_rounded,
                       color: primaryTextColor,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.5,
+                      size: 14,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 8),
+                    Text(
+                      "02 / Web App: Dashboard",
+                      style: TextStyle(
+                        color: primaryTextColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

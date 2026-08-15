@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
 import 'package:portfolio/features/projects/widgets/image_preview_dialog.dart';
+import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 
 class ProjectCarouselCard extends StatefulWidget {
   final String projectNumber;
@@ -129,12 +130,25 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard>
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(14),
-                          child: Image.asset(
-                            screenshotPath,
-                            fit: BoxFit.cover,
-                            height: double.infinity,
+                        child: LiquidGlass.withOwnLayer(
+                          shape: const LiquidRoundedRectangle(
+                            borderRadius: 14,
+                            side: BorderSide(
+                              color: Color(0x1F000000),
+                              width: 1,
+                            ),
+                          ),
+                          settings: const LiquidGlassSettings(
+                            blur: 12.0,
+                            glassColor: Colors.transparent,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(14),
+                            child: Image.asset(
+                              screenshotPath,
+                              fit: BoxFit.cover,
+                              height: double.infinity,
+                            ),
                           ),
                         ),
                       ),
@@ -161,18 +175,30 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard>
                         curve: Curves.easeOutCubic,
                       );
                     },
-                    child: Container(
-                      width: 34,
-                      height: 34,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: isDark
-                            ? Colors.black.withValues(alpha: 0.75)
-                            : Colors.white.withValues(alpha: 0.9),
-                        border: Border.all(color: borderColor),
+                    child: LiquidGlass.withOwnLayer(
+                      shape: const LiquidRoundedRectangle(
+                        borderRadius: 999,
+                        side: BorderSide(
+                          color: Color(0x33FFFFFF),
+                          width: 1,
+                        ),
                       ),
-                      child: Icon(Icons.chevron_left_rounded,
-                          size: 22, color: primaryTextColor),
+                      settings: const LiquidGlassSettings(
+                        blur: 12.0,
+                        glassColor: Colors.transparent,
+                      ),
+                      child: Container(
+                        width: 34,
+                        height: 34,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: isDark
+                              ? Colors.black.withValues(alpha: 0.5)
+                              : Colors.white.withValues(alpha: 0.7),
+                        ),
+                        child: Icon(Icons.chevron_left_rounded,
+                            size: 22, color: primaryTextColor),
+                      ),
                     ),
                   ),
                 ),
@@ -192,18 +218,30 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard>
                         curve: Curves.easeOutCubic,
                       );
                     },
-                    child: Container(
-                      width: 34,
-                      height: 34,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: isDark
-                            ? Colors.black.withValues(alpha: 0.75)
-                            : Colors.white.withValues(alpha: 0.9),
-                        border: Border.all(color: borderColor),
+                    child: LiquidGlass.withOwnLayer(
+                      shape: const LiquidRoundedRectangle(
+                        borderRadius: 999,
+                        side: BorderSide(
+                          color: Color(0x33FFFFFF),
+                          width: 1,
+                        ),
                       ),
-                      child: Icon(Icons.chevron_right_rounded,
-                          size: 22, color: primaryTextColor),
+                      settings: const LiquidGlassSettings(
+                        blur: 12.0,
+                        glassColor: Colors.transparent,
+                      ),
+                      child: Container(
+                        width: 34,
+                        height: 34,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: isDark
+                              ? Colors.black.withValues(alpha: 0.5)
+                              : Colors.white.withValues(alpha: 0.7),
+                        ),
+                        child: Icon(Icons.chevron_right_rounded,
+                            size: 22, color: primaryTextColor),
+                      ),
                     ),
                   ),
                 ),
@@ -214,68 +252,76 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard>
             Positioned(
               left: 16,
               bottom: 12,
-              child: Container(
-                height: 36,
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                decoration: BoxDecoration(
-                  color: isDark
-                      ? const Color(0xDD000000)
-                      : const Color(0xDDFFFFFF),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: isDark
-                        ? const Color(0x1AFFFFFF)
-                        : const Color(0x1F000000),
+              child: LiquidGlass.withOwnLayer(
+                shape: const LiquidRoundedRectangle(
+                  borderRadius: 12,
+                  side: BorderSide(
+                    color: Color(0x1F000000),
+                    width: 1,
                   ),
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      widget.icon,
-                      color: accentColor,
-                      size: 14,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      "${widget.projectNumber} / ${widget.title}",
-                      style: TextStyle(
-                        color: primaryTextColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5,
+                settings: const LiquidGlassSettings(
+                  blur: 16.0,
+                  glassColor: Colors.transparent,
+                ),
+                child: Container(
+                  height: 36,
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? const Color(0x44000000)
+                        : const Color(0x66FFFFFF),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        widget.icon,
+                        color: accentColor,
+                        size: 14,
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    InkWell(
-                      onTap: () => context
-                          .read<HomeViewModel>()
-                          .launchURL(context, widget.githubUrl),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 3),
-                        decoration: BoxDecoration(
-                          color: accentColor.withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(8),
+                      const SizedBox(width: 8),
+                      Text(
+                        "${widget.projectNumber} / ${widget.title}",
+                        style: TextStyle(
+                          color: primaryTextColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
                         ),
-                        child: Row(
-                          children: [
-                            Text(
-                              "GitHub",
-                              style: TextStyle(
-                                color: accentColor,
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
+                      ),
+                      const SizedBox(width: 10),
+                      InkWell(
+                        onTap: () => context
+                            .read<HomeViewModel>()
+                            .launchURL(context, widget.githubUrl),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: accentColor.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            children: [
+                              Text(
+                                "GitHub",
+                                style: TextStyle(
+                                  color: accentColor,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 3),
-                            Icon(Icons.north_east_rounded,
-                                size: 10, color: accentColor),
-                          ],
+                              const SizedBox(width: 3),
+                              Icon(Icons.north_east_rounded,
+                                  size: 10, color: accentColor),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
