@@ -64,11 +64,8 @@ class SocialGridWidget extends StatelessWidget {
       },
     ];
 
-    return BentoCard(
-      backgroundColor: cardColor,
-      borderColor: borderColor,
-      hoverBorderColor: hoverBorderColor,
-      padding: const EdgeInsets.all(16),
+    return Container(
+      color: Colors.transparent,
       child: Column(
         children: [
           Expanded(
@@ -89,19 +86,13 @@ class SocialGridWidget extends StatelessWidget {
                     onTap: () {
                       context.read<HomeViewModel>().launchURL(context, item['url'] as String);
                     },
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: isDark ? const Color(0xFF1B1E26) : const Color(0xFFE4E8F0),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
-                          ),
-                        ),
-                        child: Center(
-                          child: item['widget'] as Widget,
-                        ),
+                    child: BentoCard(
+                      backgroundColor: cardColor,
+                      borderColor: borderColor,
+                      hoverBorderColor: hoverBorderColor,
+                      padding: EdgeInsets.zero,
+                      child: Center(
+                        child: item['widget'] as Widget,
                       ),
                     ),
                   ),
