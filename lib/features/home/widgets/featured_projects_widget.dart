@@ -32,10 +32,10 @@ class FeaturedProjectsWidget extends StatelessWidget {
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
             child: Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: isDark ? const Color(0x33FFFFFF) : const Color(0x1F000000),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(14),
                 border: Border.all(
                   color: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
                 ),
@@ -45,9 +45,9 @@ class FeaturedProjectsWidget extends StatelessWidget {
                 children: [
                   // Screenshot preview
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                     child: AspectRatio(
-                      aspectRatio: 1.6,
+                      aspectRatio: 1.85,
                       child: Image.asset(
                         imagePath,
                         fit: BoxFit.cover,
@@ -55,45 +55,44 @@ class FeaturedProjectsWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 6),
 
                   // Title
                   Text(
                     title,
                     style: GoogleFonts.outfit(
                       color: primaryTextColor,
-                      fontSize: 14,
+                      fontSize: 13,
                       fontWeight: FontWeight.bold,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 3),
+                  const SizedBox(height: 2),
 
                   // Description
                   Text(
                     description,
                     style: GoogleFonts.inter(
                       color: secondaryTextColor,
-                      fontSize: 11,
-                      height: 1.3,
+                      fontSize: 10.5,
+                      height: 1.25,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const Spacer(),
-                  const SizedBox(height: 6),
 
                   // Tags
                   Wrap(
-                    spacing: 6,
+                    spacing: 4,
                     runSpacing: 4,
                     children: tags.map((tag) {
                       return Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                         decoration: BoxDecoration(
                           color: isDark ? const Color(0x44000000) : const Color(0x33FFFFFF),
-                          borderRadius: BorderRadius.circular(6),
+                          borderRadius: BorderRadius.circular(5),
                           border: Border.all(
                             color: isDark ? Colors.white12 : Colors.black12,
                           ),
@@ -102,7 +101,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
                           tag,
                           style: GoogleFonts.inter(
                             color: isDark ? Colors.white70 : Colors.black54,
-                            fontSize: 10,
+                            fontSize: 9.5,
                             fontWeight: FontWeight.w600,
                           ),
                         ),

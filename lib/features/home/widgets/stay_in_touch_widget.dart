@@ -35,7 +35,7 @@ class _StayInTouchWidgetState extends State<StayInTouchWidget> {
       backgroundColor: cardColor,
       borderColor: borderColor,
       hoverBorderColor: hoverBorderColor,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -43,37 +43,37 @@ class _StayInTouchWidgetState extends State<StayInTouchWidget> {
           // Header Bar
           Row(
             children: [
-              const Icon(Icons.mail_outline_rounded, size: 16, color: greenAccent),
+              const Icon(Icons.mail_outline_rounded, size: 15, color: greenAccent),
               const SizedBox(width: 8),
               Text(
                 "Let's stay in touch",
                 style: GoogleFonts.outfit(
                   color: primaryTextColor,
-                  fontSize: 16,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 4),
 
           // Subtitle
           Text(
             "Get updates on my projects and latest articles.",
             style: GoogleFonts.inter(
               color: secondaryTextColor,
-              fontSize: 11.5,
-              height: 1.3,
+              fontSize: 10.5,
+              height: 1.25,
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
 
           // Email Input Field
           Container(
-            height: 42,
+            height: 36,
             decoration: BoxDecoration(
               color: isDark ? const Color(0x44000000) : const Color(0x33FFFFFF),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: isDark ? Colors.white12 : Colors.black12,
               ),
@@ -82,25 +82,25 @@ class _StayInTouchWidgetState extends State<StayInTouchWidget> {
               controller: _emailController,
               style: GoogleFonts.inter(
                 color: primaryTextColor,
-                fontSize: 12.5,
+                fontSize: 11.5,
               ),
               decoration: InputDecoration(
                 hintText: "Your email address",
                 hintStyle: GoogleFonts.inter(
                   color: isDark ? Colors.white38 : Colors.black38,
-                  fontSize: 12,
+                  fontSize: 11,
                 ),
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               ),
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
 
           // Full-width Subscribe Button
           SizedBox(
             width: double.infinity,
-            height: 42,
+            height: 36,
             child: ElevatedButton.icon(
               onPressed: () {
                 if (_emailController.text.trim().isNotEmpty) {
@@ -114,16 +114,16 @@ class _StayInTouchWidgetState extends State<StayInTouchWidget> {
                 backgroundColor: greenAccent,
                 foregroundColor: Colors.black,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 elevation: 0,
               ),
               iconAlignment: IconAlignment.end,
-              icon: const Icon(Icons.arrow_forward_rounded, size: 16, color: Colors.black),
+              icon: const Icon(Icons.arrow_forward_rounded, size: 14, color: Colors.black),
               label: Text(
                 "Subscribe",
                 style: GoogleFonts.inter(
-                  fontSize: 13,
+                  fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),
               ),
