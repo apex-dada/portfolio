@@ -69,11 +69,13 @@ class _LiveClockWidgetState extends State<LiveClockWidget> {
       hoverBorderColor: hoverBorderColor,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Live Status Badge
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                 width: 6,
@@ -84,7 +86,7 @@ class _LiveClockWidgetState extends State<LiveClockWidget> {
                 ),
               ),
               const SizedBox(width: 5),
-              Expanded(
+              Flexible(
                 child: Text(
                   "Dhaka, BD (GMT+6)",
                   style: GoogleFonts.inter(
@@ -94,6 +96,7 @@ class _LiveClockWidgetState extends State<LiveClockWidget> {
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
                 ),
               ),
             ],
@@ -112,6 +115,7 @@ class _LiveClockWidgetState extends State<LiveClockWidget> {
                 height: 1.1,
                 letterSpacing: 0.5,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
           const SizedBox(height: 4),
@@ -126,6 +130,7 @@ class _LiveClockWidgetState extends State<LiveClockWidget> {
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
           ),
         ],
       ),
