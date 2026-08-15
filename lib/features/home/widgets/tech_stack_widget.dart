@@ -87,13 +87,20 @@ class TechStackWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           if (item.logoAsset != null) ...[
-                            Image.asset(
-                              item.logoAsset!,
-                              width: 14,
-                              height: 14,
-                              fit: BoxFit.contain,
+                            Container(
+                              padding: const EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Image.asset(
+                                item.logoAsset!,
+                                width: 13,
+                                height: 13,
+                                fit: BoxFit.contain,
+                              ),
                             ),
-                            const SizedBox(width: 6),
+                            const SizedBox(width: 7),
                           ] else if (item.fallbackIcon != null) ...[
                             Icon(
                               item.fallbackIcon!,
