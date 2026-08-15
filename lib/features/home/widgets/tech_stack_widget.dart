@@ -86,16 +86,11 @@ class TechStackWidget extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (item.logoAsset != null) ...[
-                          Container(
-                            padding: const EdgeInsets.all(3),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
+                          SizedBox(
+                            width: 14,
+                            height: 14,
                             child: Image.asset(
                               item.logoAsset!,
-                              width: 14,
-                              height: 14,
                               fit: BoxFit.contain,
                             ),
                           ),
