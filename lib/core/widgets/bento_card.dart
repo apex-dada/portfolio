@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 
 /// A highly customizable, interactive card widget designed for Bento Grid layouts.
 /// Supports text, icons, custom background images, action buttons, and hover animations.
@@ -52,6 +53,9 @@ class BentoCard extends StatefulWidget {
   /// Whether the card should animate and scale on hover. Defaults to true.
   final bool isHoverable;
 
+  /// Whether to apply liquid glass effect to the card. Defaults to true.
+  final bool enableGlass;
+
   /// How content should be aligned horizontally. Defaults to CrossAxisAlignment.start.
   final CrossAxisAlignment crossAxisAlignment;
 
@@ -97,6 +101,7 @@ class BentoCard extends StatefulWidget {
     this.borderRadius = 24.0,
     this.onTap,
     this.isHoverable = true,
+    this.enableGlass = true,
     this.crossAxisAlignment = CrossAxisAlignment.start,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.height,
@@ -235,8 +240,10 @@ class _BentoCardState extends State<BentoCard> {
 
     final cardBgColor = widget.glassColor ??
         (widget.backgroundColor != null
-            ? widget.backgroundColor!
-            : (isDark ? const Color(0xFF151515) : const Color(0xFFFFFFFF)));
+            ? (widget.backgroundColor == Colors.transparent
+                ? Colors.transparent
+                : widget.backgroundColor!.withValues(alpha: isDark ? 0.35 : 0.50))
+            : (isDark ? const Color(0x33151515) : const Color(0x66FFFFFF)));
 
     // Build the main card structure
     Widget cardContent = ClipRRect(
@@ -321,6 +328,51 @@ class _BentoCardState extends State<BentoCard> {
       ),
     );
 
+    final borderSide = BorderSide(
+      color: finalBorderColor,
+      width: widget.borderWidth,
+    );
+
+    Widget containerWidget = AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      height: widget.height,
+      width: widget.width,
+      decoration: BoxDecoration(
+        color: cardBgColor,
+        borderRadius: BorderRadius.circular(widget.borderRadius),
+        boxShadow: widget.shadows ?? [
+          BoxShadow(
+            color: isDark
+                ? (_isHovered ? const Color(0x66000000) : const Color(0x33000000))
+                : (_isHovered ? const Color(0x339E9E9E) : const Color(0x1A9E9E9E)),
+            blurRadius: _isHovered ? 16 : 8,
+            offset: Offset(0, _isHovered ? 8 : 4),
+          ),
+        ],
+      ),
+      child: cardContent,
+    );
+
+    Widget cardWidget = widget.enableGlass
+        ? LiquidGlass.withOwnLayer(
+            shape: LiquidRoundedRectangle(
+              borderRadius: widget.borderRadius,
+              side: borderSide,
+            ),
+            settings: LiquidGlassSettings(
+              blur: widget.glassBlur,
+              glassColor: Colors.transparent,
+            ),
+            child: containerWidget,
+          )
+        : Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: finalBorderColor, width: widget.borderWidth),
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+            ),
+            child: containerWidget,
+          );
+
     return MouseRegion(
       onEnter: (_) {
         if (widget.isHoverable) setState(() => _isHovered = true);
@@ -347,29 +399,7 @@ class _BentoCardState extends State<BentoCard> {
           child: AnimatedScale(
             scale: _isPressed ? 0.985 : 1.0,
             duration: const Duration(milliseconds: 100),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              height: widget.height,
-              width: widget.width,
-              decoration: BoxDecoration(
-                color: cardBgColor,
-                borderRadius: BorderRadius.circular(widget.borderRadius),
-                border: Border.all(
-                  color: finalBorderColor,
-                  width: widget.borderWidth,
-                ),
-                boxShadow: widget.shadows ?? [
-                  BoxShadow(
-                    color: isDark
-                        ? (_isHovered ? const Color(0x66000000) : const Color(0x33000000))
-                        : (_isHovered ? const Color(0x339E9E9E) : const Color(0x1A9E9E9E)),
-                    blurRadius: _isHovered ? 16 : 8,
-                    offset: Offset(0, _isHovered ? 8 : 4),
-                  ),
-                ],
-              ),
-              child: cardContent,
-            ),
+            child: cardWidget,
           ),
         ),
       ),
