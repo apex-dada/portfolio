@@ -9,10 +9,13 @@ class FooterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
     final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
     final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
     final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
     final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
+
+    final flutterSkyColor = isDark ? const Color(0xFF54C5F8) : const Color(0xFF02569B);
 
     return BentoCard(
       backgroundColor: cardColor,
@@ -43,12 +46,12 @@ class FooterWidget extends StatelessWidget {
                       fontSize: 12.5,
                       fontWeight: FontWeight.w500,
                     ),
-                    children: const [
-                      TextSpan(text: "Built with "),
+                    children: [
+                      const TextSpan(text: "Built with "),
                       TextSpan(
                         text: "Flutter Web",
                         style: TextStyle(
-                          color: Color(0xFF042B59),
+                          color: flutterSkyColor,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -77,12 +80,12 @@ class FooterWidget extends StatelessWidget {
                     fontSize: 12.5,
                     fontWeight: FontWeight.w500,
                   ),
-                  children: const [
-                    TextSpan(text: "Built with "),
+                  children: [
+                    const TextSpan(text: "Built with "),
                     TextSpan(
                       text: "Flutter Web",
                       style: TextStyle(
-                        color: Color(0xFF042B59),
+                        color: flutterSkyColor,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
