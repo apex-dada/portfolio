@@ -19,7 +19,7 @@ class FooterWidget extends StatelessWidget {
       backgroundColor: cardColor,
       borderColor: borderColor,
       hoverBorderColor: hoverBorderColor,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 26),
       child: LayoutBuilder(
         builder: (context, constraints) {
           final isSmall = constraints.maxWidth < 600;
@@ -31,12 +31,12 @@ class FooterWidget extends StatelessWidget {
                   "© ${DateTime.now().year} Kazi Woaej Mariz. All rights reserved.",
                   style: GoogleFonts.inter(
                     color: secondaryTextColor,
-                    fontSize: 12,
+                    fontSize: 13,
                     fontWeight: FontWeight.w500,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -44,21 +44,21 @@ class FooterWidget extends StatelessWidget {
                       "Built with ",
                       style: GoogleFonts.inter(
                         color: secondaryTextColor,
-                        fontSize: 12,
+                        fontSize: 13,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     Image.asset(
                       'assets/stack/flutter.png',
-                      width: 14,
-                      height: 14,
+                      width: 16,
+                      height: 16,
                     ),
-                    const SizedBox(width: 4),
+                    const SizedBox(width: 5),
                     Text(
                       "Flutter Web",
                       style: GoogleFonts.inter(
                         color: isDark ? Colors.white : Colors.black87,
-                        fontSize: 12,
+                        fontSize: 13,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -75,7 +75,7 @@ class FooterWidget extends StatelessWidget {
                 "© ${DateTime.now().year} Kazi Woaej Mariz. All rights reserved.",
                 style: GoogleFonts.inter(
                   color: secondaryTextColor,
-                  fontSize: 12,
+                  fontSize: 13,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -85,21 +85,21 @@ class FooterWidget extends StatelessWidget {
                     "Built with ",
                     style: GoogleFonts.inter(
                       color: secondaryTextColor,
-                      fontSize: 12,
+                      fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   Image.asset(
                     'assets/stack/flutter.png',
-                    width: 14,
-                    height: 14,
+                    width: 16,
+                    height: 16,
                   ),
-                  const SizedBox(width: 4),
+                  const SizedBox(width: 5),
                   Text(
                     "Flutter Web",
                     style: GoogleFonts.inter(
                       color: isDark ? Colors.white : Colors.black87,
-                      fontSize: 12,
+                      fontSize: 13,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
