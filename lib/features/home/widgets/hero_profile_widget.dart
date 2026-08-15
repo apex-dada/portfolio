@@ -172,12 +172,20 @@ class HeroProfileWidget extends StatelessWidget {
           ],
         );
 
-        Widget rightPhoto = ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.asset(
-            'assets/images/IMG_0741 (1).jpg',
-            fit: BoxFit.cover,
-            cacheWidth: 800,
+        Widget rightPhoto = Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 240, maxHeight: 280),
+            child: AspectRatio(
+              aspectRatio: 0.85,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: Image.asset(
+                  'assets/images/IMG_0741 (1).jpg',
+                  fit: BoxFit.cover,
+                  cacheWidth: 800,
+                ),
+              ),
+            ),
           ),
         );
 
@@ -192,14 +200,14 @@ class HeroProfileWidget extends StatelessWidget {
                   children: [
                     leftContent,
                     const SizedBox(height: 24),
-                    SizedBox(height: 320, child: rightPhoto),
+                    SizedBox(height: 240, child: rightPhoto),
                   ],
                 )
               : Row(
                   children: [
-                    Expanded(flex: 6, child: leftContent),
-                    const SizedBox(width: 24),
-                    Expanded(flex: 5, child: rightPhoto),
+                    Expanded(flex: 7, child: leftContent),
+                    const SizedBox(width: 20),
+                    Expanded(flex: 3, child: rightPhoto),
                   ],
                 ),
         );
