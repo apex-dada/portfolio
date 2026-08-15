@@ -70,67 +70,55 @@ class _LogoCarouselState extends State<LogoCarousel>
 
     return SizedBox(
       height: 96,
-      child: ShaderMask(
-        shaderCallback: (Rect bounds) {
-          return const LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              Colors.transparent,
-              Colors.white,
-              Colors.white,
-              Colors.transparent,
-            ],
-            stops: [0.0, 0.08, 0.92, 1.0],
-          ).createShader(bounds);
-        },
-        blendMode: BlendMode.dstIn,
-        child: ListView.builder(
-          controller: _scrollController,
-          scrollDirection: Axis.horizontal,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: _displayLogos.length,
-          itemBuilder: (context, index) {
-            final logo = _displayLogos[index];
-            return Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 4.0, bottom: 12.0),
-              child: LiquidGlass.withOwnLayer(
-                shape: const LiquidRoundedRectangle(
-                  borderRadius: 20,
-                  side: BorderSide(
-                    color: Color(0x1F000000),
-                    width: 1,
+      child: Stack(
+        children: [
+          ListView.builder(
+            controller: _scrollController,
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            itemCount: _displayLogos.length,
+            itemBuilder: (context, index) {
+              final logo = _displayLogos[index];
+              return Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 4.0, bottom: 12.0),
+                child: LiquidGlass.withOwnLayer(
+                  shape: const LiquidRoundedRectangle(
+                    borderRadius: 20,
+                    side: BorderSide(
+                      color: Color(0x1F000000),
+                      width: 1,
+                    ),
+                  ),
+                  settings: const LiquidGlassSettings(
+                    blur: 16.0,
+                    glassColor: Colors.transparent,
+                  ),
+                  child: Container(
+                    height: 80,
+                    width: 80,
+                    decoration: BoxDecoration(
+                      color: isDark ? const Color(0x44000000) : const Color(0x77FFFFFF),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0x1A000000),
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    padding: const EdgeInsets.all(12),
+                    child: Image.asset(
+                      logo,
+                      fit: BoxFit.contain,
+                      cacheWidth: 120,
+                    ),
                   ),
                 ),
-                settings: const LiquidGlassSettings(
-                  blur: 16.0,
-                  glassColor: Colors.transparent,
-                ),
-                child: Container(
-                  height: 80,
-                  width: 80,
-                  decoration: BoxDecoration(
-                    color: isDark ? const Color(0x44000000) : const Color(0x77FFFFFF),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x1A000000),
-                        blurRadius: 4,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  padding: const EdgeInsets.all(12),
-                  child: Image.asset(
-                    logo,
-                    fit: BoxFit.contain,
-                    cacheWidth: 120,
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
