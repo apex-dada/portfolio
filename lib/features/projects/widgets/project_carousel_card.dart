@@ -57,7 +57,7 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard>
 
     if (dt <= 0 || dt > 0.1) return;
 
-    const speed = 30.0; // pixels per second
+    const speed = 16.0; // pixels per second
     final currentScroll = _scrollController.offset;
     final maxScroll = _scrollController.position.maxScrollExtent;
 
