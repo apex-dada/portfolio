@@ -49,11 +49,11 @@ class HomeScreen extends StatelessWidget {
                 flex: 80,
                 child: Column(
                   children: [
-                    SizedBox(height: 330, child: HeroProfileWidget()),
+                    SizedBox(height: 300, child: HeroProfileWidget()),
                     SizedBox(height: 14),
-                    SizedBox(height: 66, child: HighlightsBarWidget()),
+                    SizedBox(height: 64, child: HighlightsBarWidget()),
                     SizedBox(height: 14),
-                    SizedBox(height: 266, child: TechStackWidget()),
+                    SizedBox(height: 180, child: TechStackWidget()),
                   ],
                 ),
               ),
@@ -62,14 +62,21 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                 flex: 35,
                 child: SizedBox(
-                  height: 690,
+                  height: 572,
                   child: Column(
                     children: [
-                      Expanded(flex: 15, child: WhatIDoWidget()),
+                      Expanded(child: WhatIDoWidget()),
                       SizedBox(height: 14),
-                      Expanded(flex: 12, child: SocialGridWidget()),
-                      SizedBox(height: 14),
-                      SizedBox(height: 76, child: ToggleWidget()),
+                      SizedBox(
+                        height: 180,
+                        child: Column(
+                          children: [
+                            SizedBox(height: 114, child: SocialGridWidget()),
+                            SizedBox(height: 10),
+                            SizedBox(height: 56, child: ToggleWidget()),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
