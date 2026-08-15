@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
@@ -9,45 +10,67 @@ class SocialGridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
+    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
+    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
+
+    final iconColor = isDark ? Colors.white.withValues(alpha: 0.85) : Colors.black87;
 
     final socialItems = [
       {
-        'icon': Icons.alternate_email_rounded,
+        'widget': Icon(Icons.flutter_dash_rounded, size: 20, color: iconColor),
         'url': 'https://twitter.com',
-        'tooltip': 'Twitter / X',
       },
       {
-        'icon': Icons.language_rounded,
+        'widget': Icon(Icons.language_rounded, size: 20, color: iconColor),
         'url': 'https://github.com/apex-dada',
-        'tooltip': 'Website',
       },
       {
-        'icon': Icons.camera_alt_rounded,
+        'widget': Icon(Icons.camera_alt_outlined, size: 20, color: iconColor),
         'url': 'https://instagram.com',
-        'tooltip': 'Instagram',
       },
       {
-        'icon': Icons.work_rounded,
+        'widget': Container(
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: iconColor, width: 1.5),
+          ),
+          child: Text(
+            "in",
+            style: GoogleFonts.inter(
+              color: iconColor,
+              fontSize: 10,
+              fontWeight: FontWeight.w900,
+              height: 1.0,
+            ),
+          ),
+        ),
         'url': 'https://linkedin.com',
-        'tooltip': 'LinkedIn',
       },
       {
-        'icon': Icons.code_rounded,
-        'url': 'https://github.com/apex-dada',
-        'tooltip': 'GitHub',
+        'widget': Text(
+          "Bē",
+          style: GoogleFonts.outfit(
+            color: iconColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w800,
+            letterSpacing: -0.5,
+          ),
+        ),
+        'url': 'https://behance.net',
       },
       {
-        'icon': Icons.email_rounded,
+        'widget': Icon(Icons.mail_outline_rounded, size: 20, color: iconColor),
         'url': 'mailto:woaejmariz@gmail.com',
-        'tooltip': 'Email',
       },
     ];
 
     return BentoCard(
-      backgroundColor: Colors.transparent,
-      borderColor: Colors.transparent,
-      hoverBorderColor: Colors.transparent,
-      padding: EdgeInsets.zero,
+      backgroundColor: cardColor,
+      borderColor: borderColor,
+      hoverBorderColor: hoverBorderColor,
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           Expanded(
@@ -57,7 +80,7 @@ class SocialGridWidget extends StatelessWidget {
                 crossAxisCount: 3,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                childAspectRatio: 1.25,
+                childAspectRatio: 1.15,
               ),
               itemCount: socialItems.length,
               itemBuilder: (context, index) {
@@ -70,18 +93,14 @@ class SocialGridWidget extends StatelessWidget {
                     cursor: SystemMouseCursors.click,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: isDark ? const Color(0xFF22252F) : const Color(0xFFEBEFF5),
-                        borderRadius: BorderRadius.circular(16),
+                        color: isDark ? const Color(0xFF1B1E26) : const Color(0xFFE4E8F0),
+                        borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: isDark ? const Color(0x22FFFFFF) : const Color(0x1F000000),
+                          color: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
                         ),
                       ),
                       child: Center(
-                        child: Icon(
-                          item['icon'] as IconData,
-                          size: 18,
-                          color: isDark ? Colors.white70 : Colors.black87,
-                        ),
+                        child: item['widget'] as Widget,
                       ),
                     ),
                   ),
