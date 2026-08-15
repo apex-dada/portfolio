@@ -32,7 +32,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
             child: Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: isDark ? const Color(0x33FFFFFF) : const Color(0x1F000000),
                 borderRadius: BorderRadius.circular(16),
@@ -47,7 +47,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: AspectRatio(
-                      aspectRatio: 1.3,
+                      aspectRatio: 1.6,
                       child: Image.asset(
                         imagePath,
                         fit: BoxFit.cover,
@@ -55,34 +55,34 @@ class FeaturedProjectsWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
 
                   // Title
                   Text(
                     title,
                     style: GoogleFonts.outfit(
                       color: primaryTextColor,
-                      fontSize: 15,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 3),
 
                   // Description
                   Text(
                     description,
                     style: GoogleFonts.inter(
                       color: secondaryTextColor,
-                      fontSize: 11.5,
-                      height: 1.35,
+                      fontSize: 11,
+                      height: 1.3,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const Spacer(),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 6),
 
                   // Tags
                   Wrap(
