@@ -65,11 +65,11 @@ class HomeScreen extends StatelessWidget {
                   height: 667,
                   child: Column(
                     children: [
-                      Expanded(flex: 12, child: WhatIDoWidget()),
+                      Expanded(flex: 10, child: WhatIDoWidget()),
                       SizedBox(height: 14),
-                      Expanded(flex: 9, child: StayInTouchWidget()),
+                      Expanded(flex: 8, child: StayInTouchWidget()),
                       SizedBox(height: 14),
-                      Expanded(flex: 9, child: TechStackWidget()),
+                      Expanded(flex: 12, child: TechStackWidget()),
                     ],
                   ),
                 ),

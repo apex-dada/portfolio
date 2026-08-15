@@ -67,60 +67,57 @@ class TechStackWidget extends StatelessWidget {
           Expanded(
             child: Align(
               alignment: Alignment.topLeft,
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Wrap(
-                  spacing: 8,
-                  runSpacing: 10,
-                  children: _stackItems.map((item) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: isDark ? const Color(0xFF22252F) : const Color(0xFFEBEFF5),
-                        borderRadius: BorderRadius.circular(18),
-                        border: Border.all(
-                          color: isDark ? const Color(0x22FFFFFF) : const Color(0x1F000000),
-                        ),
+              child: Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: _stackItems.map((item) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: isDark ? const Color(0xFF22252F) : const Color(0xFFEBEFF5),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: isDark ? const Color(0x22FFFFFF) : const Color(0x1F000000),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (item.logoAsset != null) ...[
-                            Container(
-                              padding: const EdgeInsets.all(3),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Image.asset(
-                                item.logoAsset!,
-                                width: 13,
-                                height: 13,
-                                fit: BoxFit.contain,
-                              ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (item.logoAsset != null) ...[
+                          Container(
+                            padding: const EdgeInsets.all(2.5),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5),
                             ),
-                            const SizedBox(width: 7),
-                          ] else if (item.fallbackIcon != null) ...[
-                            Icon(
-                              item.fallbackIcon!,
-                              size: 13,
-                              color: isDark ? Colors.white70 : Colors.black54,
-                            ),
-                            const SizedBox(width: 6),
-                          ],
-                          Text(
-                            item.name,
-                            style: GoogleFonts.inter(
-                              color: isDark ? Colors.white : Colors.black87,
-                              fontSize: 11.5,
-                              fontWeight: FontWeight.w600,
+                            child: Image.asset(
+                              item.logoAsset!,
+                              width: 12,
+                              height: 12,
+                              fit: BoxFit.contain,
                             ),
                           ),
+                          const SizedBox(width: 5),
+                        ] else if (item.fallbackIcon != null) ...[
+                          Icon(
+                            item.fallbackIcon!,
+                            size: 12,
+                            color: isDark ? Colors.white70 : Colors.black54,
+                          ),
+                          const SizedBox(width: 5),
                         ],
-                      ),
-                    );
-                  }).toList(),
-                ),
+                        Text(
+                          item.name,
+                          style: GoogleFonts.inter(
+                            color: isDark ? Colors.white : Colors.black87,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
               ),
             ),
           ),
