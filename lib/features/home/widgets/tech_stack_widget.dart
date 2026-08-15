@@ -70,11 +70,11 @@ class TechStackWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.topLeft,
               child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
+                spacing: 10,
+                runSpacing: 10,
                 children: _stackItems.map((item) {
                   return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6.5),
+                    padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
                     decoration: BoxDecoration(
                       color: isDark ? const Color(0xFF22252F) : const Color(0xFFEBEFF5),
                       borderRadius: BorderRadius.circular(16),
@@ -94,8 +94,8 @@ class TechStackWidget extends StatelessWidget {
                             ),
                             child: Image.asset(
                               item.logoAsset!,
-                              width: 13,
-                              height: 13,
+                              width: 14,
+                              height: 14,
                               fit: BoxFit.contain,
                             ),
                           ),
@@ -103,7 +103,7 @@ class TechStackWidget extends StatelessWidget {
                         ] else if (item.fallbackIcon != null) ...[
                           Icon(
                             item.fallbackIcon!,
-                            size: 13,
+                            size: 14,
                             color: isDark ? Colors.white70 : Colors.black54,
                           ),
                           const SizedBox(width: 6),
@@ -112,7 +112,7 @@ class TechStackWidget extends StatelessWidget {
                           item.name,
                           style: GoogleFonts.inter(
                             color: isDark ? Colors.white : Colors.black87,
-                            fontSize: 11.5,
+                            fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
