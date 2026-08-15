@@ -99,12 +99,28 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard>
         onExit: (_) => setState(() => _isHovered = false),
         child: Stack(
           children: [
-            // Background container
+            // Background liquid glass container
             Positioned.fill(
-              child: Container(
-                color: isDark
-                    ? const Color(0xFF121214)
-                    : const Color(0xFFF0F2F5),
+              child: LiquidGlass.withOwnLayer(
+                shape: const LiquidRoundedRectangle(
+                  borderRadius: 24,
+                  side: BorderSide(
+                    color: Color(0x1F000000),
+                    width: 1,
+                  ),
+                ),
+                settings: const LiquidGlassSettings(
+                  blur: 16.0,
+                  glassColor: Colors.transparent,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? const Color(0x22121214)
+                        : const Color(0x55F0F2F5),
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
               ),
             ),
 
