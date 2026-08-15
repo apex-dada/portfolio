@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/shared/widgets/app_bar_widget.dart';
+import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
 import 'package:portfolio/features/experience/widgets/experience_timeline_card.dart';
 import 'package:portfolio/features/experience/widgets/experience_services_card.dart';
 import 'package:portfolio/features/experience/widgets/experience_workflow_card.dart';
@@ -81,32 +82,26 @@ class ExperienceScreen extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: SafeArea(
-              child: Column(
-                children: [
-                  Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1200),
-                      child: AppBarWidget(
-                        isMobile: isMobile,
-                        isExperiencePage: true,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-                      child: SingleChildScrollView(
-                        child: Align(
-                          alignment: Alignment.topCenter,
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 1200),
-                            child: buildBody(size, isMobile),
-                          ),
+              child: AutoHidingHeader(
+                appBar: AppBarWidget(
+                  isMobile: isMobile,
+                  isExperiencePage: true,
+                ),
+                child: ScrollConfiguration(
+                  behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                  child: SingleChildScrollView(
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 1200),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 76.0),
+                          child: buildBody(size, isMobile),
                         ),
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
             ),
           ),

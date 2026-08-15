@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/shared/widgets/app_bar_widget.dart';
+import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
 import 'package:portfolio/features/home/widgets/profile_info_widget.dart';
 import 'package:portfolio/features/home/widgets/portfolio_mockup_one_widget.dart';
 import 'package:portfolio/features/home/widgets/portfolio_mockup_two_widget.dart';
@@ -160,30 +161,24 @@ class HomeScreen extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: SafeArea(
-              child: Column(
-                children: [
-                  Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1200),
-                      child: AppBarWidget(isMobile: isMobile),
-                    ),
-                  ),
-                  Expanded(
-                    child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-                      child: SingleChildScrollView(
-                        controller: mainScrollController,
-                        child: Align(
-                          alignment: Alignment.topCenter,
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 1200),
-                            child: buildBody(isMobile),
-                          ),
+              child: AutoHidingHeader(
+                appBar: AppBarWidget(isMobile: isMobile),
+                child: ScrollConfiguration(
+                  behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                  child: SingleChildScrollView(
+                    controller: mainScrollController,
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 1200),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 76.0),
+                          child: buildBody(isMobile),
                         ),
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
             ),
           ),

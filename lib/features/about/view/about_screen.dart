@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/shared/widgets/app_bar_widget.dart';
+import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
 import 'package:portfolio/features/about/widgets/about_bio_widget.dart';
 import 'package:portfolio/features/about/widgets/about_facts_widget.dart';
 import 'package:portfolio/features/about/widgets/about_education_widget.dart';
@@ -110,29 +111,23 @@ class AboutScreen extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: SafeArea(
-              child: Column(
-                children: [
-                  Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1200),
-                      child: AppBarWidget(isMobile: isMobile, isAboutPage: true),
-                    ),
-                  ),
-                  Expanded(
-                    child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-                      child: SingleChildScrollView(
-                        child: Align(
-                          alignment: Alignment.topCenter,
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 1200),
-                            child: buildBody(size, isMobile),
-                          ),
+              child: AutoHidingHeader(
+                appBar: AppBarWidget(isMobile: isMobile, isAboutPage: true),
+                child: ScrollConfiguration(
+                  behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                  child: SingleChildScrollView(
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 1200),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 76.0),
+                          child: buildBody(size, isMobile),
                         ),
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
             ),
           ),
