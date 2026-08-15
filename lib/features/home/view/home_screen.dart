@@ -36,9 +36,9 @@ class HomeScreen extends StatelessWidget {
       );
     }
 
-    // Desktop Layout (Structured 2-Column Bento Grid matching zero-scroll viewport height)
+    // Desktop Layout (Structured 2-Column Bento Grid scaled for standard monitor viewports)
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
       child: Column(
         children: [
           Row(
@@ -49,26 +49,26 @@ class HomeScreen extends StatelessWidget {
                 flex: 80,
                 child: Column(
                   children: [
-                    SizedBox(height: 250, child: HeroProfileWidget()),
-                    SizedBox(height: 12),
-                    SizedBox(height: 54, child: HighlightsBarWidget()),
-                    SizedBox(height: 12),
-                    SizedBox(height: 250, child: FeaturedProjectsWidget()),
+                    SizedBox(height: 290, child: HeroProfileWidget()),
+                    SizedBox(height: 14),
+                    SizedBox(height: 64, child: HighlightsBarWidget()),
+                    SizedBox(height: 14),
+                    SizedBox(height: 285, child: FeaturedProjectsWidget()),
                   ],
                 ),
               ),
-              SizedBox(width: 12),
+              SizedBox(width: 14),
               // Right Sidebar Column (Flex 3.5)
               Expanded(
                 flex: 35,
                 child: SizedBox(
-                  height: 578,
+                  height: 667,
                   child: Column(
                     children: [
                       Expanded(flex: 12, child: WhatIDoWidget()),
-                      SizedBox(height: 12),
+                      SizedBox(height: 14),
                       Expanded(flex: 9, child: StayInTouchWidget()),
-                      SizedBox(height: 12),
+                      SizedBox(height: 14),
                       Expanded(flex: 9, child: TechStackWidget()),
                     ],
                   ),
