@@ -9,9 +9,6 @@ class SocialGridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
-    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
-    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
-    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
 
     final socialItems = [
       {
@@ -47,10 +44,10 @@ class SocialGridWidget extends StatelessWidget {
     ];
 
     return BentoCard(
-      backgroundColor: cardColor,
-      borderColor: borderColor,
-      hoverBorderColor: hoverBorderColor,
-      padding: const EdgeInsets.all(14),
+      backgroundColor: Colors.transparent,
+      borderColor: Colors.transparent,
+      hoverBorderColor: Colors.transparent,
+      padding: EdgeInsets.zero,
       child: Column(
         children: [
           Expanded(
