@@ -67,7 +67,7 @@ class _LiveClockWidgetState extends State<LiveClockWidget> {
       backgroundColor: cardColor,
       borderColor: borderColor,
       hoverBorderColor: hoverBorderColor,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -76,35 +76,42 @@ class _LiveClockWidgetState extends State<LiveClockWidget> {
           Row(
             children: [
               Container(
-                width: 7,
-                height: 7,
+                width: 6,
+                height: 6,
                 decoration: const BoxDecoration(
                   color: greenAccent,
                   shape: BoxShape.circle,
                 ),
               ),
-              const SizedBox(width: 6),
-              Text(
-                "Dhaka, Bangladesh (GMT+6)",
-                style: GoogleFonts.inter(
-                  color: greenAccent,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
+              const SizedBox(width: 5),
+              Expanded(
+                child: Text(
+                  "Dhaka, BD (GMT+6)",
+                  style: GoogleFonts.inter(
+                    color: greenAccent,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
 
           // Digital Clock Time
-          Text(
-            _formatTime(_now),
-            style: GoogleFonts.outfit(
-              color: primaryTextColor,
-              fontSize: 26,
-              fontWeight: FontWeight.w900,
-              height: 1.1,
-              letterSpacing: 0.5,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              _formatTime(_now),
+              style: GoogleFonts.outfit(
+                color: primaryTextColor,
+                fontSize: 21,
+                fontWeight: FontWeight.w900,
+                height: 1.1,
+                letterSpacing: 0.5,
+              ),
             ),
           ),
           const SizedBox(height: 4),
@@ -114,9 +121,11 @@ class _LiveClockWidgetState extends State<LiveClockWidget> {
             _formatDate(_now),
             style: GoogleFonts.inter(
               color: secondaryTextColor,
-              fontSize: 12,
+              fontSize: 11,
               fontWeight: FontWeight.w500,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),
