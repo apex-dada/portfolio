@@ -36,12 +36,23 @@ class FooterWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 6),
-                Text(
-                  "Built with Flutter Web",
-                  style: GoogleFonts.inter(
-                    color: secondaryTextColor,
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w600,
+                RichText(
+                  text: TextSpan(
+                    style: GoogleFonts.inter(
+                      color: secondaryTextColor,
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    children: const [
+                      TextSpan(text: "Built with "),
+                      TextSpan(
+                        text: "Flutter Web",
+                        style: TextStyle(
+                          color: Color(0xFF042B59),
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -59,12 +70,23 @@ class FooterWidget extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Text(
-                "Built with Flutter Web",
-                style: GoogleFonts.inter(
-                  color: secondaryTextColor,
-                  fontSize: 12.5,
-                  fontWeight: FontWeight.w600,
+              RichText(
+                text: TextSpan(
+                  style: GoogleFonts.inter(
+                    color: secondaryTextColor,
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  children: const [
+                    TextSpan(text: "Built with "),
+                    TextSpan(
+                      text: "Flutter Web",
+                      style: TextStyle(
+                        color: Color(0xFF042B59),
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
