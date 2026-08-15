@@ -115,7 +115,9 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard>
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.transparent,
+                    color: isDark
+                        ? const Color(0x22121214)
+                        : const Color(0x55F0F2F5),
                     borderRadius: BorderRadius.circular(24),
                   ),
                 ),
@@ -204,9 +206,11 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard>
                       child: Container(
                         width: 34,
                         height: 34,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.transparent,
+                          color: isDark
+                              ? Colors.black.withValues(alpha: 0.5)
+                              : Colors.white.withValues(alpha: 0.7),
                         ),
                         child: Icon(Icons.chevron_left_rounded,
                             size: 22, color: primaryTextColor),
@@ -245,9 +249,11 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard>
                       child: Container(
                         width: 34,
                         height: 34,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.transparent,
+                          color: isDark
+                              ? Colors.black.withValues(alpha: 0.5)
+                              : Colors.white.withValues(alpha: 0.7),
                         ),
                         child: Icon(Icons.chevron_right_rounded,
                             size: 22, color: primaryTextColor),
@@ -278,7 +284,9 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard>
                   height: 36,
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   decoration: BoxDecoration(
-                    color: Colors.transparent,
+                    color: isDark
+                        ? const Color(0x44000000)
+                        : const Color(0x66FFFFFF),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(

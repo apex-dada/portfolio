@@ -338,7 +338,7 @@ class _BentoCardState extends State<BentoCard> {
       height: widget.height,
       width: widget.width,
       decoration: BoxDecoration(
-        color: widget.enableGlass ? Colors.transparent : cardBgColor,
+        color: cardBgColor,
         borderRadius: BorderRadius.circular(widget.borderRadius),
         boxShadow: widget.shadows ?? [
           BoxShadow(
