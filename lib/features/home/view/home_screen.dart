@@ -6,10 +6,8 @@ import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
 import 'package:portfolio/features/home/widgets/hero_profile_widget.dart';
 import 'package:portfolio/features/home/widgets/highlights_bar_widget.dart';
 import 'package:portfolio/features/home/widgets/social_grid_widget.dart';
-import 'package:portfolio/features/home/widgets/live_clock_widget.dart';
 import 'package:portfolio/features/home/widgets/toggle_widget.dart';
 import 'package:portfolio/features/home/widgets/what_i_do_widget.dart';
-import 'package:portfolio/features/home/widgets/stay_in_touch_widget.dart';
 import 'package:portfolio/features/home/widgets/tech_stack_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,17 +24,13 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 16),
             HighlightsBarWidget(),
             SizedBox(height: 16),
-            SizedBox(height: 200, child: TechStackWidget()),
+            SizedBox(height: 340, child: WhatIDoWidget()),
             SizedBox(height: 16),
-            SizedBox(height: 140, child: LiveClockWidget()),
+            SizedBox(height: 80, child: ToggleWidget()),
             SizedBox(height: 16),
-            SizedBox(height: 100, child: ToggleWidget()),
+            SizedBox(height: 220, child: TechStackWidget()),
             SizedBox(height: 16),
-            SizedBox(height: 360, child: WhatIDoWidget()),
-            SizedBox(height: 16),
-            SizedBox(height: 240, child: StayInTouchWidget()),
-            SizedBox(height: 16),
-            SizedBox(height: 180, child: SocialGridWidget()),
+            SizedBox(height: 220, child: SocialGridWidget()),
           ],
         ),
       );
@@ -59,18 +53,7 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(height: 14),
                     SizedBox(height: 66, child: HighlightsBarWidget()),
                     SizedBox(height: 14),
-                    SizedBox(
-                      height: 266,
-                      child: Row(
-                        children: [
-                          Expanded(flex: 5, child: SocialGridWidget()),
-                          SizedBox(width: 12),
-                          Expanded(flex: 5, child: LiveClockWidget()),
-                          SizedBox(width: 12),
-                          Expanded(flex: 3, child: ToggleWidget()),
-                        ],
-                      ),
-                    ),
+                    SizedBox(height: 266, child: TechStackWidget()),
                   ],
                 ),
               ),
@@ -82,11 +65,11 @@ class HomeScreen extends StatelessWidget {
                   height: 690,
                   child: Column(
                     children: [
-                      Expanded(flex: 12, child: WhatIDoWidget()),
+                      Expanded(flex: 15, child: WhatIDoWidget()),
                       SizedBox(height: 14),
-                      Expanded(flex: 9, child: StayInTouchWidget()),
+                      SizedBox(height: 76, child: ToggleWidget()),
                       SizedBox(height: 14),
-                      Expanded(flex: 11, child: TechStackWidget()),
+                      Expanded(flex: 12, child: SocialGridWidget()),
                     ],
                   ),
                 ),

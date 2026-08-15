@@ -23,18 +23,18 @@ class WhatIDoWidget extends StatelessWidget {
       required String description,
     }) {
       return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 26,
-            height: 26,
+            width: 32,
+            height: 32,
             decoration: BoxDecoration(
               color: greenAccent.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, size: 13, color: greenAccent),
+            child: Icon(icon, size: 16, color: greenAccent),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,17 +44,17 @@ class WhatIDoWidget extends StatelessWidget {
                   title,
                   style: GoogleFonts.outfit(
                     color: primaryTextColor,
-                    fontSize: 13,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 1),
+                const SizedBox(height: 2),
                 Text(
                   description,
                   style: GoogleFonts.inter(
                     color: secondaryTextColor,
-                    fontSize: 10.5,
-                    height: 1.25,
+                    fontSize: 11.5,
+                    height: 1.3,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -70,26 +70,26 @@ class WhatIDoWidget extends StatelessWidget {
       backgroundColor: cardColor,
       borderColor: borderColor,
       hoverBorderColor: hoverBorderColor,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header Bar
           Row(
             children: [
-              const Icon(Icons.work_outline_rounded, size: 15, color: greenAccent),
+              const Icon(Icons.work_outline_rounded, size: 16, color: greenAccent),
               const SizedBox(width: 8),
               Text(
                 "What I Do",
                 style: GoogleFonts.outfit(
                   color: primaryTextColor,
-                  fontSize: 15,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
 
           // Items List
           Expanded(
