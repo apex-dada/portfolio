@@ -32,7 +32,7 @@ class WhatIDoWidget extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, size: 16, color: const Color(0xFF1E2129)),
+            child: Icon(icon, size: 16, color: Colors.white),
           ),
           const SizedBox(width: 12),
           Expanded(
