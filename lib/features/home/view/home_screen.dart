@@ -41,55 +41,40 @@ class HomeScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
       child: Column(
         children: [
-          // Top Row: Profile & Highlights on Left, What I Do & Social Grid on Right
-          SizedBox(
-            height: 410,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Left Main Column (Flex 80)
-                Expanded(
-                  flex: 80,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Left Main Column (Flex 8)
+              Expanded(
+                flex: 80,
+                child: Column(
+                  children: [
+                    SizedBox(height: 330, child: HeroProfileWidget()),
+                    SizedBox(height: 14),
+                    SizedBox(height: 66, child: HighlightsBarWidget()),
+                    SizedBox(height: 14),
+                    SizedBox(height: 266, child: TechStackWidget()),
+                  ],
+                ),
+              ),
+              SizedBox(width: 14),
+              // Right Sidebar Column (Flex 3.5)
+              Expanded(
+                flex: 35,
+                child: SizedBox(
+                  height: 690,
                   child: Column(
                     children: [
-                      SizedBox(height: 330, child: HeroProfileWidget()),
+                      Expanded(flex: 15, child: WhatIDoWidget()),
                       SizedBox(height: 14),
-                      SizedBox(height: 66, child: HighlightsBarWidget()),
+                      Expanded(flex: 12, child: SocialGridWidget()),
+                      SizedBox(height: 14),
+                      SizedBox(height: 76, child: ToggleWidget()),
                     ],
                   ),
                 ),
-                SizedBox(width: 14),
-                // Right Sidebar Column (Flex 35)
-                Expanded(
-                  flex: 35,
-                  child: Column(
-                    children: [
-                      Expanded(flex: 11, child: WhatIDoWidget()),
-                      SizedBox(height: 14),
-                      Expanded(flex: 10, child: SocialGridWidget()),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 14),
-          // Bottom Aligned Row: Tech Stack (Flex 80) and Theme Toggle (Flex 35)
-          SizedBox(
-            height: 260,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 80,
-                  child: TechStackWidget(),
-                ),
-                SizedBox(width: 14),
-                Expanded(
-                  flex: 35,
-                  child: ToggleWidget(),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
