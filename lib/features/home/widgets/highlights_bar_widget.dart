@@ -16,8 +16,6 @@ class HighlightsBarWidget extends StatelessWidget {
     final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
     final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
 
-    const greenAccent = Color(0xFF3DDC84);
-
     Widget buildItem({
       required IconData icon,
       required String value,
@@ -30,11 +28,11 @@ class HighlightsBarWidget extends StatelessWidget {
             Container(
               width: 28,
               height: 28,
-              decoration: BoxDecoration(
-                color: greenAccent.withValues(alpha: 0.1),
+              decoration: const BoxDecoration(
+                color: Colors.white,
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, size: 14, color: greenAccent),
+              child: Icon(icon, size: 14, color: const Color(0xFF1E2129)),
             ),
             const SizedBox(width: 8),
             Column(
