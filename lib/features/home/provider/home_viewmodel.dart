@@ -6,9 +6,6 @@ class HomeViewModel extends ChangeNotifier {
   bool _isDarkMode = true;
   bool get isDarkMode => _isDarkMode;
 
-  bool _isChangingTheme = false;
-  bool get isChangingTheme => _isChangingTheme;
-
   final ScrollController mainScrollController = ScrollController();
   final GlobalKey portfolioKey = GlobalKey();
   final GlobalKey experienceKey = GlobalKey();
@@ -22,7 +19,20 @@ class HomeViewModel extends ChangeNotifier {
     mainScrollController.addListener(_onScroll);
   }
 
+  bool _scrollThrottlePending = false;
+
   void _onScroll() {
+    if (!mainScrollController.hasClients) return;
+    if (_scrollThrottlePending) return;
+
+    _scrollThrottlePending = true;
+    Timer(const Duration(milliseconds: 60), () {
+      _scrollThrottlePending = false;
+      _updateActiveSection();
+    });
+  }
+
+  void _updateActiveSection() {
     if (!mainScrollController.hasClients) return;
 
     if (mainScrollController.offset < 50) {
@@ -46,12 +56,14 @@ class HomeViewModel extends ChangeNotifier {
     keys.forEach((section, key) {
       final context = key.currentContext;
       if (context != null) {
-        final box = context.findRenderObject() as RenderBox;
-        final position = box.localToGlobal(Offset.zero);
-        final distance = position.dy.abs();
-        if (distance < closestDistance && position.dy < 350) {
-          closestDistance = distance;
-          currentSection = section;
+        final box = context.findRenderObject() as RenderBox?;
+        if (box != null && box.hasSize) {
+          final position = box.localToGlobal(Offset.zero);
+          final distance = position.dy.abs();
+          if (distance < closestDistance && position.dy < 350) {
+            closestDistance = distance;
+            currentSection = section;
+          }
         }
       }
     });
@@ -64,13 +76,7 @@ class HomeViewModel extends ChangeNotifier {
 
   void toggleTheme() {
     _isDarkMode = !_isDarkMode;
-    _isChangingTheme = true;
     notifyListeners();
-
-    Timer(const Duration(seconds: 1), () {
-      _isChangingTheme = false;
-      notifyListeners();
-    });
   }
 
   // Theme-derived values matching the original designs

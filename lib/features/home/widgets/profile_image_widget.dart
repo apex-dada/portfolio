@@ -8,16 +8,19 @@ class ProfileImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
+    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
+    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
 
     return BentoCard(
-      backgroundColor: homeViewModel.cardColor,
-      borderColor: homeViewModel.borderColor,
-      hoverBorderColor: homeViewModel.hoverBorderColor,
+      backgroundColor: cardColor,
+      borderColor: borderColor,
+      hoverBorderColor: hoverBorderColor,
       padding: EdgeInsets.zero,
       backgroundImage: Image.asset(
         'assets/images/IMG_0741 (1).jpg',
         fit: BoxFit.cover,
+        cacheWidth: 600,
       ),
     );
   }

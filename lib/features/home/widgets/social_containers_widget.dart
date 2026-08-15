@@ -8,7 +8,10 @@ class SocialContainersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
+    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
+    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
 
     return SizedBox(
       child: Column(
@@ -20,15 +23,15 @@ class SocialContainersWidget extends StatelessWidget {
                 // Facebook
                 Expanded(
                   child: BentoCard(
-                    backgroundColor: homeViewModel.cardColor,
-                    borderColor: homeViewModel.borderColor,
-                    hoverBorderColor: homeViewModel.hoverBorderColor,
+                    backgroundColor: cardColor,
+                    borderColor: borderColor,
+                    hoverBorderColor: hoverBorderColor,
                     padding: EdgeInsets.zero,
-                    onTap: () => homeViewModel.launchURL(context, 'https://www.facebook.com/kazi.woaej.mariz/'),
+                    onTap: () => context.read<HomeViewModel>().launchURL(context, 'https://www.facebook.com/kazi.woaej.mariz/'),
                     child: Center(
                       child: Icon(
                         Icons.facebook_rounded,
-                        color: homeViewModel.primaryTextColor,
+                        color: primaryTextColor,
                         size: 24,
                       ),
                     ),
@@ -38,15 +41,15 @@ class SocialContainersWidget extends StatelessWidget {
                 // Instagram
                 Expanded(
                   child: BentoCard(
-                    backgroundColor: homeViewModel.cardColor,
-                    borderColor: homeViewModel.borderColor,
-                    hoverBorderColor: homeViewModel.hoverBorderColor,
+                    backgroundColor: cardColor,
+                    borderColor: borderColor,
+                    hoverBorderColor: hoverBorderColor,
                     padding: EdgeInsets.zero,
-                    onTap: () => homeViewModel.launchURL(context, 'https://www.instagram.com/kazi_woaej/'),
+                    onTap: () => context.read<HomeViewModel>().launchURL(context, 'https://www.instagram.com/kazi_woaej/'),
                     child: Center(
                       child: Icon(
                         Icons.camera_alt_outlined,
-                        color: homeViewModel.primaryTextColor,
+                        color: primaryTextColor,
                         size: 22,
                       ),
                     ),
@@ -56,11 +59,11 @@ class SocialContainersWidget extends StatelessWidget {
                 // LinkedIn
                 Expanded(
                   child: BentoCard(
-                    backgroundColor: homeViewModel.cardColor,
-                    borderColor: homeViewModel.borderColor,
-                    hoverBorderColor: homeViewModel.hoverBorderColor,
+                    backgroundColor: cardColor,
+                    borderColor: borderColor,
+                    hoverBorderColor: hoverBorderColor,
                     padding: EdgeInsets.zero,
-                    onTap: () => homeViewModel.launchURL(
+                    onTap: () => context.read<HomeViewModel>().launchURL(
                       context,
                       'https://www.linkedin.com/in/kazi-woaej-mariz-3586501b9/',
                     ),
@@ -68,7 +71,7 @@ class SocialContainersWidget extends StatelessWidget {
                       child: Text(
                         "in",
                         style: TextStyle(
-                          color: homeViewModel.primaryTextColor,
+                          color: primaryTextColor,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
@@ -87,15 +90,15 @@ class SocialContainersWidget extends StatelessWidget {
                 // GitHub
                 Expanded(
                   child: BentoCard(
-                    backgroundColor: homeViewModel.cardColor,
-                    borderColor: homeViewModel.borderColor,
-                    hoverBorderColor: homeViewModel.hoverBorderColor,
+                    backgroundColor: cardColor,
+                    borderColor: borderColor,
+                    hoverBorderColor: hoverBorderColor,
                     padding: EdgeInsets.zero,
-                    onTap: () => homeViewModel.launchURL(context, 'https://github.com/apex-dada'),
+                    onTap: () => context.read<HomeViewModel>().launchURL(context, 'https://github.com/apex-dada'),
                     child: Center(
                       child: Icon(
                         Icons.code_rounded,
-                        color: homeViewModel.primaryTextColor,
+                        color: primaryTextColor,
                         size: 22,
                       ),
                     ),
@@ -105,15 +108,15 @@ class SocialContainersWidget extends StatelessWidget {
                 // Email
                 Expanded(
                   child: BentoCard(
-                    backgroundColor: homeViewModel.cardColor,
-                    borderColor: homeViewModel.borderColor,
-                    hoverBorderColor: homeViewModel.hoverBorderColor,
+                    backgroundColor: cardColor,
+                    borderColor: borderColor,
+                    hoverBorderColor: hoverBorderColor,
                     padding: EdgeInsets.zero,
-                    onTap: () => homeViewModel.sendEmail(context),
+                    onTap: () => context.read<HomeViewModel>().sendEmail(context),
                     child: Center(
                       child: Icon(
                         Icons.mail_outline_rounded,
-                        color: homeViewModel.primaryTextColor,
+                        color: primaryTextColor,
                         size: 22,
                       ),
                     ),

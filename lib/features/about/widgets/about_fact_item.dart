@@ -17,8 +17,9 @@ class AboutFactItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-    final isDark = homeViewModel.isDarkMode;
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
+    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
     final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
 
     return Padding(
@@ -33,7 +34,7 @@ class AboutFactItem extends StatelessWidget {
               Text(
                 label,
                 style: GoogleFonts.outfit(
-                  color: homeViewModel.secondaryTextColor,
+                  color: secondaryTextColor,
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
                 ),
@@ -41,7 +42,7 @@ class AboutFactItem extends StatelessWidget {
               Text(
                 value,
                 style: GoogleFonts.inter(
-                  color: homeViewModel.primaryTextColor,
+                  color: primaryTextColor,
                   fontSize: 13.5,
                   fontWeight: FontWeight.w500,
                 ),

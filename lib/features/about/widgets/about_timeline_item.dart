@@ -19,8 +19,10 @@ class AboutTimelineItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-    final isDark = homeViewModel.isDarkMode;
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
+    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
+    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
     final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
 
     return Row(
@@ -40,7 +42,7 @@ class AboutTimelineItem extends StatelessWidget {
               Container(
                 width: 2,
                 height: 42,
-                color: homeViewModel.borderColor,
+                color: borderColor,
               ),
           ],
         ),
@@ -52,7 +54,7 @@ class AboutTimelineItem extends StatelessWidget {
               Text(
                 title,
                 style: GoogleFonts.outfit(
-                  color: homeViewModel.primaryTextColor,
+                  color: primaryTextColor,
                   fontSize: 14.5,
                   fontWeight: FontWeight.bold,
                 ),
@@ -60,7 +62,7 @@ class AboutTimelineItem extends StatelessWidget {
               Text(
                 subtitle,
                 style: GoogleFonts.inter(
-                  color: homeViewModel.secondaryTextColor,
+                  color: secondaryTextColor,
                   fontSize: 12.5,
                   fontWeight: FontWeight.w400,
                 ),
@@ -69,7 +71,7 @@ class AboutTimelineItem extends StatelessWidget {
               Text(
                 date,
                 style: GoogleFonts.inter(
-                  color: accentColor.withOpacity(0.8),
+                  color: accentColor.withValues(alpha: 0.8),
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
                 ),

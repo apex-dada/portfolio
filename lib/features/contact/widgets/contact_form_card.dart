@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
@@ -10,14 +9,54 @@ class ContactFormCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-    final isDark = homeViewModel.isDarkMode;
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
+    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
+    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
+    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
     final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
 
+    Widget buildTextField() {
+      return Container(
+        height: 44,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(
+          color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.03),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: borderColor,
+            width: 1.0,
+          ),
+        ),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: TextField(
+            style: GoogleFonts.inter(
+              color: primaryTextColor,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+            decoration: InputDecoration(
+              hintText: "Your email address",
+              hintStyle: GoogleFonts.inter(
+                color: secondaryTextColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+              border: InputBorder.none,
+              isDense: true,
+              contentPadding: EdgeInsets.zero,
+            ),
+          ),
+        ),
+      );
+    }
+
     return BentoCard(
-      backgroundColor: homeViewModel.cardColor,
-      borderColor: homeViewModel.borderColor,
-      hoverBorderColor: homeViewModel.hoverBorderColor,
+      backgroundColor: cardColor,
+      borderColor: borderColor,
+      hoverBorderColor: hoverBorderColor,
       padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +75,7 @@ class ContactFormCard extends StatelessWidget {
           Text(
             "Have a project in mind? Let's connect.",
             style: GoogleFonts.outfit(
-              color: homeViewModel.primaryTextColor,
+              color: primaryTextColor,
               fontSize: 22,
               fontWeight: FontWeight.bold,
               letterSpacing: -0.5,
@@ -51,51 +90,12 @@ class ContactFormCard extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(
-                      height: 44,
-                      child: LiquidGlass.withOwnLayer(
-                        shape: LiquidRoundedRectangle(
-                          borderRadius: 12,
-                          side: BorderSide(
-                            color: homeViewModel.borderColor,
-                            width: 1.0,
-                          ),
-                        ),
-                        settings: LiquidGlassSettings(
-                          blur: 8.0,
-                          glassColor: isDark ? const Color(0x1F000000) : const Color(0x0FFFFFFF),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: TextField(
-                              style: GoogleFonts.inter(
-                                color: homeViewModel.primaryTextColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              decoration: InputDecoration(
-                                hintText: "Your email address",
-                                hintStyle: GoogleFonts.inter(
-                                  color: homeViewModel.secondaryTextColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                border: InputBorder.none,
-                                isDense: true,
-                                contentPadding: EdgeInsets.zero,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    buildTextField(),
                     const SizedBox(height: 10),
                     ElevatedButton(
-                      onPressed: () => homeViewModel.showSnackBar(context, "Project request sent successfully!"),
+                      onPressed: () => context.read<HomeViewModel>().showSnackBar(context, "Project request sent successfully!"),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: homeViewModel.primaryTextColor,
+                        backgroundColor: primaryTextColor,
                         foregroundColor: isDark ? Colors.black : Colors.white,
                         elevation: 0,
                         minimumSize: const Size(double.infinity, 44),
@@ -118,52 +118,13 @@ class ContactFormCard extends StatelessWidget {
               return Row(
                 children: [
                   Expanded(
-                    child: SizedBox(
-                      height: 44,
-                      child: LiquidGlass.withOwnLayer(
-                        shape: LiquidRoundedRectangle(
-                          borderRadius: 12,
-                          side: BorderSide(
-                            color: homeViewModel.borderColor,
-                            width: 1.0,
-                          ),
-                        ),
-                        settings: LiquidGlassSettings(
-                          blur: 8.0,
-                          glassColor: isDark ? const Color(0x1F000000) : const Color(0x0FFFFFFF),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: TextField(
-                              style: GoogleFonts.inter(
-                                color: homeViewModel.primaryTextColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              decoration: InputDecoration(
-                                hintText: "Your email address",
-                                hintStyle: GoogleFonts.inter(
-                                  color: homeViewModel.secondaryTextColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                border: InputBorder.none,
-                                isDense: true,
-                                contentPadding: EdgeInsets.zero,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: buildTextField(),
                   ),
                   const SizedBox(width: 12),
                   ElevatedButton(
-                    onPressed: () => homeViewModel.showSnackBar(context, "Project request sent successfully!"),
+                    onPressed: () => context.read<HomeViewModel>().showSnackBar(context, "Project request sent successfully!"),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: homeViewModel.primaryTextColor,
+                      backgroundColor: primaryTextColor,
                       foregroundColor: isDark ? Colors.black : Colors.white,
                       elevation: 0,
                       minimumSize: const Size(100, 44),

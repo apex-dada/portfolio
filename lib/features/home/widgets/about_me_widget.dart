@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
@@ -10,39 +9,37 @@ class AboutMeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-    final isDark = homeViewModel.isDarkMode;
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
+    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
+    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
 
     return BentoCard(
-      key: homeViewModel.aboutKey,
-      backgroundColor: homeViewModel.cardColor,
-      borderColor: homeViewModel.borderColor,
-      hoverBorderColor: homeViewModel.hoverBorderColor,
-      onTap: () => homeViewModel.launchURL(
+      key: context.read<HomeViewModel>().aboutKey,
+      backgroundColor: cardColor,
+      borderColor: borderColor,
+      hoverBorderColor: hoverBorderColor,
+      onTap: () => context.read<HomeViewModel>().launchURL(
         context,
         'https://www.linkedin.com/in/kazi-woaej-mariz-3586501b9/',
       ),
-      trailing: SizedBox(
+      trailing: Container(
         width: 34,
         height: 34,
-        child: LiquidGlass.withOwnLayer(
-          shape: LiquidRoundedRectangle(
-            borderRadius: 17, // Circle shape via border radius
-            side: BorderSide(
-              color: homeViewModel.borderColor,
-              width: 1.0,
-            ),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: isDark ? Colors.white.withValues(alpha: 0.06) : Colors.black.withValues(alpha: 0.04),
+          border: Border.all(
+            color: borderColor,
+            width: 1.0,
           ),
-          settings: LiquidGlassSettings(
-            blur: 8.0,
-            glassColor: isDark ? const Color(0x1AFFFFFF) : const Color(0x1A000000),
-          ),
-          child: Center(
-            child: Icon(
-              Icons.arrow_outward_rounded,
-              color: homeViewModel.primaryTextColor,
-              size: 16,
-            ),
+        ),
+        child: Center(
+          child: Icon(
+            Icons.arrow_outward_rounded,
+            color: primaryTextColor,
+            size: 16,
           ),
         ),
       ),
@@ -59,17 +56,15 @@ class AboutMeWidget extends StatelessWidget {
               letterSpacing: 2.0,
             ),
           ),
-          const SizedBox(height: 16), // Increased spacing
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 450), // Constrain paragraph width
-            child: Text(
-              "Passionate about mobile application development and enjoy solving complex user-experience problems.",
-              style: GoogleFonts.inter(
-                color: homeViewModel.primaryTextColor,
-                fontSize: 17.5, // Body size
-                height: 1.55, // Increased line height for legibility
-                fontWeight: FontWeight.w400, // Body weight (400-500)
-              ),
+          const SizedBox(height: 16),
+          Text(
+            "Curious about the person behind the code? Discover my background, values, and journey.",
+            style: GoogleFonts.inter(
+              color: primaryTextColor,
+              fontSize: 14.5,
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.2,
+              height: 1.45,
             ),
           ),
         ],

@@ -9,8 +9,12 @@ class ContactInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-    final isDark = homeViewModel.isDarkMode;
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
+    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
+    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
+    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
     final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
 
     Widget buildInfoRow(String title, String detail) {
@@ -22,7 +26,7 @@ class ContactInfoCard extends StatelessWidget {
             Text(
               title,
               style: GoogleFonts.outfit(
-                color: homeViewModel.secondaryTextColor,
+                color: secondaryTextColor,
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
               ),
@@ -31,7 +35,7 @@ class ContactInfoCard extends StatelessWidget {
             Text(
               detail,
               style: GoogleFonts.inter(
-                color: homeViewModel.primaryTextColor,
+                color: primaryTextColor,
                 fontSize: 13.5,
                 fontWeight: FontWeight.w500,
               ),
@@ -42,9 +46,9 @@ class ContactInfoCard extends StatelessWidget {
     }
 
     return BentoCard(
-      backgroundColor: homeViewModel.cardColor,
-      borderColor: homeViewModel.borderColor,
-      hoverBorderColor: homeViewModel.hoverBorderColor,
+      backgroundColor: cardColor,
+      borderColor: borderColor,
+      hoverBorderColor: hoverBorderColor,
       padding: const EdgeInsets.all(28.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,9 +65,9 @@ class ContactInfoCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           buildInfoRow("PRIMARY MAIL", "kaziwoaej@gmail.com"),
-          Divider(color: homeViewModel.borderColor.withOpacity(0.5), height: 16),
+          Divider(color: borderColor.withValues(alpha: 0.5), height: 16),
           buildInfoRow("DISCORD", "woaej#0000"),
-          Divider(color: homeViewModel.borderColor.withOpacity(0.5), height: 16),
+          Divider(color: borderColor.withValues(alpha: 0.5), height: 16),
           buildInfoRow("AVAILABILITY", "Open to Freelance & Full-time"),
         ],
       ),

@@ -68,7 +68,7 @@ class HoverNavItem extends StatelessWidget {
                           boxShadow: isActive
                               ? [
                                   BoxShadow(
-                                    color: resolvedActiveColor.withOpacity(0.6),
+                                    color: resolvedActiveColor.withValues(alpha: 0.6),
                                     blurRadius: 6,
                                     spreadRadius: 2,
                                   ),

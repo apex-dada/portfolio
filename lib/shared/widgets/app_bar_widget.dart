@@ -25,8 +25,9 @@ class AppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-    final isDark = homeViewModel.isDarkMode;
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
+    final activeSection = context.select<HomeViewModel, String>((vm) => vm.activeSection);
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
     final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
     
     final isSubPage = isAboutPage || isProjectsPage || isExperiencePage || isContactPage;
@@ -76,7 +77,7 @@ class AppBarWidget extends StatelessWidget {
                     if (isSubPage) {
                       context.go('/');
                     } else {
-                      homeViewModel.scrollToTop();
+                      context.read<HomeViewModel>().scrollToTop();
                     }
                   },
                   child: MouseRegion(
@@ -84,7 +85,7 @@ class AppBarWidget extends StatelessWidget {
                     child: Text(
                       "Mariz.",
                       style: GoogleFonts.outfit(
-                        color: homeViewModel.primaryTextColor,
+                        color: primaryTextColor,
                         fontSize: 20,
                         fontWeight: FontWeight.w900,
                         letterSpacing: -0.5,
@@ -101,14 +102,14 @@ class AppBarWidget extends StatelessWidget {
                     children: [
                       HoverNavItem(
                         label: "Home",
-                        isActive: !isSubPage && homeViewModel.activeSection == "Home",
+                        isActive: !isSubPage && activeSection == "Home",
                         activeColor: accentColor,
                         isDarkMode: isDark,
                         onTap: () {
                           if (isSubPage) {
                             context.go('/');
                           } else {
-                            homeViewModel.scrollToTop();
+                            context.read<HomeViewModel>().scrollToTop();
                           }
                         },
                       ),

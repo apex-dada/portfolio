@@ -9,8 +9,9 @@ class ProfileInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-    final isDark = homeViewModel.isDarkMode;
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
+    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
 
     // Subtle lighting glow effect (spotlight) using low-opacity accent color
     // Dark mode: very soft cyan/blue glow (6% opacity)
@@ -89,7 +90,7 @@ class ProfileInfoWidget extends StatelessWidget {
                   Text(
                     "Hi, I'm Kazi Woaej Mariz",
                     style: GoogleFonts.outfit(
-                      color: homeViewModel.primaryTextColor,
+                      color: primaryTextColor,
                       fontSize: 34, // Large Display size
                       fontWeight: FontWeight.w800, // Display weight (700-800)
                       letterSpacing: -1.0,
@@ -102,7 +103,7 @@ class ProfileInfoWidget extends StatelessWidget {
                     child: Text(
                       "Mobile application developer, building high-quality Android & iOS experiences based in Bangladesh.",
                       style: GoogleFonts.inter(
-                        color: homeViewModel.secondaryTextColor,
+                        color: secondaryTextColor,
                         fontSize: 15, // Body size
                         height: 1.5, // Line height for readability
                         fontWeight: FontWeight.w400, // Body weight

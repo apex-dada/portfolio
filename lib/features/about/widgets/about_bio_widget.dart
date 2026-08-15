@@ -9,14 +9,18 @@ class AboutBioWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-    final isDark = homeViewModel.isDarkMode;
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
+    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
+    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
+    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
     final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
 
     return BentoCard(
-      backgroundColor: homeViewModel.cardColor,
-      borderColor: homeViewModel.borderColor,
-      hoverBorderColor: homeViewModel.hoverBorderColor,
+      backgroundColor: cardColor,
+      borderColor: borderColor,
+      hoverBorderColor: hoverBorderColor,
       padding: const EdgeInsets.all(28.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +39,7 @@ class AboutBioWidget extends StatelessWidget {
           Text(
             "My Journey & Vision",
             style: GoogleFonts.outfit(
-              color: homeViewModel.primaryTextColor,
+              color: primaryTextColor,
               fontSize: 26,
               fontWeight: FontWeight.bold,
               letterSpacing: -0.5,
@@ -46,7 +50,7 @@ class AboutBioWidget extends StatelessWidget {
             "I'm Kazi Woaej Mariz, a software engineer specializing in cross-platform mobile development. From my early days tinkering with layouts, I fell in love with Dart and Flutter.\n\n"
             "I believe writing software is not just about making machines do things, but about creating intuitive, smooth, and breathtaking experiences for people. When I build apps, I design them to feel responsive, fast, and alive.",
             style: GoogleFonts.inter(
-              color: homeViewModel.secondaryTextColor,
+              color: secondaryTextColor,
               fontSize: 14.5,
               height: 1.6,
               fontWeight: FontWeight.w400,

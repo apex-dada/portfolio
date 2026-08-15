@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
-import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/core/widgets/bento_card_viewmodel.dart';
 
 /// A highly customizable, interactive card widget designed for Bento Grid layouts.
 /// Supports text, icons, custom background images, action buttons, and hover animations.
-class BentoCard extends StatelessWidget {
+class BentoCard extends StatefulWidget {
   /// Custom child widget to display inside the card.
   final Widget? child;
 
@@ -105,60 +102,60 @@ class BentoCard extends StatelessWidget {
     this.height,
     this.width,
     this.backgroundGradient,
-    this.borderWidth = 1.5,
+    this.borderWidth = 1.0,
     this.shadows,
     this.glassBlur = 16.0,
     this.glassColor,
   });
 
-  /// Factory constructor for a simple text card (like the Introduction card).
-  factory BentoCard.text({
+  /// Factory constructor for a standard Media/Image Card.
+  factory BentoCard.media({
     Key? key,
-    required String description,
-    TextStyle? descriptionStyle,
-    Color? backgroundColor,
-    EdgeInsetsGeometry? padding,
-    double borderRadius = 24.0,
+    required String imagePath,
+    String? title,
+    String? description,
     VoidCallback? onTap,
     double? height,
     double? width,
+    double borderRadius = 24.0,
+    Widget? overlayContent,
   }) {
     return BentoCard(
       key: key,
+      backgroundImagePath: imagePath,
+      title: title,
       description: description,
-      descriptionStyle: descriptionStyle,
-      backgroundColor: backgroundColor,
-      padding: padding,
-      borderRadius: borderRadius,
       onTap: onTap,
       height: height,
       width: width,
+      borderRadius: borderRadius,
+      child: overlayContent,
     );
   }
 
-  /// Factory constructor for an image-only card.
-  factory BentoCard.image({
+  /// Factory constructor for a Feature/Highlight Card with a leading Icon.
+  factory BentoCard.feature({
     Key? key,
-    required Widget image,
-    Color? backgroundColor,
-    double borderRadius = 24.0,
+    required IconData icon,
+    required String title,
+    required String description,
+    Color? iconColor,
     VoidCallback? onTap,
     double? height,
     double? width,
   }) {
     return BentoCard(
       key: key,
-      backgroundImage: image,
-      backgroundColor: backgroundColor,
-      borderRadius: borderRadius,
+      leading: Icon(icon, size: 28, color: iconColor ?? Colors.white),
+      title: title,
+      description: description,
       onTap: onTap,
-      padding: EdgeInsets.zero,
       height: height,
       width: width,
     );
   }
 
-  /// Factory constructor for an action card (like the "About" or "Resources" card).
+  /// Factory constructor for an Action/CTA Card.
   factory BentoCard.action({
     Key? key,
     required String title,
@@ -186,6 +183,14 @@ class BentoCard extends StatelessWidget {
   }
 
   @override
+  State<BentoCard> createState() => _BentoCardState();
+}
+
+class _BentoCardState extends State<BentoCard> {
+  bool _isHovered = false;
+  bool _isPressed = false;
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
@@ -194,42 +199,51 @@ class BentoCard extends StatelessWidget {
     final defaultBorderColor = isDark ? const Color(0xFF262626) : const Color(0xFFE5E5EA);
     final defaultHoverBorderColor = isDark ? const Color(0xFF444444) : const Color(0xFFD1D1D6);
 
-    final resolvedPadding = padding ?? const EdgeInsets.all(24.0);
+    final resolvedPadding = widget.padding ?? const EdgeInsets.all(24.0);
 
-    final resolvedGradient = backgroundGradient != null
-        ? (backgroundGradient is LinearGradient
+    final resolvedGradient = widget.backgroundGradient != null
+        ? (widget.backgroundGradient is LinearGradient
             ? LinearGradient(
-                begin: (backgroundGradient as LinearGradient).begin,
-                end: (backgroundGradient as LinearGradient).end,
-                colors: (backgroundGradient as LinearGradient).colors
-                    .map((c) => c.withOpacity(isDark ? 0.15 : 0.25))
+                begin: (widget.backgroundGradient as LinearGradient).begin,
+                end: (widget.backgroundGradient as LinearGradient).end,
+                colors: (widget.backgroundGradient as LinearGradient).colors
+                    .map((c) => c.withValues(alpha: isDark ? 0.15 : 0.25))
                     .toList(),
-                stops: (backgroundGradient as LinearGradient).stops,
-                tileMode: (backgroundGradient as LinearGradient).tileMode,
-                transform: (backgroundGradient as LinearGradient).transform,
+                stops: (widget.backgroundGradient as LinearGradient).stops,
+                tileMode: (widget.backgroundGradient as LinearGradient).tileMode,
+                transform: (widget.backgroundGradient as LinearGradient).transform,
               )
-            : backgroundGradient is RadialGradient
+            : widget.backgroundGradient is RadialGradient
                 ? RadialGradient(
-                    center: (backgroundGradient as RadialGradient).center,
-                    radius: (backgroundGradient as RadialGradient).radius,
-                    colors: (backgroundGradient as RadialGradient).colors
-                        .map((c) => c.withOpacity(isDark ? 0.15 : 0.25))
+                    center: (widget.backgroundGradient as RadialGradient).center,
+                    radius: (widget.backgroundGradient as RadialGradient).radius,
+                    colors: (widget.backgroundGradient as RadialGradient).colors
+                        .map((c) => c.withValues(alpha: isDark ? 0.15 : 0.25))
                         .toList(),
-                    stops: (backgroundGradient as RadialGradient).stops,
-                    tileMode: (backgroundGradient as RadialGradient).tileMode,
-                    focal: (backgroundGradient as RadialGradient).focal,
-                    focalRadius: (backgroundGradient as RadialGradient).focalRadius,
-                    transform: (backgroundGradient as RadialGradient).transform,
+                    stops: (widget.backgroundGradient as RadialGradient).stops,
+                    tileMode: (widget.backgroundGradient as RadialGradient).tileMode,
+                    focal: (widget.backgroundGradient as RadialGradient).focal,
+                    focalRadius: (widget.backgroundGradient as RadialGradient).focalRadius,
+                    transform: (widget.backgroundGradient as RadialGradient).transform,
                   )
-                : backgroundGradient)
+                : widget.backgroundGradient)
         : null;
+
+    final finalBorderColor = _isHovered
+        ? (widget.hoverBorderColor ?? defaultHoverBorderColor)
+        : (widget.borderColor ?? defaultBorderColor);
+
+    final cardBgColor = widget.glassColor ??
+        (widget.backgroundColor != null
+            ? widget.backgroundColor!
+            : (isDark ? const Color(0xFF151515) : const Color(0xFFFFFFFF)));
 
     // Build the main card structure
     Widget cardContent = ClipRRect(
-      borderRadius: BorderRadius.circular(borderRadius),
+      borderRadius: BorderRadius.circular(widget.borderRadius),
       child: Stack(
         children: [
-          // Background Color / Gradient Layer (Glassified)
+          // Background Color / Gradient Layer
           Positioned.fill(
             child: Container(
               decoration: BoxDecoration(
@@ -240,36 +254,37 @@ class BentoCard extends StatelessWidget {
           ),
 
           // Background Image Layer (Asset)
-          if (backgroundImagePath != null)
+          if (widget.backgroundImagePath != null)
             Positioned.fill(
               child: Image.asset(
-                backgroundImagePath!,
+                widget.backgroundImagePath!,
                 fit: BoxFit.cover,
+                cacheWidth: 800,
               ),
             ),
 
           // Background Image Layer (Custom Widget)
-          if (backgroundImage != null)
+          if (widget.backgroundImage != null)
             Positioned.fill(
-              child: backgroundImage!,
+              child: widget.backgroundImage!,
             ),
 
           // Text content or custom child layout
           Padding(
             padding: resolvedPadding,
-            child: child ??
+            child: widget.child ??
                 Column(
-                  crossAxisAlignment: crossAxisAlignment,
-                  mainAxisAlignment: mainAxisAlignment,
+                  crossAxisAlignment: widget.crossAxisAlignment,
+                  mainAxisAlignment: widget.mainAxisAlignment,
                   children: [
-                    if (leading != null) ...[
-                      leading!,
+                    if (widget.leading != null) ...[
+                      widget.leading!,
                       const SizedBox(height: 16),
                     ],
-                    if (title != null) ...[
+                    if (widget.title != null) ...[
                       Text(
-                        title!.toUpperCase(),
-                        style: titleStyle ??
+                        widget.title!.toUpperCase(),
+                        style: widget.titleStyle ??
                             GoogleFonts.outfit(
                               color: isDark ? Colors.white38 : Colors.black38,
                               fontSize: 11,
@@ -279,11 +294,11 @@ class BentoCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                     ],
-                    if (description != null)
+                    if (widget.description != null)
                       Expanded(
                         child: Text(
-                          description!,
-                          style: descriptionStyle ??
+                          widget.description!,
+                          style: widget.descriptionStyle ??
                               GoogleFonts.inter(
                                 color: isDark ? const Color(0xDEFFFFFF) : Colors.black87,
                                 fontSize: 15.5,
@@ -292,11 +307,11 @@ class BentoCard extends StatelessWidget {
                               ),
                         ),
                       ),
-                    if (trailing != null) ...[
+                    if (widget.trailing != null) ...[
                       const Spacer(),
                       Align(
                         alignment: Alignment.bottomRight,
-                        child: trailing,
+                        child: widget.trailing,
                       ),
                     ],
                   ],
@@ -306,79 +321,57 @@ class BentoCard extends StatelessWidget {
       ),
     );
 
-    return ChangeNotifierProvider(
-      create: (_) => BentoCardViewModel(),
-      child: Consumer<BentoCardViewModel>(
-        builder: (context, viewModel, _) {
-          final finalBorderColor = viewModel.isHovered
-              ? (hoverBorderColor ?? defaultHoverBorderColor)
-              : (borderColor ?? defaultBorderColor);
-
-          return MouseRegion(
-            onEnter: (_) {
-              if (isHoverable) viewModel.setHovered(true);
-            },
-            onExit: (_) {
-              if (isHoverable) viewModel.setHovered(false);
-            },
-            cursor: onTap != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
-            child: GestureDetector(
-              onTapDown: (_) {
-                if (onTap != null) viewModel.setPressed(true);
-              },
-              onTapUp: (_) {
-                if (onTap != null) viewModel.setPressed(false);
-              },
-              onTapCancel: () {
-                if (onTap != null) viewModel.setPressed(false);
-              },
-              onTap: onTap,
-              child: AnimatedScale(
-                scale: isHoverable && viewModel.isHovered ? 1.02 : 1.0,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeOutCubic,
-                child: AnimatedScale(
-                  scale: viewModel.isPressed ? 0.98 : 1.0,
-                  duration: const Duration(milliseconds: 100),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    height: height,
-                    width: width,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(borderRadius),
-                      boxShadow: shadows ?? [
-                        BoxShadow(
-                          color: isDark
-                              ? (viewModel.isHovered ? const Color(0x66000000) : const Color(0x33000000))
-                              : (viewModel.isHovered ? const Color(0x339E9E9E) : const Color(0x1A9E9E9E)),
-                          blurRadius: viewModel.isHovered ? 16 : 8,
-                          offset: Offset(0, viewModel.isHovered ? 8 : 4),
-                        ),
-                      ],
-                    ),
-                    child: LiquidGlass.withOwnLayer(
-                      shape: LiquidRoundedRectangle(
-                        borderRadius: borderRadius,
-                        side: BorderSide(
-                          color: finalBorderColor,
-                          width: borderWidth,
-                        ),
-                      ),
-                      settings: LiquidGlassSettings(
-                        blur: glassBlur,
-                        glassColor: glassColor ?? (backgroundColor != null
-                            ? backgroundColor!.withOpacity(isDark ? 0.15 : 0.25)
-                            : (isDark ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.02))),
-                      ),
-                      child: cardContent,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          );
+    return MouseRegion(
+      onEnter: (_) {
+        if (widget.isHoverable) setState(() => _isHovered = true);
+      },
+      onExit: (_) {
+        if (widget.isHoverable) setState(() => _isHovered = false);
+      },
+      cursor: widget.onTap != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      child: GestureDetector(
+        onTapDown: (_) {
+          if (widget.onTap != null) setState(() => _isPressed = true);
         },
+        onTapUp: (_) {
+          if (widget.onTap != null) setState(() => _isPressed = false);
+        },
+        onTapCancel: () {
+          if (widget.onTap != null) setState(() => _isPressed = false);
+        },
+        onTap: widget.onTap,
+        child: AnimatedScale(
+          scale: widget.isHoverable && _isHovered ? 1.015 : 1.0,
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOutCubic,
+          child: AnimatedScale(
+            scale: _isPressed ? 0.985 : 1.0,
+            duration: const Duration(milliseconds: 100),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              height: widget.height,
+              width: widget.width,
+              decoration: BoxDecoration(
+                color: cardBgColor,
+                borderRadius: BorderRadius.circular(widget.borderRadius),
+                border: Border.all(
+                  color: finalBorderColor,
+                  width: widget.borderWidth,
+                ),
+                boxShadow: widget.shadows ?? [
+                  BoxShadow(
+                    color: isDark
+                        ? (_isHovered ? const Color(0x66000000) : const Color(0x33000000))
+                        : (_isHovered ? const Color(0x339E9E9E) : const Color(0x1A9E9E9E)),
+                    blurRadius: _isHovered ? 16 : 8,
+                    offset: Offset(0, _isHovered ? 8 : 4),
+                  ),
+                ],
+              ),
+              child: cardContent,
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -9,8 +9,12 @@ class ExperienceServicesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-    final isDark = homeViewModel.isDarkMode;
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
+    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
+    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
+    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
     final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
 
     Widget buildServiceItem(String title, String desc, IconData icon) {
@@ -28,7 +32,7 @@ class ExperienceServicesCard extends StatelessWidget {
                   Text(
                     title,
                     style: GoogleFonts.outfit(
-                      color: homeViewModel.primaryTextColor,
+                      color: primaryTextColor,
                       fontSize: 13.5,
                       fontWeight: FontWeight.bold,
                     ),
@@ -36,7 +40,7 @@ class ExperienceServicesCard extends StatelessWidget {
                   Text(
                     desc,
                     style: GoogleFonts.inter(
-                      color: homeViewModel.secondaryTextColor,
+                      color: secondaryTextColor,
                       fontSize: 12,
                       height: 1.4,
                     ),
@@ -50,9 +54,9 @@ class ExperienceServicesCard extends StatelessWidget {
     }
 
     return BentoCard(
-      backgroundColor: homeViewModel.cardColor,
-      borderColor: homeViewModel.borderColor,
-      hoverBorderColor: homeViewModel.hoverBorderColor,
+      backgroundColor: cardColor,
+      borderColor: borderColor,
+      hoverBorderColor: hoverBorderColor,
       padding: const EdgeInsets.all(28.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

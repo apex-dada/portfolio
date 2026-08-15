@@ -7,23 +7,33 @@ import 'package:portfolio/app/routes.dart';
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static final ThemeData _darkTheme = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    textTheme: GoogleFonts.interTextTheme(
+      ThemeData(brightness: Brightness.dark).textTheme,
+    ),
+  );
+
+  static final ThemeData _lightTheme = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.light,
+    textTheme: GoogleFonts.interTextTheme(
+      ThemeData(brightness: Brightness.light).textTheme,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => HomeViewModel(),
-      child: Consumer<HomeViewModel>(
-        builder: (context, homeViewModel, _) {
-          final isDark = homeViewModel.isDarkMode;
+      child: Selector<HomeViewModel, bool>(
+        selector: (_, vm) => vm.isDarkMode,
+        builder: (context, isDark, _) {
           return MaterialApp.router(
             title: 'Portfolio Bento',
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              useMaterial3: true,
-              brightness: isDark ? Brightness.dark : Brightness.light,
-              textTheme: GoogleFonts.interTextTheme(
-                ThemeData(brightness: isDark ? Brightness.dark : Brightness.light).textTheme,
-              ),
-            ),
+            theme: isDark ? _darkTheme : _lightTheme,
             routerConfig: appRouter,
           );
         },

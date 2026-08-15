@@ -13,23 +13,24 @@ class AboutSkillBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-    final isDark = homeViewModel.isDarkMode;
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
+    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withOpacity(0.04) : Colors.black.withOpacity(0.02),
+        color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.black.withValues(alpha: 0.02),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: homeViewModel.borderColor.withOpacity(0.5),
+          color: borderColor.withValues(alpha: 0.5),
           width: 1,
         ),
       ),
       child: Text(
         name,
         style: GoogleFonts.inter(
-          color: homeViewModel.primaryTextColor,
+          color: primaryTextColor,
           fontSize: 12.5,
           fontWeight: FontWeight.w500,
         ),
