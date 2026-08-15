@@ -186,10 +186,10 @@ class FeaturedProjectsWidget extends StatelessWidget {
                         child: Row(
                           children: [
                             buildProjectCard(
-                              title: "Cinephile",
-                              description: "A Bangla movie discovery platform with reviews, lists and community.",
+                              title: "Bangla Film Picks",
+                              description: "Bangla movie discovery platform with reviews, ratings & community lists.",
                               imagePath: 'assets/images/bangla_film_picks/bangla_movie_pick_4.jpg',
-                              tags: ["Flutter", "Supabase"],
+                              tags: const ["Flutter", "Supabase"],
                               onTap: () => context.go('/projects'),
                             ),
                           ],
@@ -201,10 +201,10 @@ class FeaturedProjectsWidget extends StatelessWidget {
                         child: Row(
                           children: [
                             buildProjectCard(
-                              title: "Onest Router App",
-                              description: "Router management app supporting multiple brands & firmware.",
+                              title: "NestKeeper",
+                              description: "Smart property & tenant management application.",
                               imagePath: 'assets/images/nestkeeper/nest_keeper_1.png',
-                              tags: ["Flutter", "GoRouter"],
+                              tags: const ["Flutter", "Firebase"],
                               onTap: () => context.go('/projects'),
                             ),
                           ],
@@ -216,10 +216,10 @@ class FeaturedProjectsWidget extends StatelessWidget {
                         child: Row(
                           children: [
                             buildProjectCard(
-                              title: "Sudoku - Multi Langual",
-                              description: "Clean and minimal Sudoku game with multiple languages.",
+                              title: "Sudoku",
+                              description: "Clean & minimal Sudoku puzzle game with multiple levels & languages.",
                               imagePath: 'assets/images/sudoku/1_.webp',
-                              tags: ["Flutter", "Offline"],
+                              tags: const ["Flutter", "Offline"],
                               onTap: () => context.go('/projects'),
                             ),
                           ],
@@ -233,26 +233,26 @@ class FeaturedProjectsWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     buildProjectCard(
-                      title: "Cinephile",
-                      description: "A Bangla movie discovery platform with reviews, lists and community.",
+                      title: "Bangla Film Picks",
+                      description: "Bangla movie discovery platform with reviews, ratings & community lists.",
                       imagePath: 'assets/images/bangla_film_picks/bangla_movie_pick_4.jpg',
-                      tags: ["Flutter", "Supabase"],
+                      tags: const ["Flutter", "Supabase"],
                       onTap: () => context.go('/projects'),
                     ),
                     const SizedBox(width: 14),
                     buildProjectCard(
-                      title: "Onest Router App",
-                      description: "Router management app supporting multiple brands & firmware.",
+                      title: "NestKeeper",
+                      description: "Smart property & tenant management application.",
                       imagePath: 'assets/images/nestkeeper/nest_keeper_1.png',
-                      tags: ["Flutter", "GoRouter"],
+                      tags: const ["Flutter", "Firebase"],
                       onTap: () => context.go('/projects'),
                     ),
                     const SizedBox(width: 14),
                     buildProjectCard(
-                      title: "Sudoku - Multi Langual",
-                      description: "Clean and minimal Sudoku game with multiple languages.",
+                      title: "Sudoku",
+                      description: "Clean & minimal Sudoku puzzle game with multiple levels & languages.",
                       imagePath: 'assets/images/sudoku/1_.webp',
-                      tags: ["Flutter", "Offline"],
+                      tags: const ["Flutter", "Offline"],
                       onTap: () => context.go('/projects'),
                     ),
                   ],
