@@ -19,16 +19,57 @@ class FooterWidget extends StatelessWidget {
       borderColor: borderColor,
       hoverBorderColor: hoverBorderColor,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-      child: Center(
-        child: Text(
-          "© ${DateTime.now().year} Kazi Woaej Mariz. All rights reserved.",
-          style: GoogleFonts.inter(
-            color: secondaryTextColor,
-            fontSize: 12.5,
-            fontWeight: FontWeight.w500,
-          ),
-          textAlign: TextAlign.center,
-        ),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isSmall = constraints.maxWidth < 600;
+          if (isSmall) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "© ${DateTime.now().year} Kazi Woaej Mariz. All rights reserved.",
+                  style: GoogleFonts.inter(
+                    color: secondaryTextColor,
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  "Built with Flutter Web",
+                  style: GoogleFonts.inter(
+                    color: secondaryTextColor,
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            );
+          }
+
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "© ${DateTime.now().year} Kazi Woaej Mariz. All rights reserved.",
+                style: GoogleFonts.inter(
+                  color: secondaryTextColor,
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Text(
+                "Built with Flutter Web",
+                style: GoogleFonts.inter(
+                  color: secondaryTextColor,
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
