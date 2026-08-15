@@ -21,7 +21,7 @@ class PortfolioMockupTwoWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
         child: Image.asset(
-          'assets/images/laptop_mockup.png',
+          'assets/images/nestkeeper/nest_keeper_1.png',
           fit: BoxFit.cover,
           cacheWidth: 800,
         ),
