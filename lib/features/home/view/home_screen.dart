@@ -10,6 +10,8 @@ import 'package:portfolio/features/home/widgets/toggle_widget.dart';
 import 'package:portfolio/features/home/widgets/what_i_do_widget.dart';
 import 'package:portfolio/features/home/widgets/tech_stack_widget.dart';
 
+import 'package:portfolio/shared/widgets/footer_widget.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -122,7 +124,13 @@ class HomeScreen extends StatelessWidget {
                         constraints: const BoxConstraints(maxWidth: 1200),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 76.0),
-                          child: buildBody(isMobile),
+                          child: Column(
+                            children: [
+                              buildBody(isMobile),
+                              const SizedBox(height: 16),
+                              const FooterWidget(),
+                            ],
+                          ),
                         ),
                       ),
                     ),
