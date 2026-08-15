@@ -73,33 +73,38 @@ class TechStackWidget extends StatelessWidget {
                 spacing: 10,
                 runSpacing: 10,
                 children: _stackItems.map((item) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
-                    decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF22252F) : const Color(0xFFEBEFF5),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: isDark ? const Color(0x22FFFFFF) : const Color(0x1F000000),
-                      ),
-                    ),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (item.logoAsset != null) ...[
-                          SizedBox(
-                            width: 14,
-                            height: 14,
+                          Container(
+                            padding: const EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
                             child: Image.asset(
                               item.logoAsset!,
+                              width: 14,
+                              height: 14,
                               fit: BoxFit.contain,
                             ),
                           ),
                           const SizedBox(width: 6),
                         ] else if (item.fallbackIcon != null) ...[
-                          Icon(
-                            item.fallbackIcon!,
-                            size: 14,
-                            color: isDark ? Colors.white70 : Colors.black54,
+                          Container(
+                            padding: const EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Icon(
+                              item.fallbackIcon!,
+                              size: 14,
+                              color: Colors.black87,
+                            ),
                           ),
                           const SizedBox(width: 6),
                         ],
