@@ -4,8 +4,30 @@ import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
 
+class TechStackItem {
+  final String name;
+  final String? logoAsset;
+  final IconData? fallbackIcon;
+
+  const TechStackItem(this.name, {this.logoAsset, this.fallbackIcon});
+}
+
 class TechStackWidget extends StatelessWidget {
   const TechStackWidget({super.key});
+
+  static const List<TechStackItem> _stackItems = [
+    TechStackItem("Flutter", logoAsset: "assets/stack/flutter.png"),
+    TechStackItem("Dart", logoAsset: "assets/stack/dart.png"),
+    TechStackItem("Bloc", logoAsset: "assets/stack/block.png"),
+    TechStackItem("Riverpod", fallbackIcon: Icons.water_drop_rounded),
+    TechStackItem("Firebase", logoAsset: "assets/stack/firebase.png"),
+    TechStackItem("Supabase", logoAsset: "assets/stack/supabase.webp"),
+    TechStackItem("REST API", fallbackIcon: Icons.api_rounded),
+    TechStackItem("Git", fallbackIcon: Icons.alt_route_rounded),
+    TechStackItem("GitHub", fallbackIcon: Icons.code_rounded),
+    TechStackItem("VS Code", fallbackIcon: Icons.terminal_rounded),
+    TechStackItem("Linux", fallbackIcon: Icons.computer_rounded),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +38,6 @@ class TechStackWidget extends StatelessWidget {
     final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
 
     const greenAccent = Color(0xFF3DDC84);
-
-    final stackItems = [
-      "Flutter", "Dart", "Bloc", "Riverpod",
-      "Firebase", "Supabase", "REST API",
-      "Git", "GitHub", "VS Code", "Linux"
-    ];
 
     return BentoCard(
       backgroundColor: cardColor,
@@ -34,7 +50,7 @@ class TechStackWidget extends StatelessWidget {
           // Header Bar
           Row(
             children: [
-              const Icon(Icons.terminal_rounded, size: 16, color: greenAccent),
+              const Icon(Icons.layers_rounded, size: 18, color: greenAccent),
               const SizedBox(width: 8),
               Text(
                 "Tech Stack",
@@ -52,34 +68,53 @@ class TechStackWidget extends StatelessWidget {
           Expanded(
             child: Align(
               alignment: Alignment.topLeft,
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: stackItems.map((tech) {
-                  final isFlutter = tech == "Flutter";
-                  return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: isFlutter
-                          ? greenAccent.withValues(alpha: 0.15)
-                          : (isDark ? const Color(0x33FFFFFF) : const Color(0x1F000000)),
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: isFlutter
-                            ? greenAccent.withValues(alpha: 0.4)
-                            : (isDark ? Colors.white12 : Colors.black12),
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 10,
+                  children: _stackItems.map((item) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: isDark ? const Color(0xFF22252F) : const Color(0xFFEBEFF5),
+                        borderRadius: BorderRadius.circular(18),
+                        border: Border.all(
+                          color: isDark ? const Color(0x22FFFFFF) : const Color(0x1F000000),
+                        ),
                       ),
-                    ),
-                    child: Text(
-                      tech,
-                      style: GoogleFonts.inter(
-                        color: isFlutter ? greenAccent : (isDark ? Colors.white70 : Colors.black87),
-                        fontSize: 11,
-                        fontWeight: isFlutter ? FontWeight.bold : FontWeight.w600,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (item.logoAsset != null) ...[
+                            Image.asset(
+                              item.logoAsset!,
+                              width: 14,
+                              height: 14,
+                              fit: BoxFit.contain,
+                            ),
+                            const SizedBox(width: 6),
+                          ] else if (item.fallbackIcon != null) ...[
+                            Icon(
+                              item.fallbackIcon!,
+                              size: 13,
+                              color: isDark ? Colors.white70 : Colors.black54,
+                            ),
+                            const SizedBox(width: 6),
+                          ],
+                          Text(
+                            item.name,
+                            style: GoogleFonts.inter(
+                              color: isDark ? Colors.white : Colors.black87,
+                              fontSize: 11.5,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  );
-                }).toList(),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
           ),
