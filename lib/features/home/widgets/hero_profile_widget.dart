@@ -59,13 +59,13 @@ class HeroProfileWidget extends StatelessWidget {
             RichText(
               text: TextSpan(
                 style: GoogleFonts.outfit(
-                  fontSize: isMobile ? 28 : 36,
+                  fontSize: isMobile ? 24 : 28,
                   fontWeight: FontWeight.w900,
                   height: 1.15,
                   color: primaryTextColor,
                 ),
                 children: const [
-                  TextSpan(text: "Hi, I'm\n"),
+                  TextSpan(text: "Hi, I'm "),
                   TextSpan(
                     text: "Kazi Woaej Mariz",
                     style: TextStyle(color: greenAccent),
@@ -73,24 +73,24 @@ class HeroProfileWidget extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 8),
 
             // Bio Subtitle
             Text(
               "Mobile application developer crafting high-performance Android & iOS experiences with clean code and thoughtful design.",
               style: GoogleFonts.inter(
                 color: secondaryTextColor,
-                fontSize: 13.5,
-                height: 1.5,
+                fontSize: 12,
+                height: 1.4,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            const SizedBox(height: 22),
+            const SizedBox(height: 14),
 
             // Action Buttons
             Wrap(
-              spacing: 12,
-              runSpacing: 10,
+              spacing: 10,
+              runSpacing: 8,
               children: [
                 // Primary Green Button
                 ElevatedButton.icon(
@@ -98,18 +98,18 @@ class HeroProfileWidget extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: greenAccent,
                     foregroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     elevation: 0,
                   ),
                   iconAlignment: IconAlignment.end,
-                  icon: const Icon(Icons.arrow_forward_rounded, size: 16, color: Colors.black),
+                  icon: const Icon(Icons.arrow_forward_rounded, size: 14, color: Colors.black),
                   label: Text(
                     "View Projects",
                     style: GoogleFonts.inter(
-                      fontSize: 13,
+                      fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -123,28 +123,28 @@ class HeroProfileWidget extends StatelessWidget {
                     side: BorderSide(
                       color: isDark ? const Color(0x33FFFFFF) : const Color(0x33000000),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  icon: Icon(Icons.send_rounded, size: 14, color: primaryTextColor),
+                  icon: Icon(Icons.send_rounded, size: 13, color: primaryTextColor),
                   label: Text(
                     "Contact Me",
                     style: GoogleFonts.inter(
-                      fontSize: 13,
+                      fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 14),
 
             // Social & Location Bar
             Wrap(
-              spacing: 16,
-              runSpacing: 10,
+              spacing: 14,
+              runSpacing: 8,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 buildSocialLink(
@@ -174,15 +174,15 @@ class HeroProfileWidget extends StatelessWidget {
 
         Widget rightPhoto = Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 240, maxHeight: 280),
+            constraints: const BoxConstraints(maxWidth: 180, maxHeight: 210),
             child: AspectRatio(
               aspectRatio: 0.85,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(14),
                 child: Image.asset(
                   'assets/images/IMG_0741 (1).jpg',
                   fit: BoxFit.cover,
-                  cacheWidth: 800,
+                  cacheWidth: 600,
                 ),
               ),
             ),
@@ -193,7 +193,7 @@ class HeroProfileWidget extends StatelessWidget {
           backgroundColor: cardColor,
           borderColor: borderColor,
           hoverBorderColor: hoverBorderColor,
-          padding: const EdgeInsets.all(28),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: isMobile
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

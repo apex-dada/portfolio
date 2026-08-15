@@ -36,9 +36,9 @@ class HomeScreen extends StatelessWidget {
       );
     }
 
-    // Desktop Layout (Structured 2-Column Bento Grid matching exact target layout)
+    // Desktop Layout (Structured 2-Column Bento Grid matching zero-scroll viewport height)
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
       child: Column(
         children: [
           Row(
@@ -49,27 +49,27 @@ class HomeScreen extends StatelessWidget {
                 flex: 80,
                 child: Column(
                   children: [
-                    SizedBox(height: 380, child: HeroProfileWidget()),
-                    SizedBox(height: 16),
-                    SizedBox(height: 76, child: HighlightsBarWidget()),
-                    SizedBox(height: 16),
-                    SizedBox(height: 340, child: FeaturedProjectsWidget()),
+                    SizedBox(height: 250, child: HeroProfileWidget()),
+                    SizedBox(height: 12),
+                    SizedBox(height: 54, child: HighlightsBarWidget()),
+                    SizedBox(height: 12),
+                    SizedBox(height: 250, child: FeaturedProjectsWidget()),
                   ],
                 ),
               ),
-              SizedBox(width: 16),
+              SizedBox(width: 12),
               // Right Sidebar Column (Flex 3.5)
               Expanded(
                 flex: 35,
                 child: SizedBox(
-                  height: 828,
+                  height: 578,
                   child: Column(
                     children: [
                       Expanded(flex: 12, child: WhatIDoWidget()),
-                      SizedBox(height: 16),
+                      SizedBox(height: 12),
                       Expanded(flex: 9, child: StayInTouchWidget()),
-                      SizedBox(height: 16),
-                      Expanded(flex: 8, child: TechStackWidget()),
+                      SizedBox(height: 12),
+                      Expanded(flex: 9, child: TechStackWidget()),
                     ],
                   ),
                 ),

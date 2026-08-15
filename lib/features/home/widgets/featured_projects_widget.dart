@@ -121,7 +121,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
       backgroundColor: cardColor,
       borderColor: borderColor,
       hoverBorderColor: hoverBorderColor,
-      padding: const EdgeInsets.all(22),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -137,7 +137,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
                     "Featured Projects",
                     style: GoogleFonts.outfit(
                       color: primaryTextColor,
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -153,14 +153,14 @@ class FeaturedProjectsWidget extends StatelessWidget {
                         "View all projects",
                         style: GoogleFonts.inter(
                           color: isDark ? Colors.white60 : Colors.black54,
-                          fontSize: 12,
+                          fontSize: 11,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       const SizedBox(width: 4),
                       Icon(
                         Icons.arrow_forward_rounded,
-                        size: 13,
+                        size: 12,
                         color: isDark ? Colors.white60 : Colors.black54,
                       ),
                     ],
@@ -169,7 +169,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 18),
+          const SizedBox(height: 10),
 
           // 3 Project Cards Layout
           Expanded(

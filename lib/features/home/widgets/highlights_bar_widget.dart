@@ -28,15 +28,15 @@ class HighlightsBarWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 36,
-              height: 36,
+              width: 28,
+              height: 28,
               decoration: BoxDecoration(
                 color: greenAccent.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, size: 18, color: greenAccent),
+              child: Icon(icon, size: 14, color: greenAccent),
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 8),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +45,7 @@ class HighlightsBarWidget extends StatelessWidget {
                   value,
                   style: GoogleFonts.outfit(
                     color: primaryTextColor,
-                    fontSize: 18,
+                    fontSize: 15,
                     fontWeight: FontWeight.w800,
                     height: 1.1,
                   ),
@@ -54,7 +54,7 @@ class HighlightsBarWidget extends StatelessWidget {
                   label,
                   style: GoogleFonts.inter(
                     color: secondaryTextColor,
-                    fontSize: 11,
+                    fontSize: 10,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -69,7 +69,7 @@ class HighlightsBarWidget extends StatelessWidget {
       backgroundColor: cardColor,
       borderColor: borderColor,
       hoverBorderColor: hoverBorderColor,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: LayoutBuilder(
         builder: (context, constraints) {
           final isSmall = constraints.maxWidth < 600;
