@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/shared/widgets/hover_nav_item.dart';
 import 'package:portfolio/shared/widgets/available_badge.dart';
+import 'package:portfolio/core/widgets/bento_card.dart';
 
 class AppBarWidget extends StatelessWidget {
   final bool isMobile;
@@ -46,13 +47,15 @@ class AppBarWidget extends StatelessWidget {
       if (isMobileView) {
         return const SizedBox.shrink();
       }
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          color: const Color(0x1F3DDC84),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: const Color(0x333DDC84)),
-        ),
+      final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
+      final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+      final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
+
+      return BentoCard(
+        backgroundColor: cardColor,
+        borderColor: borderColor,
+        hoverBorderColor: hoverBorderColor,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         child: const AvailableBadge(),
       );
     }

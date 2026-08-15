@@ -15,7 +15,7 @@ class AvailableBadge extends StatelessWidget {
         Text(
           "Available for Work",
           style: GoogleFonts.inter(
-            color: const Color(0xFF59F5A2), // Green text (#59F5A2)
+            color: Colors.white,
             fontSize: 12.5,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.2,
