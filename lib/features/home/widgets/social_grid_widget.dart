@@ -13,18 +13,17 @@ class SocialGridWidget extends StatelessWidget {
 
     final socialItems = [
       {
-        'widget': Icon(Icons.flutter_dash_rounded, size: 20, color: iconColor),
-        'url': 'https://twitter.com',
+        'name': 'Facebook',
+        'widget': Icon(Icons.facebook_rounded, size: 20, color: iconColor),
+        'url': 'https://www.facebook.com/kazi.woaej.mariz/',
       },
       {
-        'widget': Icon(Icons.language_rounded, size: 20, color: iconColor),
-        'url': 'https://github.com/apex-dada',
-      },
-      {
+        'name': 'Instagram',
         'widget': Icon(Icons.camera_alt_outlined, size: 20, color: iconColor),
-        'url': 'https://instagram.com',
+        'url': 'https://www.instagram.com/kazi_woaej/',
       },
       {
+        'name': 'LinkedIn',
         'widget': Container(
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
           decoration: BoxDecoration(
@@ -41,23 +40,22 @@ class SocialGridWidget extends StatelessWidget {
             ),
           ),
         ),
-        'url': 'https://linkedin.com',
+        'url': 'https://www.linkedin.com/in/kazi-woaej-mariz-3586501b9/',
       },
       {
-        'widget': Text(
-          "Bē",
-          style: GoogleFonts.outfit(
-            color: iconColor,
-            fontSize: 16,
-            fontWeight: FontWeight.w800,
-            letterSpacing: -0.5,
-          ),
-        ),
-        'url': 'https://behance.net',
+        'name': 'GitHub',
+        'widget': Icon(Icons.code_rounded, size: 20, color: iconColor),
+        'url': 'https://github.com/apex-dada',
       },
       {
+        'name': 'Email',
         'widget': Icon(Icons.mail_outline_rounded, size: 20, color: iconColor),
         'url': 'mailto:woaejmariz@gmail.com',
+      },
+      {
+        'name': 'Discord',
+        'widget': Icon(Icons.discord, size: 20, color: iconColor),
+        'url': 'https://discord.gg',
       },
     ];
 
@@ -77,22 +75,25 @@ class SocialGridWidget extends StatelessWidget {
               itemCount: socialItems.length,
               itemBuilder: (context, index) {
                 final item = socialItems[index];
-                return GestureDetector(
-                  onTap: () {
-                    context.read<HomeViewModel>().launchURL(context, item['url'] as String);
-                  },
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: isDark ? const Color(0xFF1B1E26) : const Color(0xFFE4E8F0),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
+                return Tooltip(
+                  message: item['name'] as String,
+                  child: GestureDetector(
+                    onTap: () {
+                      context.read<HomeViewModel>().launchURL(context, item['url'] as String);
+                    },
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: isDark ? const Color(0xFF1B1E26) : const Color(0xFFE4E8F0),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
+                          ),
                         ),
-                      ),
-                      child: Center(
-                        child: item['widget'] as Widget,
+                        child: Center(
+                          child: item['widget'] as Widget,
+                        ),
                       ),
                     ),
                   ),
