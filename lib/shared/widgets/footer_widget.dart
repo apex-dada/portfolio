@@ -9,7 +9,6 @@ class FooterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
     final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
     final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
     final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
@@ -19,95 +18,17 @@ class FooterWidget extends StatelessWidget {
       backgroundColor: cardColor,
       borderColor: borderColor,
       hoverBorderColor: hoverBorderColor,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final isSmall = constraints.maxWidth < 600;
-          if (isSmall) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "© ${DateTime.now().year} Kazi Woaej Mariz. All rights reserved.",
-                  style: GoogleFonts.inter(
-                    color: secondaryTextColor,
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Built with ",
-                      style: GoogleFonts.inter(
-                        color: secondaryTextColor,
-                        fontSize: 12.5,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Image.asset(
-                      'assets/stack/flutter.png',
-                      width: 15,
-                      height: 15,
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      "Flutter Web",
-                      style: GoogleFonts.inter(
-                        color: isDark ? Colors.white : Colors.black87,
-                        fontSize: 12.5,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            );
-          }
-
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "© ${DateTime.now().year} Kazi Woaej Mariz. All rights reserved.",
-                style: GoogleFonts.inter(
-                  color: secondaryTextColor,
-                  fontSize: 12.5,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Built with ",
-                    style: GoogleFonts.inter(
-                      color: secondaryTextColor,
-                      fontSize: 12.5,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Image.asset(
-                    'assets/stack/flutter.png',
-                    width: 15,
-                    height: 15,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    "Flutter Web",
-                    style: GoogleFonts.inter(
-                      color: isDark ? Colors.white : Colors.black87,
-                      fontSize: 12.5,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          );
-        },
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+      child: Center(
+        child: Text(
+          "© ${DateTime.now().year} Kazi Woaej Mariz. All rights reserved.",
+          style: GoogleFonts.inter(
+            color: secondaryTextColor,
+            fontSize: 12.5,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
