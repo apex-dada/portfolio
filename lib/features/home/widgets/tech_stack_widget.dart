@@ -68,11 +68,11 @@ class TechStackWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.topLeft,
               child: Wrap(
-                spacing: 6,
-                runSpacing: 6,
+                spacing: 8,
+                runSpacing: 8,
                 children: _stackItems.map((item) {
                   return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6.5),
                     decoration: BoxDecoration(
                       color: isDark ? const Color(0xFF22252F) : const Color(0xFFEBEFF5),
                       borderRadius: BorderRadius.circular(16),
@@ -85,32 +85,32 @@ class TechStackWidget extends StatelessWidget {
                       children: [
                         if (item.logoAsset != null) ...[
                           Container(
-                            padding: const EdgeInsets.all(2.5),
+                            padding: const EdgeInsets.all(3),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Image.asset(
                               item.logoAsset!,
-                              width: 12,
-                              height: 12,
+                              width: 13,
+                              height: 13,
                               fit: BoxFit.contain,
                             ),
                           ),
-                          const SizedBox(width: 5),
+                          const SizedBox(width: 6),
                         ] else if (item.fallbackIcon != null) ...[
                           Icon(
                             item.fallbackIcon!,
-                            size: 12,
+                            size: 13,
                             color: isDark ? Colors.white70 : Colors.black54,
                           ),
-                          const SizedBox(width: 5),
+                          const SizedBox(width: 6),
                         ],
                         Text(
                           item.name,
                           style: GoogleFonts.inter(
                             color: isDark ? Colors.white : Colors.black87,
-                            fontSize: 11,
+                            fontSize: 11.5,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
