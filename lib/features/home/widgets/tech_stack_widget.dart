@@ -19,14 +19,13 @@ class TechStackWidget extends StatelessWidget {
     TechStackItem("Flutter", logoAsset: "assets/stack/flutter.png"),
     TechStackItem("Dart", logoAsset: "assets/stack/dart.png"),
     TechStackItem("Bloc", logoAsset: "assets/stack/block.png"),
-    TechStackItem("Riverpod", fallbackIcon: Icons.water_drop_rounded),
+    TechStackItem("Riverpod", logoAsset: "assets/stack/riverpod_logo.png"),
     TechStackItem("Firebase", logoAsset: "assets/stack/firebase.png"),
     TechStackItem("Supabase", logoAsset: "assets/stack/supabase.webp"),
-    TechStackItem("REST API", fallbackIcon: Icons.api_rounded),
+    TechStackItem("SQLite", logoAsset: "assets/stack/sqlite.webp"),
     TechStackItem("Git", fallbackIcon: Icons.alt_route_rounded),
-    TechStackItem("GitHub", fallbackIcon: Icons.code_rounded),
-    TechStackItem("VS Code", fallbackIcon: Icons.terminal_rounded),
-    TechStackItem("Linux", fallbackIcon: Icons.computer_rounded),
+    TechStackItem("GitHub", logoAsset: "assets/stack/github-logo-png_seeklogo-304612.png"),
+    TechStackItem("Android Studio", logoAsset: "assets/stack/android-studio.png"),
   ];
 
   @override

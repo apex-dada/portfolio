@@ -15,9 +15,12 @@ class _LogoCarouselState extends State<LogoCarousel>
     'assets/stack/flutter.png',
     'assets/stack/dart.png',
     'assets/stack/block.png',
+    'assets/stack/riverpod_logo.png',
     'assets/stack/firebase.png',
     'assets/stack/sqlite.webp',
     'assets/stack/supabase.webp',
+    'assets/stack/android-studio.png',
+    'assets/stack/github-logo-png_seeklogo-304612.png',
   ];
 
   static final List<String> _displayLogos =
