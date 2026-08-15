@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp.router(
             title: 'Portfolio Bento',
             debugShowCheckedModeBanner: false,
+            scrollBehavior: const MaterialScrollBehavior().copyWith(scrollbars: false),
             theme: isDark ? _darkTheme : _lightTheme,
             routerConfig: appRouter,
           );

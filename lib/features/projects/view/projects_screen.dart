@@ -4,67 +4,96 @@ import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/shared/widgets/app_bar_widget.dart';
 import 'package:portfolio/features/projects/widgets/project_tech_stack_card.dart';
 import 'package:portfolio/features/projects/widgets/project_overview_card.dart';
-import 'package:portfolio/features/projects/widgets/project_sudoku_card.dart';
-import 'package:portfolio/features/projects/widgets/project_nestkeeper_card.dart';
-import 'package:portfolio/features/projects/widgets/project_bangla_film_picks_card.dart';
+import 'package:portfolio/features/projects/widgets/project_carousel_card.dart';
 
 class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({super.key});
 
-  Widget buildBody(Size size, bool isMobile) {
-    if (isMobile) {
-      return const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-        child: Column(
-          children: [
-            SizedBox(height: 320, child: ProjectSudokuCard()),
-            SizedBox(height: 16),
-            SizedBox(height: 320, child: ProjectNestKeeperCard()),
-            SizedBox(height: 16),
-            SizedBox(height: 320, child: ProjectBanglaFilmPicksCard()),
-            SizedBox(height: 16),
-            ProjectOverviewCard(),
-            SizedBox(height: 16),
-            SizedBox(height: 220, child: ProjectTechStackCard()),
-          ],
-        ),
-      );
-    }
+  static const List<String> _banglaFilmPicksScreenshots = [
+    'assets/images/bangla_film_picks/bangla_movie_pick_4.jpg',
+    'assets/images/bangla_film_picks/mov1.jpg',
+    'assets/images/bangla_film_picks/mov2.jpg',
+    'assets/images/bangla_film_picks/mov3.jpg',
+    'assets/images/bangla_film_picks/mov4.jpg',
+  ];
 
-    // Desktop layout
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 24),
+  static const List<String> _sudokuScreenshots = [
+    'assets/images/sudoku/1_.webp',
+    'assets/images/sudoku/2_.webp',
+    'assets/images/sudoku/3_.webp',
+    'assets/images/sudoku/4_.webp',
+    'assets/images/sudoku/5_.webp',
+    'assets/images/sudoku/6_.webp',
+    'assets/images/sudoku/7_.webp',
+    'assets/images/sudoku/8_.webp',
+    'assets/images/sudoku/9_.webp',
+    'assets/images/sudoku/10_.webp',
+  ];
+
+  static const List<String> _nestkeeperScreenshots = [
+    'assets/images/nestkeeper/nest_keeper_1.png',
+    'assets/images/nestkeeper/nest_keeper_2.png',
+    'assets/images/nestkeeper/nest_keeper_3.png',
+    'assets/images/nestkeeper/nest_keeper_4.png',
+    'assets/images/nestkeeper/nest_keeper_5.png',
+    'assets/images/nestkeeper/nest_keeper_6.png',
+    'assets/images/nestkeeper/nest_keeper_7.png',
+    'assets/images/nestkeeper/nest_keeper_8.png',
+    'assets/images/nestkeeper/nest_keeper_9.png',
+    'assets/images/nestkeeper/nest_keeper_10.png',
+  ];
+
+  Widget buildBody(Size size, bool isMobile) {
+    final projectCardHeight = isMobile ? 500.0 : 480.0;
+    final paddingHorizontal = isMobile ? 16.0 : 32.0;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: 32),
       child: Column(
         children: [
-          // Row 1: Sudoku (flex 6), Overview (flex 4)
+          // Project 1: Bangla Film Picks
           SizedBox(
-            height: 340,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(flex: 6, child: ProjectSudokuCard()),
-                SizedBox(width: 16),
-                Expanded(flex: 4, child: ProjectOverviewCard()),
-              ],
+            height: projectCardHeight,
+            child: const ProjectCarouselCard(
+              projectNumber: "01",
+              title: "Flutter App: Bangla Film Picks",
+              icon: Icons.movie_filter_rounded,
+              screenshots: _banglaFilmPicksScreenshots,
             ),
           ),
-          SizedBox(height: 16),
-          // Row 2: NestKeeper (flex 6), Bangla Film Picks (flex 4)
+          const SizedBox(height: 24),
+
+          // Project 2: NestKeeper
           SizedBox(
-            height: 340,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(flex: 6, child: ProjectNestKeeperCard()),
-                SizedBox(width: 16),
-                Expanded(flex: 4, child: ProjectBanglaFilmPicksCard()),
-              ],
+            height: projectCardHeight,
+            child: const ProjectCarouselCard(
+              projectNumber: "02",
+              title: "Flutter App: NestKeeper",
+              icon: Icons.flutter_dash,
+              screenshots: _nestkeeperScreenshots,
             ),
           ),
-          SizedBox(height: 16),
-          // Row 3: Tech stack full width
+          const SizedBox(height: 24),
+
+          // Project 3: Sudoku
           SizedBox(
-            height: 220,
+            height: projectCardHeight,
+            child: const ProjectCarouselCard(
+              projectNumber: "03",
+              title: "Flutter Game: Sudoku",
+              icon: Icons.grid_on_rounded,
+              screenshots: _sudokuScreenshots,
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // Project Philosophy Overview
+          const ProjectOverviewCard(),
+          const SizedBox(height: 24),
+
+          // Tech Stack
+          const SizedBox(
+            height: 240,
             child: ProjectTechStackCard(),
           ),
         ],
@@ -74,6 +103,7 @@ class ProjectsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("ProjectsScreen build called");
     return Selector<HomeViewModel, bool>(
       selector: (_, vm) => vm.isDarkMode,
       builder: (context, isDark, _) {
@@ -116,8 +146,11 @@ class ProjectsScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: ConstrainedBox(
                         constraints: const BoxConstraints(maxWidth: 1200),
-                        child: SingleChildScrollView(
-                          child: buildBody(size, isMobile),
+                        child: ScrollConfiguration(
+                          behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                          child: SingleChildScrollView(
+                            child: buildBody(size, isMobile),
+                          ),
                         ),
                       ),
                     ),

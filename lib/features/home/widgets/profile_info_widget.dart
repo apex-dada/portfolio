@@ -9,6 +9,7 @@ class ProfileInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('refresh');
     final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
     final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
     final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
