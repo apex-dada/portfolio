@@ -82,18 +82,16 @@ class SocialGridWidget extends StatelessWidget {
                 final item = socialItems[index];
                 return Tooltip(
                   message: item['name'] as String,
-                  child: GestureDetector(
+                  child: BentoCard(
                     onTap: () {
                       context.read<HomeViewModel>().launchURL(context, item['url'] as String);
                     },
-                    child: BentoCard(
-                      backgroundColor: cardColor,
-                      borderColor: borderColor,
-                      hoverBorderColor: hoverBorderColor,
-                      padding: EdgeInsets.zero,
-                      child: Center(
-                        child: item['widget'] as Widget,
-                      ),
+                    backgroundColor: cardColor,
+                    borderColor: borderColor,
+                    hoverBorderColor: hoverBorderColor,
+                    padding: EdgeInsets.zero,
+                    child: Center(
+                      child: item['widget'] as Widget,
                     ),
                   ),
                 );
