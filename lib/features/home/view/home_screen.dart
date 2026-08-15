@@ -6,6 +6,7 @@ import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
 import 'package:portfolio/features/home/widgets/hero_profile_widget.dart';
 import 'package:portfolio/features/home/widgets/highlights_bar_widget.dart';
 import 'package:portfolio/features/home/widgets/social_grid_widget.dart';
+import 'package:portfolio/features/home/widgets/live_clock_widget.dart';
 import 'package:portfolio/features/home/widgets/toggle_widget.dart';
 import 'package:portfolio/features/home/widgets/what_i_do_widget.dart';
 import 'package:portfolio/features/home/widgets/tech_stack_widget.dart';
@@ -29,6 +30,8 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 340, child: WhatIDoWidget()),
             SizedBox(height: 16),
             SizedBox(height: 220, child: TechStackWidget()),
+            SizedBox(height: 16),
+            SizedBox(height: 140, child: LiveClockWidget()),
             SizedBox(height: 16),
             SizedBox(height: 220, child: SocialGridWidget()),
             SizedBox(height: 16),
@@ -55,7 +58,22 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(height: 14),
                     SizedBox(height: 64, child: HighlightsBarWidget()),
                     SizedBox(height: 14),
-                    SizedBox(height: 210, child: TechStackWidget()),
+                    SizedBox(
+                      height: 210,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 65,
+                            child: TechStackWidget(),
+                          ),
+                          SizedBox(width: 14),
+                          Expanded(
+                            flex: 35,
+                            child: LiveClockWidget(),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
