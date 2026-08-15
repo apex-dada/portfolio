@@ -28,11 +28,10 @@ class WhatIDoWidget extends StatelessWidget {
           Container(
             width: 32,
             height: 32,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
+            decoration: const BoxDecoration(
+              color: Colors.transparent,
             ),
-            child: Icon(icon, size: 16, color: Colors.white),
+            child: Icon(icon, size: 18, color: Colors.white),
           ),
           const SizedBox(width: 12),
           Expanded(
