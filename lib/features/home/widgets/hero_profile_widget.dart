@@ -174,11 +174,11 @@ class HeroProfileWidget extends StatelessWidget {
 
         Widget rightPhoto = Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 210, maxHeight: 240),
+            constraints: const BoxConstraints(maxWidth: 235, maxHeight: 270),
             child: AspectRatio(
               aspectRatio: 0.85,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(18),
                 child: Image.asset(
                   'assets/images/IMG_0741 (1).jpg',
                   fit: BoxFit.cover,
@@ -193,7 +193,7 @@ class HeroProfileWidget extends StatelessWidget {
           backgroundColor: cardColor,
           borderColor: borderColor,
           hoverBorderColor: hoverBorderColor,
-          padding: const EdgeInsets.all(22),
+          padding: const EdgeInsets.all(26),
           child: isMobile
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
