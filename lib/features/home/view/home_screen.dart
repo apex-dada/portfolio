@@ -3,129 +3,78 @@ import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/shared/widgets/app_bar_widget.dart';
 import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
-import 'package:portfolio/features/home/widgets/profile_info_widget.dart';
-import 'package:portfolio/features/home/widgets/home_stats_card.dart';
-import 'package:portfolio/features/home/widgets/home_github_card.dart';
-import 'package:portfolio/features/home/widgets/social_containers_widget.dart';
-import 'package:portfolio/features/home/widgets/profile_image_widget.dart';
-import 'package:portfolio/features/home/widgets/about_me_widget.dart';
-import 'package:portfolio/features/home/widgets/toggle_widget.dart';
-import 'package:portfolio/features/home/widgets/stack_i_use_widget.dart';
-import 'package:portfolio/features/home/widgets/newsletter_widget.dart';
-import 'package:portfolio/features/home/widgets/my_workflow_widget.dart';
+import 'package:portfolio/features/home/widgets/hero_profile_widget.dart';
+import 'package:portfolio/features/home/widgets/highlights_bar_widget.dart';
+import 'package:portfolio/features/home/widgets/featured_projects_widget.dart';
+import 'package:portfolio/features/home/widgets/what_i_do_widget.dart';
+import 'package:portfolio/features/home/widgets/stay_in_touch_widget.dart';
+import 'package:portfolio/features/home/widgets/tech_stack_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   Widget buildBody(bool isMobile) {
     if (isMobile) {
-      // Mobile Layout (Single Column following natural eye flow)
+      // Mobile Layout (Single Column matching natural visual flow)
       return const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
           children: [
-            SizedBox(height: 240, child: ProfileInfoWidget()), // Hero Section
+            HeroProfileWidget(),
             SizedBox(height: 16),
-            SizedBox(height: 240, child: ProfileImageWidget()), // Profile Image
+            HighlightsBarWidget(),
             SizedBox(height: 16),
-            SizedBox(height: 180, child: HomeStatsCard()), // Key Stats
+            SizedBox(height: 480, child: FeaturedProjectsWidget()),
             SizedBox(height: 16),
-            SizedBox(height: 180, child: HomeGithubCard()), // GitHub & Open Source
+            SizedBox(height: 360, child: WhatIDoWidget()),
             SizedBox(height: 16),
-            SizedBox(height: 200, child: AboutMeWidget()), // About
+            SizedBox(height: 240, child: StayInTouchWidget()),
             SizedBox(height: 16),
-            SizedBox(height: 200, child: StackIUseWidget()), // Tech Stack
-            SizedBox(height: 16),
-            SizedBox(height: 260, child: MyWorkflowWidget()), // Workflow
-            SizedBox(height: 16),
-            SizedBox(height: 180, child: NewsletterWidget()), // Contact
-            SizedBox(height: 16),
-            SizedBox(height: 160, child: SocialContainersWidget()), // Supplementary Socials
-            SizedBox(height: 16),
-            SizedBox(height: 80, child: ToggleWidget()), // Theme Switcher
+            SizedBox(height: 200, child: TechStackWidget()),
           ],
         ),
       );
     }
 
-    // Desktop Layout (Grid structure optimized for visual hierarchy and flow)
+    // Desktop Layout (Structured 2-Column Bento Grid matching exact target layout)
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 32, vertical: 20),
       child: Column(
         children: [
-          // Row 1: Hero (flex 5), Profile Image (flex 3), Social/Toggle Column (flex 2)
-          SizedBox(
-            height: 220,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(flex: 5, child: ProfileInfoWidget()),
-                SizedBox(width: 16),
-                Expanded(flex: 3, child: ProfileImageWidget()),
-                SizedBox(width: 16),
-                Expanded(
-                  flex: 2,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Left Main Column (Flex 8)
+              Expanded(
+                flex: 80,
+                child: Column(
+                  children: [
+                    SizedBox(height: 380, child: HeroProfileWidget()),
+                    SizedBox(height: 16),
+                    SizedBox(height: 76, child: HighlightsBarWidget()),
+                    SizedBox(height: 16),
+                    SizedBox(height: 340, child: FeaturedProjectsWidget()),
+                  ],
+                ),
+              ),
+              SizedBox(width: 16),
+              // Right Sidebar Column (Flex 3.5)
+              Expanded(
+                flex: 35,
+                child: SizedBox(
+                  height: 828,
                   child: Column(
                     children: [
-                      Expanded(child: SocialContainersWidget()),
+                      Expanded(flex: 12, child: WhatIDoWidget()),
                       SizedBox(height: 16),
-                      Expanded(child: ToggleWidget()),
+                      Expanded(flex: 9, child: StayInTouchWidget()),
+                      SizedBox(height: 16),
+                      Expanded(flex: 8, child: TechStackWidget()),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          SizedBox(height: 16),
-          // Rows 2 & 3 (Combined grid for vertical alignment of workflow)
-          SizedBox(
-            height: 386,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Left side grid column (Featured Projects, About, Stack, Contact)
-                Expanded(
-                  flex: 8,
-                  child: Column(
-                    children: [
-                      // Row 2 Left (Featured Projects & About)
-                      SizedBox(
-                        height: 200,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(flex: 3, child: HomeStatsCard()),
-                            SizedBox(width: 16),
-                            Expanded(flex: 3, child: HomeGithubCard()),
-                            SizedBox(width: 16),
-                            Expanded(flex: 4, child: AboutMeWidget()),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 16),
-                      // Row 3 Left (Tech Stack & Contact)
-                      SizedBox(
-                        height: 170,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(flex: 5, child: StackIUseWidget()),
-                            SizedBox(width: 16),
-                            Expanded(flex: 3, child: NewsletterWidget()),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(width: 16),
-                // Right side grid column (Workflow Timeline - spans Row 2 & 3 height)
-                Expanded(
-                  flex: 2,
-                  child: MyWorkflowWidget(),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

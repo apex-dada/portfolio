@@ -46,7 +46,44 @@ class AppBarWidget extends StatelessWidget {
       if (isMobileView) {
         return const SizedBox.shrink();
       }
-      return const AvailableBadge();
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: const Color(0x1F3DDC84),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: const Color(0x333DDC84)),
+            ),
+            child: const AvailableBadge(),
+          ),
+          const SizedBox(width: 12),
+          OutlinedButton.icon(
+            onPressed: () {
+              context.read<HomeViewModel>().launchURL(context, 'https://github.com/apex-dada');
+            },
+            style: OutlinedButton.styleFrom(
+              foregroundColor: primaryTextColor,
+              side: BorderSide(
+                color: isDark ? const Color(0x33FFFFFF) : const Color(0x33000000),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            icon: Icon(Icons.download_rounded, size: 14, color: primaryTextColor),
+            label: Text(
+              "Download CV",
+              style: GoogleFonts.inter(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      );
     }
 
     return Padding(
