@@ -53,119 +53,131 @@ class HeroProfileWidget extends StatelessWidget {
 
         Widget leftContent = Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: isMobile ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
           children: [
-            // Main Title
-            RichText(
-              text: TextSpan(
-                style: GoogleFonts.outfit(
-                  fontSize: isMobile ? 26 : 32,
-                  fontWeight: FontWeight.w900,
-                  height: 1.15,
-                  color: primaryTextColor,
-                ),
-                children: const [
-                  TextSpan(text: "Hi, I'm "),
-                  TextSpan(
-                    text: "Kazi Woaej Mariz",
-                    style: TextStyle(color: greenAccent),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-
-            // Bio Subtitle
-            Text(
-              "Mobile application developer crafting high-performance Android & iOS experiences with clean code and thoughtful design.",
-              style: GoogleFonts.inter(
-                color: secondaryTextColor,
-                fontSize: 13,
-                height: 1.45,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // Action Buttons
-            Wrap(
-              spacing: 12,
-              runSpacing: 10,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Primary Green Button
-                ElevatedButton.icon(
-                  onPressed: () => context.go('/projects'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: greenAccent,
-                    foregroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                // Main Title
+                RichText(
+                  text: TextSpan(
+                    style: GoogleFonts.outfit(
+                      fontSize: isMobile ? 26 : 32,
+                      fontWeight: FontWeight.w900,
+                      height: 1.15,
+                      color: primaryTextColor,
                     ),
-                    elevation: 0,
-                  ),
-                  iconAlignment: IconAlignment.end,
-                  icon: const Icon(Icons.arrow_forward_rounded, size: 15, color: Colors.black),
-                  label: Text(
-                    "View Projects",
-                    style: GoogleFonts.inter(
-                      fontSize: 12.5,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    children: const [
+                      TextSpan(text: "Hi, I'm "),
+                      TextSpan(
+                        text: "Kazi Woaej Mariz",
+                        style: TextStyle(color: greenAccent),
+                      ),
+                    ],
                   ),
                 ),
+                const SizedBox(height: 10),
 
-                // Outline Contact Me Button
-                OutlinedButton.icon(
-                  onPressed: () => context.go('/contact'),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: primaryTextColor,
-                    side: BorderSide(
-                      color: isDark ? const Color(0x33FFFFFF) : const Color(0x33000000),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  icon: Icon(Icons.send_rounded, size: 13, color: primaryTextColor),
-                  label: Text(
-                    "Contact Me",
-                    style: GoogleFonts.inter(
-                      fontSize: 12.5,
-                      fontWeight: FontWeight.w600,
-                    ),
+                // Bio Subtitle
+                Text(
+                  "Mobile application developer crafting high-performance Android & iOS experiences with clean code and thoughtful design.",
+                  style: GoogleFonts.inter(
+                    color: secondaryTextColor,
+                    fontSize: 13,
+                    height: 1.45,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            if (!isMobile) const Spacer(),
+            if (isMobile) const SizedBox(height: 16),
 
-            // Social & Location Bar
-            Wrap(
-              spacing: 16,
-              runSpacing: 8,
-              crossAxisAlignment: WrapCrossAlignment.center,
+            // Bottom Section (Action Buttons + Social Links)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildSocialLink(
-                  icon: Icons.code_rounded,
-                  label: "GitHub",
-                  onTap: () => context.read<HomeViewModel>().launchURL(context, 'https://github.com/apex-dada'),
+                // Action Buttons
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 10,
+                  children: [
+                    // Primary Green Button
+                    ElevatedButton.icon(
+                      onPressed: () => context.go('/projects'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: greenAccent,
+                        foregroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        elevation: 0,
+                      ),
+                      iconAlignment: IconAlignment.end,
+                      icon: const Icon(Icons.arrow_forward_rounded, size: 15, color: Colors.black),
+                      label: Text(
+                        "View Projects",
+                        style: GoogleFonts.inter(
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+
+                    // Outline Contact Me Button
+                    OutlinedButton.icon(
+                      onPressed: () => context.go('/contact'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: primaryTextColor,
+                        side: BorderSide(
+                          color: isDark ? const Color(0x33FFFFFF) : const Color(0x33000000),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      icon: Icon(Icons.send_rounded, size: 13, color: primaryTextColor),
+                      label: Text(
+                        "Contact Me",
+                        style: GoogleFonts.inter(
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                buildSocialLink(
-                  icon: Icons.work_rounded,
-                  label: "LinkedIn",
-                  onTap: () => context.read<HomeViewModel>().launchURL(context, 'https://linkedin.com'),
-                ),
-                buildSocialLink(
-                  icon: Icons.email_rounded,
-                  label: "Email",
-                  onTap: () => context.read<HomeViewModel>().launchURL(context, 'mailto:woaejmariz@gmail.com'),
-                ),
-                buildSocialLink(
-                  icon: Icons.location_on_rounded,
-                  label: "Bangladesh",
-                  onTap: () {},
+                const SizedBox(height: 16),
+
+                // Social & Location Bar
+                Wrap(
+                  spacing: 16,
+                  runSpacing: 8,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    buildSocialLink(
+                      icon: Icons.code_rounded,
+                      label: "GitHub",
+                      onTap: () => context.read<HomeViewModel>().launchURL(context, 'https://github.com/apex-dada'),
+                    ),
+                    buildSocialLink(
+                      icon: Icons.work_rounded,
+                      label: "LinkedIn",
+                      onTap: () => context.read<HomeViewModel>().launchURL(context, 'https://linkedin.com'),
+                    ),
+                    buildSocialLink(
+                      icon: Icons.email_rounded,
+                      label: "Email",
+                      onTap: () => context.read<HomeViewModel>().launchURL(context, 'mailto:woaejmariz@gmail.com'),
+                    ),
+                    buildSocialLink(
+                      icon: Icons.location_on_rounded,
+                      label: "Bangladesh",
+                      onTap: () {},
+                    ),
+                  ],
                 ),
               ],
             ),
