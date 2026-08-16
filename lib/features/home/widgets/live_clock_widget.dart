@@ -55,13 +55,14 @@ class _LiveClockWidgetState extends State<LiveClockWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
     final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
     final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
     final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
     final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
     final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
 
-    const greenAccent = Color(0xFF3DDC84);
+    final greenAccent = isDark ? const Color(0xFF3DDC84) : const Color(0xFF16A34A);
 
     return BentoCard(
       backgroundColor: cardColor,
@@ -80,7 +81,7 @@ class _LiveClockWidgetState extends State<LiveClockWidget> {
               Container(
                 width: 6,
                 height: 6,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: greenAccent,
                   shape: BoxShape.circle,
                 ),

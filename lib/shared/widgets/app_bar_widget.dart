@@ -29,119 +29,170 @@ class AppBarWidget extends StatelessWidget {
   void _showMobileMenu(BuildContext context) {
     final isDark = context.read<HomeViewModel>().isDarkMode;
     final primaryTextColor = context.read<HomeViewModel>().primaryTextColor;
+    final secondaryTextColor = context.read<HomeViewModel>().secondaryTextColor;
     final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
     final activeSection = context.read<HomeViewModel>().activeSection;
     final isSubPage = isAboutPage || isProjectsPage || isExperiencePage || isContactPage;
 
-    showModalBottomSheet(
+    showGeneralDialog(
       context: context,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      builder: (context) {
-        return ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-              decoration: BoxDecoration(
-                color: isDark ? const Color(0xFA12141A) : const Color(0xFAF8F9FA),
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                border: Border.all(
-                  color: isDark ? Colors.white12 : Colors.black12,
-                ),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Navigation",
-                        style: GoogleFonts.outfit(
-                          color: primaryTextColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+      barrierDismissible: true,
+      barrierLabel: "Dismiss",
+      barrierColor: Colors.black.withValues(alpha: 0.5),
+      transitionDuration: const Duration(milliseconds: 280),
+      pageBuilder: (context, anim1, anim2) => const SizedBox.shrink(),
+      transitionBuilder: (context, anim, secondaryAnim, child) {
+        final slideIn = Tween<Offset>(
+          begin: const Offset(1.0, 0.0),
+          end: Offset.zero,
+        ).animate(CurvedAnimation(parent: anim, curve: Curves.easeOutCubic));
+
+        final screenWidth = MediaQuery.of(context).size.width;
+        final panelWidth = (screenWidth * 0.75).clamp(240.0, 320.0);
+
+        return SlideTransition(
+          position: slideIn,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Material(
+              color: Colors.transparent,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.horizontal(left: Radius.circular(28)),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+                  child: Container(
+                    width: panelWidth,
+                    height: double.infinity,
+                    decoration: BoxDecoration(
+                      color: isDark ? const Color(0xF212141A) : const Color(0xF2FFFFFF),
+                      borderRadius: const BorderRadius.horizontal(left: Radius.circular(28)),
+                      border: Border(
+                        left: BorderSide(
+                          color: isDark ? const Color(0x26FFFFFF) : const Color(0x1F000000),
+                          width: 1.0,
                         ),
                       ),
-                      IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: Icon(Icons.close_rounded, color: primaryTextColor),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.25),
+                          blurRadius: 28,
+                          offset: const Offset(-8, 0),
+                        ),
+                      ],
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 28),
+                    child: SafeArea(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Header with Close Button
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Mariz.",
+                                style: GoogleFonts.outfit(
+                                  color: primaryTextColor,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: -0.5,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () => Navigator.pop(context),
+                                icon: Icon(
+                                  Icons.close_rounded,
+                                  color: secondaryTextColor,
+                                  size: 22,
+                                ),
+                                splashRadius: 20,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 32),
+
+                          // Menu items matching reference screenshot style
+                          _buildSideMenuItem(
+                            context,
+                            label: "Home",
+                            icon: Icons.home_outlined,
+                            isActive: activeSection == 'Home' && !isSubPage,
+                            activeColor: accentColor,
+                            primaryTextColor: primaryTextColor,
+                            onTap: () {
+                              Navigator.pop(context);
+                              if (isSubPage) {
+                                context.go('/');
+                              } else {
+                                context.read<HomeViewModel>().scrollToTop();
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 8),
+                          _buildSideMenuItem(
+                            context,
+                            label: "Projects",
+                            icon: Icons.article_outlined,
+                            isActive: isProjectsPage || activeSection == 'Projects',
+                            activeColor: accentColor,
+                            primaryTextColor: primaryTextColor,
+                            onTap: () {
+                              Navigator.pop(context);
+                              if (!isProjectsPage) context.go('/projects');
+                            },
+                          ),
+                          const SizedBox(height: 8),
+                          _buildSideMenuItem(
+                            context,
+                            label: "Experience",
+                            icon: Icons.chat_bubble_outline_rounded,
+                            isActive: isExperiencePage || activeSection == 'Experience',
+                            activeColor: accentColor,
+                            primaryTextColor: primaryTextColor,
+                            onTap: () {
+                              Navigator.pop(context);
+                              if (!isExperiencePage) context.go('/experience');
+                            },
+                          ),
+                          const SizedBox(height: 8),
+                          _buildSideMenuItem(
+                            context,
+                            label: "About",
+                            icon: Icons.person_outline_rounded,
+                            isActive: isAboutPage || activeSection == 'About',
+                            activeColor: accentColor,
+                            primaryTextColor: primaryTextColor,
+                            onTap: () {
+                              Navigator.pop(context);
+                              if (!isAboutPage) context.go('/about');
+                            },
+                          ),
+                          const SizedBox(height: 8),
+                          _buildSideMenuItem(
+                            context,
+                            label: "Contact",
+                            icon: Icons.mail_outline_rounded,
+                            isActive: isContactPage || activeSection == 'Contact',
+                            activeColor: accentColor,
+                            primaryTextColor: primaryTextColor,
+                            onTap: () {
+                              Navigator.pop(context);
+                              if (!isContactPage) context.go('/contact');
+                            },
+                          ),
+
+                          const Spacer(),
+
+                          // Status Badge
+                          const Center(
+                            child: AvailableBadge(),
+                          ),
+                          const SizedBox(height: 12),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                  const Divider(height: 20),
-                  _buildMobileMenuItem(
-                    context,
-                    label: "Home",
-                    icon: Icons.home_rounded,
-                    isActive: activeSection == 'Home' && !isSubPage,
-                    activeColor: accentColor,
-                    primaryTextColor: primaryTextColor,
-                    onTap: () {
-                      Navigator.pop(context);
-                      if (isSubPage) {
-                        context.go('/');
-                      } else {
-                        context.read<HomeViewModel>().scrollToTop();
-                      }
-                    },
-                  ),
-                  _buildMobileMenuItem(
-                    context,
-                    label: "Projects",
-                    icon: Icons.work_rounded,
-                    isActive: isProjectsPage || activeSection == 'Projects',
-                    activeColor: accentColor,
-                    primaryTextColor: primaryTextColor,
-                    onTap: () {
-                      Navigator.pop(context);
-                      if (!isProjectsPage) context.go('/projects');
-                    },
-                  ),
-                  _buildMobileMenuItem(
-                    context,
-                    label: "Experience",
-                    icon: Icons.timeline_rounded,
-                    isActive: isExperiencePage || activeSection == 'Experience',
-                    activeColor: accentColor,
-                    primaryTextColor: primaryTextColor,
-                    onTap: () {
-                      Navigator.pop(context);
-                      if (!isExperiencePage) context.go('/experience');
-                    },
-                  ),
-                  _buildMobileMenuItem(
-                    context,
-                    label: "About",
-                    icon: Icons.person_rounded,
-                    isActive: isAboutPage || activeSection == 'About',
-                    activeColor: accentColor,
-                    primaryTextColor: primaryTextColor,
-                    onTap: () {
-                      Navigator.pop(context);
-                      if (!isAboutPage) context.go('/about');
-                    },
-                  ),
-                  _buildMobileMenuItem(
-                    context,
-                    label: "Contact",
-                    icon: Icons.mail_rounded,
-                    isActive: isContactPage || activeSection == 'Contact',
-                    activeColor: accentColor,
-                    primaryTextColor: primaryTextColor,
-                    onTap: () {
-                      Navigator.pop(context);
-                      if (!isContactPage) context.go('/contact');
-                    },
-                  ),
-                  const Divider(height: 24),
-                  const Center(
-                    child: AvailableBadge(),
-                  ),
-                  const SizedBox(height: 12),
-                ],
+                ),
               ),
             ),
           ),
@@ -150,7 +201,7 @@ class AppBarWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildMobileMenuItem(
+  Widget _buildSideMenuItem(
     BuildContext context, {
     required String label,
     required IconData icon,
@@ -159,37 +210,50 @@ class AppBarWidget extends StatelessWidget {
     required Color primaryTextColor,
     required VoidCallback onTap,
   }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: ListTile(
+    final itemColor = isActive ? activeColor : primaryTextColor;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
         onTap: onTap,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        tileColor: isActive ? activeColor.withValues(alpha: 0.15) : Colors.transparent,
-        leading: Icon(
-          icon,
-          color: isActive ? activeColor : primaryTextColor,
-          size: 22,
-        ),
-        title: Text(
-          label,
-          style: GoogleFonts.outfit(
-            color: isActive ? activeColor : primaryTextColor,
-            fontSize: 16,
-            fontWeight: isActive ? FontWeight.bold : FontWeight.w600,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          decoration: BoxDecoration(
+            color: isActive ? activeColor.withValues(alpha: 0.1) : Colors.transparent,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                icon,
+                color: itemColor,
+                size: 20,
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Text(
+                  label,
+                  style: GoogleFonts.outfit(
+                    color: itemColor,
+                    fontSize: 14,
+                    fontWeight: isActive ? FontWeight.w500 : FontWeight.w300,
+                    letterSpacing: 0.4,
+                  ),
+                ),
+              ),
+              if (isActive)
+                Container(
+                  width: 5,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: activeColor,
+                  ),
+                ),
+            ],
           ),
         ),
-        trailing: isActive
-            ? Container(
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: activeColor,
-                ),
-              )
-            : null,
       ),
     );
   }

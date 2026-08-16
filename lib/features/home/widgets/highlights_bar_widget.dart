@@ -28,11 +28,12 @@ class HighlightsBarWidget extends StatelessWidget {
             Container(
               width: 28,
               height: 28,
-              decoration: const BoxDecoration(
-                color: Colors.white,
+              decoration: BoxDecoration(
+                color: isDark ? Colors.white : const Color(0xFFF1F5F9),
                 shape: BoxShape.circle,
+                border: isDark ? null : Border.all(color: const Color(0xFFE2E8F0)),
               ),
-              child: Icon(icon, size: 14, color: const Color(0xFF1E2129)),
+              child: Icon(icon, size: 14, color: isDark ? const Color(0xFF1E2129) : const Color(0xFF334155)),
             ),
             const SizedBox(width: 8),
             Column(

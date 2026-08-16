@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/shared/widgets/breathing_status_dot.dart';
 
 class AvailableBadge extends StatelessWidget {
@@ -7,6 +9,8 @@ class AvailableBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -15,7 +19,7 @@ class AvailableBadge extends StatelessWidget {
         Text(
           "Available for Work",
           style: GoogleFonts.inter(
-            color: Colors.white,
+            color: primaryTextColor,
             fontSize: 12.5,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.2,

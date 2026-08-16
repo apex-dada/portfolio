@@ -9,11 +9,13 @@ class WhatIDoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
     final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
     final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
     final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
     final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
     final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
+    final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF16A34A);
 
     Widget buildItem({
       required IconData icon,
@@ -29,7 +31,7 @@ class WhatIDoWidget extends StatelessWidget {
             decoration: const BoxDecoration(
               color: Colors.transparent,
             ),
-            child: Icon(icon, size: 18, color: const Color(0xFF3DDC84)),
+            child: Icon(icon, size: 18, color: accentColor),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -75,7 +77,7 @@ class WhatIDoWidget extends StatelessWidget {
           Text(
             "What I Do",
             style: GoogleFonts.outfit(
-              color: const Color(0xFF3DDC84),
+              color: accentColor,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),

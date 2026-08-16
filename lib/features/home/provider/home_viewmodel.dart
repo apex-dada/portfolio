@@ -79,12 +79,13 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Theme-derived values matching the original designs
+  // Theme-derived values matching modern high-contrast design systems
   Color get cardColor => _isDarkMode ? const Color(0xFF151515) : const Color(0xFFFFFFFF);
-  Color get borderColor => _isDarkMode ? const Color(0xFF222222) : const Color(0xFFE8E8E8);
-  Color get hoverBorderColor => _isDarkMode ? const Color(0xFF3F3F3F) : const Color(0xFFCCCCCC);
-  Color get primaryTextColor => _isDarkMode ? Colors.white : Colors.black;
-  Color get secondaryTextColor => _isDarkMode ? Colors.white54 : Colors.black54;
+  Color get borderColor => _isDarkMode ? const Color(0xFF222222) : const Color(0xFFE2E8F0);
+  Color get hoverBorderColor => _isDarkMode ? const Color(0xFF3F3F3F) : const Color(0xFFCBD5E1);
+  Color get primaryTextColor => _isDarkMode ? const Color(0xFFFFFFFF) : const Color(0xFF0F172A);
+  Color get secondaryTextColor => _isDarkMode ? const Color(0xB3FFFFFF) : const Color(0xFF475569);
+  Color get accentColor => _isDarkMode ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
 
   TextStyle get titleStyle => TextStyle(
         fontSize: 12,

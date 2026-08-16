@@ -32,7 +32,7 @@ class TechStackWidget extends StatelessWidget {
     final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
     final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
 
-    const greenAccent = Color(0xFF3DDC84);
+    final greenAccent = isDark ? const Color(0xFF3DDC84) : const Color(0xFF16A34A);
 
     return BentoCard(
       backgroundColor: cardColor,
@@ -65,14 +65,14 @@ class TechStackWidget extends StatelessWidget {
                     runSpacing: 8,
                     children: _stackItems.map((name) {
                       return BentoCard(
-                        backgroundColor: isDark ? const Color(0xFF1E2129) : const Color(0xFFF4F6F9),
-                        borderColor: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
-                        hoverBorderColor: isDark ? const Color(0x33FFFFFF) : const Color(0x33000000),
+                        backgroundColor: isDark ? const Color(0xFF1E2129) : const Color(0xFFF1F5F9),
+                        borderColor: isDark ? const Color(0x1AFFFFFF) : const Color(0xFFE2E8F0),
+                        hoverBorderColor: isDark ? const Color(0x33FFFFFF) : const Color(0xFFCBD5E1),
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                         child: Text(
                           name,
                           style: GoogleFonts.inter(
-                            color: isDark ? Colors.white : Colors.black87,
+                            color: isDark ? Colors.white : const Color(0xFF0F172A),
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),

@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         selector: (_, vm) => vm.isDarkMode,
         builder: (context, isDark, _) {
           return MaterialApp.router(
-            title: 'Portfolio Bento',
+            title: 'Kazi Woaej Mariz',
             debugShowCheckedModeBanner: false,
             scrollBehavior: const MaterialScrollBehavior().copyWith(scrollbars: false),
             theme: isDark ? _darkTheme : _lightTheme,

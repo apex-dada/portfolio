@@ -103,9 +103,9 @@ class AboutScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              Container(
-            height: double.infinity,
-            width: double.infinity,
+              SizedBox(
+                height: double.infinity,
+                width: double.infinity,
             child: SafeArea(
               child: AutoHidingHeader(
                 appBar: AppBarWidget(isMobile: isMobile, isAboutPage: true),

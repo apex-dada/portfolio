@@ -5,7 +5,14 @@ import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
 
 class SocialGridWidget extends StatelessWidget {
-  const SocialGridWidget({super.key});
+  final double childAspectRatio;
+  final double spacing;
+
+  const SocialGridWidget({
+    super.key,
+    this.childAspectRatio = 1.15,
+    this.spacing = 10.0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +21,7 @@ class SocialGridWidget extends StatelessWidget {
     final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
     final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
 
-    final iconColor = isDark ? Colors.white.withValues(alpha: 0.85) : Colors.black87;
+    final iconColor = isDark ? Colors.white.withValues(alpha: 0.85) : const Color(0xFF334155);
 
     final socialItems = [
       {
@@ -60,7 +67,7 @@ class SocialGridWidget extends StatelessWidget {
       {
         'name': 'Discord',
         'widget': Icon(Icons.discord, size: 20, color: iconColor),
-        'url': 'https://discord.gg',
+        'url': 'https://discord.com/users/1396808354562834583',
       },
     ];
 
@@ -71,11 +78,11 @@ class SocialGridWidget extends StatelessWidget {
           Expanded(
             child: GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 1.15,
+                crossAxisSpacing: spacing,
+                mainAxisSpacing: spacing,
+                childAspectRatio: childAspectRatio,
               ),
               itemCount: socialItems.length,
               itemBuilder: (context, index) {

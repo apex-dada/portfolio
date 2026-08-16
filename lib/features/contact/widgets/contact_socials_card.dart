@@ -129,11 +129,11 @@ class ContactSocialsCard extends StatelessWidget {
                 }),
                 const SizedBox(width: 12),
                 buildSocialButton(Icons.discord, "Discord", () {
-                  context.read<HomeViewModel>().launchURL(context, 'https://discord.gg');
+                  context.read<HomeViewModel>().launchURL(context, 'https://discord.com/users/1396808354562834583');
                 }),
                 const SizedBox(width: 12),
                 buildTextSocialButton("wa", "WhatsApp", () {
-                  context.read<HomeViewModel>().launchURL(context, 'https://wa.me/');
+                  context.read<HomeViewModel>().launchURL(context, 'https://wa.me/8801797575162');
                 }),
               ],
             ),

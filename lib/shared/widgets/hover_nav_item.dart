@@ -21,8 +21,8 @@ class HoverNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final baseColor = isDarkMode ? Colors.white : Colors.black;
-    final hoveredColor = isDarkMode ? const Color(0x99FFFFFF) : const Color(0x99000000);
+    final baseColor = isDarkMode ? Colors.white : const Color(0xFF0F172A);
+    final hoveredColor = isDarkMode ? const Color(0xB3FFFFFF) : const Color(0xFF64748B);
     final resolvedActiveColor = activeColor ?? (isDarkMode ? const Color(0xFF3DDC84) : const Color(0xFF007AFF));
 
     return ChangeNotifierProvider(

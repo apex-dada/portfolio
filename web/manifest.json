@@ -1,11 +1,11 @@
 {
-    "name": "portfolio",
-    "short_name": "portfolio",
+    "name": "Kazi Woaej Mariz Portfolio",
+    "short_name": "Mariz Portfolio",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#12141A",
+    "theme_color": "#3DDC84",
+    "description": "Portfolio of Kazi Woaej Mariz - Flutter & Mobile Application Developer crafting high-performance iOS & Android apps.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
