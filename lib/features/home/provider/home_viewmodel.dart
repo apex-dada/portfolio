@@ -93,6 +93,30 @@ class HomeViewModel extends ChangeNotifier {
         letterSpacing: 1.5,
       );
 
+  // Cursor follower configuration (read-only config — position never lives here)
+  bool _cursorFollowerEnabled = true;
+  bool get cursorFollowerEnabled => _cursorFollowerEnabled;
+  Color get cursorFollowerColor =>
+      _isDarkMode ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
+  double get cursorFollowerSize => 40.0;
+  double get cursorDotSize => 8.0;
+
+  // Bento card hover state — circle cursor only shows when over a bento card
+  bool _isOverBentoCard = false;
+  bool get isOverBentoCard => _isOverBentoCard;
+
+  void setOverBentoCard(bool value) {
+    if (_isOverBentoCard != value) {
+      _isOverBentoCard = value;
+      notifyListeners();
+    }
+  }
+
+  void toggleCursorFollower() {
+    _cursorFollowerEnabled = !_cursorFollowerEnabled;
+    notifyListeners();
+  }
+
   void scrollToKey(GlobalKey key) {
     final context = key.currentContext;
     if (context != null) {

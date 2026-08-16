@@ -23,7 +23,7 @@ class LetsTalkButton extends StatelessWidget {
           return MouseRegion(
             onEnter: (_) => hoverProvider.setHovered(true),
             onExit: (_) => hoverProvider.setHovered(false),
-            cursor: SystemMouseCursors.click,
+            cursor: SystemMouseCursors.none,
             child: GestureDetector(
               onTap: onTap,
               child: Row(

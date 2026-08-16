@@ -92,7 +92,7 @@ class AppBarWidget extends StatelessWidget {
                     }
                   },
                   child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
+                    cursor: SystemMouseCursors.none,
                     child: Text(
                       "Mariz.",
                       style: GoogleFonts.outfit(

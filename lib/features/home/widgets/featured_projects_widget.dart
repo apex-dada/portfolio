@@ -30,7 +30,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
         child: GestureDetector(
           onTap: onTap,
           child: MouseRegion(
-            cursor: SystemMouseCursors.click,
+            cursor: SystemMouseCursors.none,
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -146,7 +146,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
               GestureDetector(
                 onTap: () => context.go('/projects'),
                 child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
+                  cursor: SystemMouseCursors.none,
                   child: Row(
                     children: [
                       Text(

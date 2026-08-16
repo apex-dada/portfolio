@@ -34,7 +34,7 @@ class HoverNavItem extends StatelessWidget {
           return MouseRegion(
             onEnter: (_) => viewModel.setHovered(true),
             onExit: (_) => viewModel.setHovered(false),
-            cursor: SystemMouseCursors.click,
+            cursor: SystemMouseCursors.none,
             child: GestureDetector(
               onTap: onTap,
               child: Column(

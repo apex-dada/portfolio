@@ -10,6 +10,7 @@ import 'package:portfolio/features/home/widgets/live_clock_widget.dart';
 import 'package:portfolio/features/home/widgets/toggle_widget.dart';
 import 'package:portfolio/features/home/widgets/what_i_do_widget.dart';
 import 'package:portfolio/features/home/widgets/tech_stack_widget.dart';
+import 'package:portfolio/shared/widgets/video_background.dart';
 
 import 'package:portfolio/shared/widgets/footer_widget.dart';
 
@@ -110,44 +111,38 @@ class HomeScreen extends StatelessWidget {
     return Selector<HomeViewModel, bool>(
       selector: (_, vm) => vm.isDarkMode,
       builder: (context, isDarkMode, _) {
-        final backgroundDecoration = isDarkMode
-            ? const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/background/background_2.jpg'),
-                  fit: BoxFit.fill,
-                ),
-              )
-            : const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/background/finalfr.jpg'),
-                  fit: BoxFit.fill,
-                ),
-              );
-
-        return Scaffold(
-          body: Container(
-            decoration: backgroundDecoration,
-            height: double.infinity,
-            width: double.infinity,
-            child: SafeArea(
-              child: AutoHidingHeader(
-                appBar: AppBarWidget(isMobile: isMobile),
-                child: ScrollConfiguration(
-                  behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-                  child: SingleChildScrollView(
-                    controller: mainScrollController,
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 1200),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 76.0),
-                          child: Column(
-                            children: [
-                              buildBody(isMobile),
-                              const SizedBox(height: 16),
-                              const FooterWidget(),
-                            ],
+        final mainBody = SizedBox(
+          height: double.infinity,
+          width: double.infinity,
+          child: Stack(
+            children: [
+              // Video background layer
+              const Positioned.fill(
+                child: VideoBackground(),
+              ),
+              // Content layer
+              Positioned.fill(
+                child: SafeArea(
+                  child: AutoHidingHeader(
+                    appBar: AppBarWidget(isMobile: isMobile),
+                    child: ScrollConfiguration(
+                      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                      child: SingleChildScrollView(
+                        controller: mainScrollController,
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 1200),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 76.0),
+                              child: Column(
+                                children: [
+                                  buildBody(isMobile),
+                                  const SizedBox(height: 16),
+                                  const FooterWidget(),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -155,10 +150,16 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ],
           ),
+        );
+
+        return Scaffold(
+            backgroundColor: Colors.transparent,
+            body: mainBody
         );
       },
     );
   }
 }
+

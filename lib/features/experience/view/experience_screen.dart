@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/shared/widgets/app_bar_widget.dart';
 import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
+import 'package:portfolio/shared/widgets/video_background.dart';
 import 'package:portfolio/features/experience/widgets/experience_timeline_card.dart';
 import 'package:portfolio/features/experience/widgets/experience_services_card.dart';
 import 'package:portfolio/features/experience/widgets/experience_workflow_card.dart';
@@ -59,26 +60,17 @@ class ExperienceScreen extends StatelessWidget {
     return Selector<HomeViewModel, bool>(
       selector: (_, vm) => vm.isDarkMode,
       builder: (context, isDark, _) {
-        final backgroundDecoration = isDark
-            ? const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/background/background_2.jpg'),
-                  fit: BoxFit.fill,
-                ),
-              )
-            : const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/background/finalfr.jpg'),
-                  fit: BoxFit.fill,
-                ),
-              );
-
         final size = MediaQuery.of(context).size;
         final isMobile = size.width < 900;
 
         return Scaffold(
-          body: Container(
-            decoration: backgroundDecoration,
+          backgroundColor: Colors.transparent,
+          body: Stack(
+            children: [
+              const Positioned.fill(
+                child: VideoBackground(),
+              ),
+              Container(
             height: double.infinity,
             width: double.infinity,
             child: SafeArea(
@@ -104,6 +96,8 @@ class ExperienceScreen extends StatelessWidget {
                 ),
               ),
             ),
+              ),
+            ],
           ),
         );
       },

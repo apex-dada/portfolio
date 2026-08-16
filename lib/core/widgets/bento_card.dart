@@ -380,7 +380,7 @@ class _BentoCardState extends State<BentoCard> {
       onExit: (_) {
         if (widget.isHoverable) setState(() => _isHovered = false);
       },
-      cursor: widget.onTap != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      cursor: SystemMouseCursors.none,
       child: GestureDetector(
         onTapDown: (_) {
           if (widget.onTap != null) setState(() => _isPressed = true);
