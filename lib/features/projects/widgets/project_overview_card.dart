@@ -18,6 +18,7 @@ class ProjectOverviewCard extends StatelessWidget {
     final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
 
     return BentoCard(
+      width: double.infinity,
       backgroundColor: cardColor,
       borderColor: borderColor,
       hoverBorderColor: hoverBorderColor,

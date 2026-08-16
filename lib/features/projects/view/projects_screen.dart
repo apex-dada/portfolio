@@ -51,10 +51,12 @@ class ProjectsScreen extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: 32),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Project 1: Bangla Film Picks
           SizedBox(
             height: projectCardHeight,
+            width: double.infinity,
             child: const ProjectCarouselCard(
               projectNumber: "01",
               title: "Flutter App: Bangla Film Picks",
@@ -67,6 +69,7 @@ class ProjectsScreen extends StatelessWidget {
           // Project 2: NestKeeper
           SizedBox(
             height: projectCardHeight,
+            width: double.infinity,
             child: const ProjectCarouselCard(
               projectNumber: "02",
               title: "Flutter App: NestKeeper",
@@ -79,6 +82,7 @@ class ProjectsScreen extends StatelessWidget {
           // Project 3: Sudoku
           SizedBox(
             height: projectCardHeight,
+            width: double.infinity,
             child: const ProjectCarouselCard(
               projectNumber: "03",
               title: "Flutter Game: Sudoku",
@@ -89,12 +93,16 @@ class ProjectsScreen extends StatelessWidget {
           const SizedBox(height: 24),
 
           // Project Philosophy Overview
-          const ProjectOverviewCard(),
+          const SizedBox(
+            width: double.infinity,
+            child: ProjectOverviewCard(),
+          ),
           const SizedBox(height: 24),
 
           // Tech Stack
           const SizedBox(
             height: 240,
+            width: double.infinity,
             child: ProjectTechStackCard(),
           ),
         ],

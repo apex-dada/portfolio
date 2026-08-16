@@ -54,6 +54,7 @@ class ContactFormCard extends StatelessWidget {
     }
 
     return BentoCard(
+      width: double.infinity,
       backgroundColor: cardColor,
       borderColor: borderColor,
       hoverBorderColor: hoverBorderColor,

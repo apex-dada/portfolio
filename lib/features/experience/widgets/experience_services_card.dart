@@ -19,7 +19,7 @@ class ExperienceServicesCard extends StatelessWidget {
 
     Widget buildServiceItem(String title, String desc, IconData icon) {
       return Padding(
-        padding: const EdgeInsets.only(bottom: 12.0),
+        padding: const EdgeInsets.only(bottom: 8.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -71,21 +71,43 @@ class ExperienceServicesCard extends StatelessWidget {
               letterSpacing: 2.0,
             ),
           ),
-          const SizedBox(height: 16),
-          buildServiceItem(
-            "Mobile App Dev",
-            "High performance native Android & iOS applications using Flutter.",
-            Icons.phone_iphone_rounded,
-          ),
-          buildServiceItem(
-            "API Integration",
-            "Connecting secure backend REST APIs and Realtime WebSockets.",
-            Icons.sync_alt_rounded,
-          ),
-          buildServiceItem(
-            "Local Database",
-            "Setting up SQLite / Drift / Hive databases for robust offline workflows.",
-            Icons.storage_rounded,
+          const SizedBox(height: 12),
+          Expanded(
+            child: ScrollConfiguration(
+              behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildServiceItem(
+                      "Mobile App Dev",
+                      "High performance native Android & iOS applications using Flutter.",
+                      Icons.phone_iphone_rounded,
+                    ),
+                    buildServiceItem(
+                      "Backend & Cloud Services",
+                      "Firebase & Supabase — Authentication, Database, Storage, Cloud Functions, Push Notifications, and Real-Time Data Synchronization.",
+                      Icons.cloud_done_rounded,
+                    ),
+                    buildServiceItem(
+                      "Offline-First Architecture",
+                      "Local data persistence, background synchronization, conflict resolution, and seamless online/offline experiences.",
+                      Icons.cloud_sync_rounded,
+                    ),
+                    buildServiceItem(
+                      "API Integration",
+                      "Connecting secure backend REST APIs and Realtime WebSockets.",
+                      Icons.sync_alt_rounded,
+                    ),
+                    buildServiceItem(
+                      "Local Database",
+                      "Setting up SQLite / Drift / Hive databases for robust offline workflows.",
+                      Icons.storage_rounded,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ],
       ),

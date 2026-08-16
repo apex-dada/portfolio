@@ -15,12 +15,13 @@ class ContactScreen extends StatelessWidget {
       return const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ContactFormCard(),
+            SizedBox(width: double.infinity, child: ContactFormCard()),
             SizedBox(height: 16),
-            ContactInfoCard(),
+            SizedBox(width: double.infinity, child: ContactInfoCard()),
             SizedBox(height: 16),
-            SizedBox(height: 160, child: ContactSocialsCard()),
+            SizedBox(height: 160, width: double.infinity, child: ContactSocialsCard()),
           ],
         ),
       );
@@ -30,10 +31,12 @@ class ContactScreen extends StatelessWidget {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 32, vertical: 24),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Row 1: Form (flex 6), Details (flex 4)
           SizedBox(
             height: 340,
+            width: double.infinity,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -44,9 +47,10 @@ class ContactScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16),
-          // Row 2: Social accounts (flex 10)
+          // Row 2: Social accounts ("CONNECT WITH ME")
           SizedBox(
             height: 180,
+            width: double.infinity,
             child: ContactSocialsCard(),
           ),
         ],
