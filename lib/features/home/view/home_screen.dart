@@ -63,12 +63,12 @@ class HomeScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            flex: 74,
+                            flex: 62,
                             child: TechStackWidget(),
                           ),
                           SizedBox(width: 14),
                           Expanded(
-                            flex: 26,
+                            flex: 38,
                             child: LiveClockWidget(),
                           ),
                         ],

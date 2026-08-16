@@ -84,7 +84,7 @@ class ExperienceServicesCard extends StatelessWidget {
           ),
           buildServiceItem(
             "Local Database",
-            "Setting up SQLite / Hive databases for robust offline workflows.",
+            "Setting up SQLite / Drift / Hive databases for robust offline workflows.",
             Icons.storage_rounded,
           ),
         ],

@@ -25,6 +25,7 @@ class TechStackWidget extends StatelessWidget {
     TechStackItem("Firebase", logoAsset: "assets/stack/firebase.png"),
     TechStackItem("Supabase", logoAsset: "assets/stack/supabase.webp"),
     TechStackItem("SQLite", logoAsset: "assets/stack/sqlite.webp"),
+    TechStackItem("Drift", fallbackIcon: Icons.storage_rounded),
     TechStackItem("Git", fallbackIcon: Icons.alt_route_rounded),
     TechStackItem("GitHub", logoAsset: "assets/stack/github-logo-png_seeklogo-304612.png"),
     TechStackItem("Android Studio", logoAsset: "assets/stack/android-studio.png"),
@@ -70,14 +71,14 @@ class TechStackWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.topLeft,
               child: Wrap(
-                spacing: 10,
-                runSpacing: 10,
+                spacing: 8,
+                runSpacing: 8,
                 children: _stackItems.map((item) {
                   return BentoCard(
                     backgroundColor: isDark ? const Color(0xFF1E2129) : const Color(0xFFF4F6F9),
                     borderColor: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
                     hoverBorderColor: isDark ? const Color(0x33FFFFFF) : const Color(0x33000000),
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
