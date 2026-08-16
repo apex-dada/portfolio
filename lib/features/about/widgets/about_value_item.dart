@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 
 class AboutValueItem extends StatelessWidget {
   final String title;
@@ -17,17 +15,14 @@ class AboutValueItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
-    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
-    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
-    final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
+    const darkNavy = Color(0xFF1E2837);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 14.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: accentColor, size: 18),
+          Icon(icon, color: darkNavy, size: 18),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -35,19 +30,20 @@ class AboutValueItem extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.outfit(
-                    color: primaryTextColor,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: darkNavy,
                     fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   desc,
                   style: GoogleFonts.inter(
-                    color: secondaryTextColor,
+                    color: darkNavy.withValues(alpha: 0.8),
                     fontSize: 12.5,
                     height: 1.4,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],

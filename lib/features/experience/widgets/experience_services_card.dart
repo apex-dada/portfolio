@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
 
 class ExperienceServicesCard extends StatelessWidget {
@@ -9,13 +7,8 @@ class ExperienceServicesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
-    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
-    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
-    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
-    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
-    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
-    final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
+    const periwinkle = Color(0xFF8EAFD1);
+    const darkNavy = Color(0xFF1E2837);
 
     Widget buildServiceItem(String title, String desc, IconData icon) {
       return Padding(
@@ -23,7 +16,7 @@ class ExperienceServicesCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: accentColor, size: 16),
+            Icon(icon, color: darkNavy, size: 16),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -31,18 +24,19 @@ class ExperienceServicesCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: GoogleFonts.outfit(
-                      color: primaryTextColor,
+                    style: GoogleFonts.plusJakartaSans(
+                      color: darkNavy,
                       fontSize: 13.5,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                   Text(
                     desc,
                     style: GoogleFonts.inter(
-                      color: secondaryTextColor,
+                      color: darkNavy.withValues(alpha: 0.8),
                       fontSize: 12,
                       height: 1.4,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
@@ -55,9 +49,9 @@ class ExperienceServicesCard extends StatelessWidget {
 
     return BentoCard(
       width: double.infinity,
-      backgroundColor: cardColor,
-      borderColor: borderColor,
-      hoverBorderColor: hoverBorderColor,
+      backgroundColor: periwinkle,
+      borderColor: Colors.transparent,
+      hoverBorderColor: Colors.white70,
       padding: const EdgeInsets.all(28.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,8 +59,8 @@ class ExperienceServicesCard extends StatelessWidget {
         children: [
           Text(
             "SERVICES",
-            style: GoogleFonts.outfit(
-              color: accentColor,
+            style: GoogleFonts.plusJakartaSans(
+              color: darkNavy,
               fontSize: 11,
               fontWeight: FontWeight.w800,
               letterSpacing: 2.0,

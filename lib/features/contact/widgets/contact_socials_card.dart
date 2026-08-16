@@ -9,12 +9,8 @@ class ContactSocialsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
-    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
     final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
-    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
     final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
-    final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
 
     Widget buildSocialButton(IconData icon, String tooltip, VoidCallback onTap) {
       return Tooltip(
@@ -24,7 +20,7 @@ class ContactSocialsCard extends StatelessWidget {
           height: 48,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.03),
+            color: const Color(0xFF1E2837),
             border: Border.all(
               color: borderColor,
               width: 1.0,
@@ -56,7 +52,7 @@ class ContactSocialsCard extends StatelessWidget {
           height: 48,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.03),
+            color: const Color(0xFF1E2837),
             border: Border.all(
               color: borderColor,
               width: 1.0,
@@ -70,10 +66,10 @@ class ContactSocialsCard extends StatelessWidget {
               child: Center(
                 child: Text(
                   label,
-                  style: GoogleFonts.outfit(
+                  style: GoogleFonts.plusJakartaSans(
                     color: primaryTextColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ),
@@ -85,9 +81,9 @@ class ContactSocialsCard extends StatelessWidget {
 
     return BentoCard(
       width: double.infinity,
-      backgroundColor: cardColor,
-      borderColor: borderColor,
-      hoverBorderColor: hoverBorderColor,
+      backgroundColor: const Color(0xFF15181E),
+      borderColor: const Color(0xFF242C38),
+      hoverBorderColor: HomeViewModel.periwinkleBlue,
       padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,8 +91,8 @@ class ContactSocialsCard extends StatelessWidget {
         children: [
           Text(
             "CONNECT WITH ME",
-            style: GoogleFonts.outfit(
-              color: accentColor,
+            style: GoogleFonts.plusJakartaSans(
+              color: HomeViewModel.periwinkleBlue,
               fontSize: 11,
               fontWeight: FontWeight.w800,
               letterSpacing: 2.0,

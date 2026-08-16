@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:portfolio/features/home/provider/home_viewmodel.dart';
-import 'package:portfolio/shared/widgets/app_bar_widget.dart';
-import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
+import 'package:portfolio/shared/widgets/editorial_top_bar.dart';
 import 'package:portfolio/features/experience/widgets/experience_timeline_card.dart';
 import 'package:portfolio/features/experience/widgets/experience_services_card.dart';
 import 'package:portfolio/features/experience/widgets/experience_workflow_card.dart';
@@ -60,55 +57,34 @@ class ExperienceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<HomeViewModel, bool>(
-      selector: (_, vm) => vm.isDarkMode,
-      builder: (context, isDark, _) {
-        final size = MediaQuery.of(context).size;
-        final isMobile = size.width < 900;
+    final size = MediaQuery.of(context).size;
+    final isMobile = size.width < 900;
 
-        return Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Stack(
-            children: [
-              Positioned.fill(
-                child: Image.asset(
-                  isDark
-                      ? 'assets/background/background_2.jpg'
-                      : 'assets/background/finalfr.jpg',
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Container(
-            height: double.infinity,
-            width: double.infinity,
-            child: SafeArea(
-              child: AutoHidingHeader(
-                appBar: AppBarWidget(
-                  isMobile: isMobile,
-                  isExperiencePage: true,
-                ),
-                child: ScrollConfiguration(
-                  behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-                  child: SingleChildScrollView(
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 1200),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 76.0),
-                          child: buildBody(size, isMobile),
-                        ),
-                      ),
+    return Scaffold(
+      backgroundColor: const Color(0xFF0A0B0E),
+      body: SafeArea(
+        child: ScrollConfiguration(
+          behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+          child: SingleChildScrollView(
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1180),
+                child: Column(
+                  children: [
+                    EditorialTopBar(
+                      isMobile: isMobile,
+                      isExperiencePage: true,
                     ),
-                  ),
+                    buildBody(size, isMobile),
+                    const SizedBox(height: 24),
+                  ],
                 ),
               ),
             ),
-              ),
-            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

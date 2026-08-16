@@ -20,7 +20,7 @@ class AboutSkillBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.black.withValues(alpha: 0.02),
+        color: isDark ? const Color(0xFF1E2837) : const Color(0xFFECEFF4),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: borderColor.withValues(alpha: 0.5),

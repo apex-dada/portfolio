@@ -120,10 +120,10 @@ class _WorkflowListState extends State<WorkflowList>
                       height: 8,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF),
+                        color: isDark ? const Color(0xFF8EAFD1) : const Color(0xFF1E2837),
                         boxShadow: [
                           BoxShadow(
-                            color: isDark ? const Color(0x663DDC84) : const Color(0x66007AFF),
+                            color: isDark ? const Color(0x668EAFD1) : const Color(0x441E2837),
                             blurRadius: 6,
                             spreadRadius: 2,
                           ),

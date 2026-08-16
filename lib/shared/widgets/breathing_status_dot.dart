@@ -41,10 +41,10 @@ class _BreathingStatusDotState extends State<BreathingStatusDot>
               height: glowSize,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFF59F5A2).withValues(alpha: 0.15 * (1.0 - t * 0.4)),
+                color: const Color(0xFF8EAFD1).withValues(alpha: 0.20 * (1.0 - t * 0.4)),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF59F5A2).withValues(alpha: 0.3 * (1.0 - t * 0.5)),
+                    color: const Color(0xFF8EAFD1).withValues(alpha: 0.35 * (1.0 - t * 0.5)),
                     blurRadius: 6,
                     spreadRadius: 2,
                   ),
@@ -60,7 +60,7 @@ class _BreathingStatusDotState extends State<BreathingStatusDot>
         height: 7,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: Color(0xFF59F5A2),
+          color: Color(0xFF8EAFD1),
         ),
       ),
     );

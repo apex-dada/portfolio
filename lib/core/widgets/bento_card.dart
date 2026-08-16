@@ -46,7 +46,7 @@ class BentoCard extends StatefulWidget {
   /// Custom padding inside the card. Defaults to EdgeInsets.all(24.0).
   final EdgeInsetsGeometry? padding;
 
-  /// Card border radius. Defaults to 24.0.
+  /// Card border radius. Defaults to 28.0.
   final double borderRadius;
 
   /// Action when the card is tapped.
@@ -100,10 +100,10 @@ class BentoCard extends StatefulWidget {
     this.borderColor,
     this.hoverBorderColor,
     this.padding,
-    this.borderRadius = 24.0,
+    this.borderRadius = 28.0,
     this.onTap,
     this.isHoverable = true,
-    this.enableGlass = true,
+    this.enableGlass = false,
     this.crossAxisAlignment = CrossAxisAlignment.start,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.height,
@@ -240,12 +240,8 @@ class _BentoCardState extends State<BentoCard> {
         ? (widget.hoverBorderColor ?? defaultHoverBorderColor)
         : (widget.borderColor ?? defaultBorderColor);
 
-    final cardBgColor = widget.glassColor ??
-        (widget.backgroundColor != null
-            ? (widget.backgroundColor == Colors.transparent
-                ? Colors.transparent
-                : widget.backgroundColor!.withValues(alpha: isDark ? 0.35 : 0.50))
-            : (isDark ? const Color(0x33151515) : const Color(0x66FFFFFF)));
+    final cardBgColor = widget.backgroundColor ??
+        (isDark ? const Color(0xFF15181E) : const Color(0xFFECEFF4));
 
     // Build the main card structure
     Widget cardContent = ClipRRect(
@@ -294,10 +290,10 @@ class _BentoCardState extends State<BentoCard> {
                       Text(
                         widget.title!.toUpperCase(),
                         style: widget.titleStyle ??
-                            GoogleFonts.outfit(
-                              color: isDark ? Colors.white38 : Colors.black38,
+                            GoogleFonts.plusJakartaSans(
+                              color: isDark ? const Color(0xFF8EAFD1) : const Color(0xFF1E2837),
                               fontSize: 11,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w800,
                               letterSpacing: 2.0,
                             ),
                       ),

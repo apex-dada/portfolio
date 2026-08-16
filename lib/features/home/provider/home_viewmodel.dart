@@ -79,19 +79,18 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Theme-derived values matching the original designs
-  Color get cardColor => _isDarkMode ? const Color(0xFF151515) : const Color(0xFFFFFFFF);
-  Color get borderColor => _isDarkMode ? const Color(0xFF222222) : const Color(0xFFE8E8E8);
-  Color get hoverBorderColor => _isDarkMode ? const Color(0xFF3F3F3F) : const Color(0xFFCCCCCC);
-  Color get primaryTextColor => _isDarkMode ? Colors.white : Colors.black;
-  Color get secondaryTextColor => _isDarkMode ? Colors.white54 : Colors.black54;
+  // Theme-derived values matching the reference design
+  static const Color obsidianBlack = Color(0xFF0A0B0E);
+  static const Color periwinkleBlue = Color(0xFF8EAFD1);
+  static const Color lightContainer = Color(0xFFECEFF4);
+  static const Color darkSlate = Color(0xFF1E2837);
 
-  TextStyle get titleStyle => TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.bold,
-        color: secondaryTextColor,
-        letterSpacing: 1.5,
-      );
+  Color get cardColor => _isDarkMode ? const Color(0xFF15181E) : const Color(0xFFFFFFFF);
+  Color get borderColor => _isDarkMode ? const Color(0x1AFFFFFF) : const Color(0x1F000000);
+  Color get hoverBorderColor => _isDarkMode ? periwinkleBlue : const Color(0xFF8EAFD1);
+  Color get primaryTextColor => _isDarkMode ? Colors.white : Colors.black;
+  Color get secondaryTextColor => _isDarkMode ? const Color(0xFF8A96A6) : const Color(0xFF556070);
+  Color get accentColor => periwinkleBlue;
 
   // Cursor follower configuration (read-only config — position never lives here)
   bool _cursorFollowerEnabled = true;

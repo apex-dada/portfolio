@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
 
@@ -9,19 +8,15 @@ class ProjectOverviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
-    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
-    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
-    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
-    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
-    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
-    final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
+    const offWhite = Color(0xFFECEFF4);
+    const darkNavy = Color(0xFF1E2837);
+    const periwinkle = Color(0xFF567C9E);
 
     return BentoCard(
       width: double.infinity,
-      backgroundColor: cardColor,
-      borderColor: borderColor,
-      hoverBorderColor: hoverBorderColor,
+      backgroundColor: offWhite,
+      borderColor: const Color(0xFFD8DFE8),
+      hoverBorderColor: HomeViewModel.periwinkleBlue,
       padding: const EdgeInsets.all(28.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,8 +24,8 @@ class ProjectOverviewCard extends StatelessWidget {
         children: [
           Text(
             "PROJECT PHILOSOPHY",
-            style: GoogleFonts.outfit(
-              color: accentColor,
+            style: GoogleFonts.plusJakartaSans(
+              color: periwinkle,
               fontSize: 11,
               fontWeight: FontWeight.w800,
               letterSpacing: 2.0,
@@ -39,10 +34,10 @@ class ProjectOverviewCard extends StatelessWidget {
           const SizedBox(height: 14),
           Text(
             "Clean Architecture & UX Focus",
-            style: GoogleFonts.outfit(
-              color: primaryTextColor,
+            style: GoogleFonts.plusJakartaSans(
+              color: darkNavy,
               fontSize: 24,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w800,
               letterSpacing: -0.5,
             ),
           ),
@@ -51,10 +46,10 @@ class ProjectOverviewCard extends StatelessWidget {
             "Every application is built following strict state-management rules (Bloc/Provider), clear layout structures (MVVM), and tested optimization practices.\n\n"
             "By ensuring clean separations of layers, applications are scale-ready, modular, and easy to maintain for future modifications.",
             style: GoogleFonts.inter(
-              color: secondaryTextColor,
+              color: const Color(0xFF4B5563),
               fontSize: 13.5,
               height: 1.55,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

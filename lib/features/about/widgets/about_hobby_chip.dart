@@ -18,13 +18,13 @@ class AboutHobbyChip extends StatelessWidget {
     final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
     final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
     final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
-    final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
+    final accentColor = isDark ? HomeViewModel.periwinkleBlue : const Color(0xFF1E2837);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.black.withValues(alpha: 0.02),
-        borderRadius: BorderRadius.circular(12),
+        color: isDark ? const Color(0xFF1E2837) : const Color(0xFFECEFF4),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: borderColor.withValues(alpha: 0.5),
           width: 1,

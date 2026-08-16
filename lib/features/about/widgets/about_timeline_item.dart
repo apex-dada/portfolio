@@ -8,22 +8,38 @@ class AboutTimelineItem extends StatelessWidget {
   final String subtitle;
   final String date;
   final bool isLast;
+  final Color? titleColor;
+  final Color? subtitleColor;
+  final Color? dateColor;
+  final Color? dotColor;
+  final Color? lineColor;
 
   const AboutTimelineItem({
     required this.title,
     required this.subtitle,
     required this.date,
     this.isLast = false,
+    this.titleColor,
+    this.subtitleColor,
+    this.dateColor,
+    this.dotColor,
+    this.lineColor,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
-    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
-    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
-    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
-    final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
+    final fallbackBorderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
+    final fallbackPrimaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
+    final fallbackSecondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
+    final fallbackAccentColor = isDark ? HomeViewModel.periwinkleBlue : const Color(0xFF1E2837);
+
+    final resolvedTitleColor = titleColor ?? fallbackPrimaryTextColor;
+    final resolvedSubtitleColor = subtitleColor ?? fallbackSecondaryTextColor;
+    final resolvedDateColor = dateColor ?? (dotColor ?? fallbackAccentColor).withValues(alpha: 0.8);
+    final resolvedDotColor = dotColor ?? fallbackAccentColor;
+    final resolvedLineColor = lineColor ?? fallbackBorderColor;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +50,7 @@ class AboutTimelineItem extends StatelessWidget {
               width: 8,
               height: 8,
               decoration: BoxDecoration(
-                color: accentColor,
+                color: resolvedDotColor,
                 shape: BoxShape.circle,
               ),
             ),
@@ -42,7 +58,7 @@ class AboutTimelineItem extends StatelessWidget {
               Container(
                 width: 2,
                 height: 42,
-                color: borderColor,
+                color: resolvedLineColor,
               ),
           ],
         ),
@@ -53,16 +69,16 @@ class AboutTimelineItem extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.outfit(
-                  color: primaryTextColor,
+                style: GoogleFonts.plusJakartaSans(
+                  color: resolvedTitleColor,
                   fontSize: 14.5,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               Text(
                 subtitle,
                 style: GoogleFonts.inter(
-                  color: secondaryTextColor,
+                  color: resolvedSubtitleColor,
                   fontSize: 12.5,
                   fontWeight: FontWeight.w400,
                 ),
@@ -71,7 +87,7 @@ class AboutTimelineItem extends StatelessWidget {
               Text(
                 date,
                 style: GoogleFonts.inter(
-                  color: accentColor.withValues(alpha: 0.8),
+                  color: resolvedDateColor,
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
                 ),

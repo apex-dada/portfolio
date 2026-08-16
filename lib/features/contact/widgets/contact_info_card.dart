@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
 
 class ContactInfoCard extends StatelessWidget {
@@ -9,13 +7,8 @@ class ContactInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.select<HomeViewModel, bool>((vm) => vm.isDarkMode);
-    final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
-    final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
-    final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
-    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
-    final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
-    final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
+    const periwinkle = Color(0xFF8EAFD1);
+    const darkNavy = Color(0xFF1E2837);
 
     Widget buildInfoRow(String title, String detail) {
       return Padding(
@@ -25,19 +18,20 @@ class ContactInfoCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: GoogleFonts.outfit(
-                color: secondaryTextColor,
-                fontSize: 11,
-                fontWeight: FontWeight.w600,
+              style: GoogleFonts.plusJakartaSans(
+                color: darkNavy.withValues(alpha: 0.7),
+                fontSize: 10.5,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1.0,
               ),
             ),
             const SizedBox(height: 2),
             Text(
               detail,
               style: GoogleFonts.inter(
-                color: primaryTextColor,
+                color: darkNavy,
                 fontSize: 13.5,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],
@@ -47,9 +41,9 @@ class ContactInfoCard extends StatelessWidget {
 
     return BentoCard(
       width: double.infinity,
-      backgroundColor: cardColor,
-      borderColor: borderColor,
-      hoverBorderColor: hoverBorderColor,
+      backgroundColor: periwinkle,
+      borderColor: Colors.transparent,
+      hoverBorderColor: Colors.white70,
       padding: const EdgeInsets.all(28.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,8 +51,8 @@ class ContactInfoCard extends StatelessWidget {
         children: [
           Text(
             "QUICK DETAILS",
-            style: GoogleFonts.outfit(
-              color: accentColor,
+            style: GoogleFonts.plusJakartaSans(
+              color: darkNavy,
               fontSize: 11,
               fontWeight: FontWeight.w800,
               letterSpacing: 2.0,
@@ -66,9 +60,9 @@ class ContactInfoCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           buildInfoRow("PRIMARY MAIL", "kaziwoaej@gmail.com"),
-          Divider(color: borderColor.withValues(alpha: 0.5), height: 16),
+          Divider(color: darkNavy.withValues(alpha: 0.15), height: 16),
           buildInfoRow("DISCORD", "woaej#0000"),
-          Divider(color: borderColor.withValues(alpha: 0.5), height: 16),
+          Divider(color: darkNavy.withValues(alpha: 0.15), height: 16),
           buildInfoRow("AVAILABILITY", "Open to Freelance & Full-time"),
         ],
       ),
