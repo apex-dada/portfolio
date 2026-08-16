@@ -188,7 +188,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
                             buildProjectCard(
                               title: "Bangla Film Picks",
                               description: "Bangla movie discovery platform with reviews, ratings & community lists.",
-                              imagePath: 'assets/images/bangla_film_picks/bangla_movie_pick_4.jpg',
+                              imagePath: 'assets/images/bangla_film_picks/bangla_movie_pick_4.webp',
                               tags: const ["Flutter", "Supabase"],
                               onTap: () => context.go('/projects'),
                             ),
@@ -203,7 +203,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
                             buildProjectCard(
                               title: "NestKeeper",
                               description: "Smart property & tenant management application.",
-                              imagePath: 'assets/images/nestkeeper/nest_keeper_1.png',
+                              imagePath: 'assets/images/nestkeeper/nest_keeper_1.webp',
                               tags: const ["Flutter", "RESTful API"],
                               onTap: () => context.go('/projects'),
                             ),
@@ -235,7 +235,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
                     buildProjectCard(
                       title: "Bangla Film Picks",
                       description: "Bangla movie discovery platform with reviews, ratings & community lists.",
-                      imagePath: 'assets/images/bangla_film_picks/bangla_movie_pick_4.jpg',
+                      imagePath: 'assets/images/bangla_film_picks/bangla_movie_pick_4.webp',
                       tags: const ["Flutter", "Supabase"],
                       onTap: () => context.go('/projects'),
                     ),
@@ -243,7 +243,7 @@ class FeaturedProjectsWidget extends StatelessWidget {
                     buildProjectCard(
                       title: "NestKeeper",
                       description: "Smart property & tenant management application.",
-                      imagePath: 'assets/images/nestkeeper/nest_keeper_1.png',
+                      imagePath: 'assets/images/nestkeeper/nest_keeper_1.webp',
                       tags: const ["Flutter", "RESTful API"],
                       onTap: () => context.go('/projects'),
                     ),

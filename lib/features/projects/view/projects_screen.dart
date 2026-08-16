@@ -11,11 +11,11 @@ class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({super.key});
 
   static const List<String> _banglaFilmPicksScreenshots = [
-    'assets/images/bangla_film_picks/bangla_movie_pick_4.jpg',
-    'assets/images/bangla_film_picks/mov1.jpg',
-    'assets/images/bangla_film_picks/mov2.jpg',
-    'assets/images/bangla_film_picks/mov3.jpg',
-    'assets/images/bangla_film_picks/mov4.jpg',
+    'assets/images/bangla_film_picks/bangla_movie_pick_4.webp',
+    'assets/images/bangla_film_picks/mov1.webp',
+    'assets/images/bangla_film_picks/mov2.webp',
+    'assets/images/bangla_film_picks/mov3.webp',
+    'assets/images/bangla_film_picks/mov4.webp',
   ];
 
   static const List<String> _sudokuScreenshots = [
@@ -32,16 +32,16 @@ class ProjectsScreen extends StatelessWidget {
   ];
 
   static const List<String> _nestkeeperScreenshots = [
-    'assets/images/nestkeeper/nest_keeper_1.png',
-    'assets/images/nestkeeper/nest_keeper_2.png',
-    'assets/images/nestkeeper/nest_keeper_3.png',
-    'assets/images/nestkeeper/nest_keeper_4.png',
-    'assets/images/nestkeeper/nest_keeper_5.png',
-    'assets/images/nestkeeper/nest_keeper_6.png',
-    'assets/images/nestkeeper/nest_keeper_7.png',
-    'assets/images/nestkeeper/nest_keeper_8.png',
-    'assets/images/nestkeeper/nest_keeper_9.png',
-    'assets/images/nestkeeper/nest_keeper_10.png',
+    'assets/images/nestkeeper/nest_keeper_1.webp',
+    'assets/images/nestkeeper/nest_keeper_2.webp',
+    'assets/images/nestkeeper/nest_keeper_3.webp',
+    'assets/images/nestkeeper/nest_keeper_4.webp',
+    'assets/images/nestkeeper/nest_keeper_5.webp',
+    'assets/images/nestkeeper/nest_keeper_6.webp',
+    'assets/images/nestkeeper/nest_keeper_7.webp',
+    'assets/images/nestkeeper/nest_keeper_8.webp',
+    'assets/images/nestkeeper/nest_keeper_9.webp',
+    'assets/images/nestkeeper/nest_keeper_10.webp',
   ];
 
   Widget buildBody(Size size, bool isMobile) {
