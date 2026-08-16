@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 
 class ImagePreviewDialog extends StatefulWidget {
@@ -97,34 +98,51 @@ class _ImagePreviewDialogState extends State<ImagePreviewDialog> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // Title and counter pill
-                LiquidGlass.withOwnLayer(
-                  shape: const LiquidRoundedRectangle(
-                    borderRadius: 20,
-                    side: BorderSide(
-                      color: Color(0x33FFFFFF),
-                      width: 1,
-                    ),
-                  ),
-                  settings: const LiquidGlassSettings(
-                    blur: 16.0,
-                    glassColor: Colors.transparent,
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.4),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      "${widget.title.isNotEmpty ? '${widget.title}  •  ' : ''}${_currentIndex + 1} / ${widget.images.length}",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
+                kIsWeb
+                    ? Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.6),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: const Color(0x33FFFFFF), width: 1),
+                        ),
+                        child: Text(
+                          "${widget.title.isNotEmpty ? '${widget.title}  •  ' : ''}${_currentIndex + 1} / ${widget.images.length}",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      )
+                    : LiquidGlass.withOwnLayer(
+                        shape: const LiquidRoundedRectangle(
+                          borderRadius: 20,
+                          side: BorderSide(
+                            color: Color(0x33FFFFFF),
+                            width: 1,
+                          ),
+                        ),
+                        settings: const LiquidGlassSettings(
+                          blur: 16.0,
+                          glassColor: Colors.transparent,
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withValues(alpha: 0.4),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            "${widget.title.isNotEmpty ? '${widget.title}  •  ' : ''}${_currentIndex + 1} / ${widget.images.length}",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
 
                 // Action buttons: Reset zoom & Close
                 Row(
@@ -132,53 +150,73 @@ class _ImagePreviewDialogState extends State<ImagePreviewDialog> {
                     IconButton(
                       onPressed: _resetZoom,
                       tooltip: 'Reset Zoom',
-                      icon: LiquidGlass.withOwnLayer(
-                        shape: const LiquidRoundedRectangle(
-                          borderRadius: 999,
-                          side: BorderSide(
-                            color: Color(0x33FFFFFF),
-                            width: 1,
-                          ),
-                        ),
-                        settings: const LiquidGlassSettings(
-                          blur: 12.0,
-                          glassColor: Colors.transparent,
-                        ),
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.black.withValues(alpha: 0.4),
-                          ),
-                          child: const Icon(Icons.zoom_out_map_rounded, color: Colors.white, size: 20),
-                        ),
-                      ),
+                      icon: kIsWeb
+                          ? Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.black.withValues(alpha: 0.6),
+                                border: Border.all(color: const Color(0x33FFFFFF), width: 1),
+                              ),
+                              child: const Icon(Icons.zoom_out_map_rounded, color: Colors.white, size: 20),
+                            )
+                          : LiquidGlass.withOwnLayer(
+                              shape: const LiquidRoundedRectangle(
+                                borderRadius: 999,
+                                side: BorderSide(
+                                  color: Color(0x33FFFFFF),
+                                  width: 1,
+                                ),
+                              ),
+                              settings: const LiquidGlassSettings(
+                                blur: 12.0,
+                                glassColor: Colors.transparent,
+                              ),
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.black.withValues(alpha: 0.4),
+                                ),
+                                child: const Icon(Icons.zoom_out_map_rounded, color: Colors.white, size: 20),
+                              ),
+                            ),
                     ),
                     const SizedBox(width: 8),
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
                       tooltip: 'Close',
-                      icon: LiquidGlass.withOwnLayer(
-                        shape: const LiquidRoundedRectangle(
-                          borderRadius: 999,
-                          side: BorderSide(
-                            color: Color(0x33FFFFFF),
-                            width: 1,
-                          ),
-                        ),
-                        settings: const LiquidGlassSettings(
-                          blur: 12.0,
-                          glassColor: Colors.transparent,
-                        ),
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.black.withValues(alpha: 0.4),
-                          ),
-                          child: const Icon(Icons.close_rounded, color: Colors.white, size: 20),
-                        ),
-                      ),
+                      icon: kIsWeb
+                          ? Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.black.withValues(alpha: 0.6),
+                                border: Border.all(color: const Color(0x33FFFFFF), width: 1),
+                              ),
+                              child: const Icon(Icons.close_rounded, color: Colors.white, size: 20),
+                            )
+                          : LiquidGlass.withOwnLayer(
+                              shape: const LiquidRoundedRectangle(
+                                borderRadius: 999,
+                                side: BorderSide(
+                                  color: Color(0x33FFFFFF),
+                                  width: 1,
+                                ),
+                              ),
+                              settings: const LiquidGlassSettings(
+                                blur: 12.0,
+                                glassColor: Colors.transparent,
+                              ),
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.black.withValues(alpha: 0.4),
+                                ),
+                                child: const Icon(Icons.close_rounded, color: Colors.white, size: 20),
+                              ),
+                            ),
                     ),
                   ],
                 ),
@@ -197,27 +235,37 @@ class _ImagePreviewDialogState extends State<ImagePreviewDialog> {
                     curve: Curves.easeInOut,
                   );
                 },
-                child: LiquidGlass.withOwnLayer(
-                  shape: const LiquidRoundedRectangle(
-                    borderRadius: 999,
-                    side: BorderSide(
-                      color: Color(0x33FFFFFF),
-                      width: 1,
-                    ),
-                  ),
-                  settings: const LiquidGlassSettings(
-                    blur: 12.0,
-                    glassColor: Colors.transparent,
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black.withValues(alpha: 0.4),
-                    ),
-                    child: const Icon(Icons.chevron_left_rounded, color: Colors.white, size: 28),
-                  ),
-                ),
+                child: kIsWeb
+                    ? Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black.withValues(alpha: 0.6),
+                          border: Border.all(color: const Color(0x33FFFFFF), width: 1),
+                        ),
+                        child: const Icon(Icons.chevron_left_rounded, color: Colors.white, size: 28),
+                      )
+                    : LiquidGlass.withOwnLayer(
+                        shape: const LiquidRoundedRectangle(
+                          borderRadius: 999,
+                          side: BorderSide(
+                            color: Color(0x33FFFFFF),
+                            width: 1,
+                          ),
+                        ),
+                        settings: const LiquidGlassSettings(
+                          blur: 12.0,
+                          glassColor: Colors.transparent,
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.black.withValues(alpha: 0.4),
+                          ),
+                          child: const Icon(Icons.chevron_left_rounded, color: Colors.white, size: 28),
+                        ),
+                      ),
               ),
             ),
 
@@ -232,27 +280,37 @@ class _ImagePreviewDialogState extends State<ImagePreviewDialog> {
                     curve: Curves.easeInOut,
                   );
                 },
-                child: LiquidGlass.withOwnLayer(
-                  shape: const LiquidRoundedRectangle(
-                    borderRadius: 999,
-                    side: BorderSide(
-                      color: Color(0x33FFFFFF),
-                      width: 1,
-                    ),
-                  ),
-                  settings: const LiquidGlassSettings(
-                    blur: 12.0,
-                    glassColor: Colors.transparent,
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black.withValues(alpha: 0.4),
-                    ),
-                    child: const Icon(Icons.chevron_right_rounded, color: Colors.white, size: 28),
-                  ),
-                ),
+                child: kIsWeb
+                    ? Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black.withValues(alpha: 0.6),
+                          border: Border.all(color: const Color(0x33FFFFFF), width: 1),
+                        ),
+                        child: const Icon(Icons.chevron_right_rounded, color: Colors.white, size: 28),
+                      )
+                    : LiquidGlass.withOwnLayer(
+                        shape: const LiquidRoundedRectangle(
+                          borderRadius: 999,
+                          side: BorderSide(
+                            color: Color(0x33FFFFFF),
+                            width: 1,
+                          ),
+                        ),
+                        settings: const LiquidGlassSettings(
+                          blur: 12.0,
+                          glassColor: Colors.transparent,
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.black.withValues(alpha: 0.4),
+                          ),
+                          child: const Icon(Icons.chevron_right_rounded, color: Colors.white, size: 28),
+                        ),
+                      ),
               ),
             ),
         ],

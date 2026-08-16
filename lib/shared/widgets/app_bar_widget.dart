@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 import 'package:provider/provider.dart';
@@ -60,130 +62,149 @@ class AppBarWidget extends StatelessWidget {
       );
     }
 
-    return Padding(
-      padding: appBarPadding,
-      child: LiquidGlass.withOwnLayer(
-        shape: const LiquidRoundedRectangle(
-          borderRadius: 16,
-          side: BorderSide(
-            color: Color(0x1F000000),
-            width: 1,
-          ),
-        ),
-        settings: const LiquidGlassSettings(
-          blur: 16.0,
-          glassColor: Colors.transparent,
-        ),
+    final appBarContent = ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
         child: Container(
           height: 54.0, // Standard height since there is no stacked CTA button
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // Logo (Align Left)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: GestureDetector(
-                  onTap: () {
-                    if (isSubPage) {
-                      context.go('/');
-                    } else {
-                      context.read<HomeViewModel>().scrollToTop();
-                    }
-                  },
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.none,
-                    child: Text(
-                      "Mariz.",
-                      style: GoogleFonts.outfit(
-                        color: primaryTextColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: -0.5,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              // Nav Items (Absolute Center - Desktop Only)
-              if (!isMobile)
-                Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      HoverNavItem(
-                        label: "Home",
-                        isActive: !isSubPage && activeSection == "Home",
-                        activeColor: accentColor,
-                        isDarkMode: isDark,
-                        onTap: () {
-                          if (isSubPage) {
-                            context.go('/');
-                          } else {
-                            context.read<HomeViewModel>().scrollToTop();
-                          }
-                        },
-                      ),
-                      const SizedBox(width: 28), // Improved spacing
-                      HoverNavItem(
-                        label: "Projects",
-                        isActive: isProjectsPage,
-                        activeColor: accentColor,
-                        isDarkMode: isDark,
-                        onTap: () {
-                          if (!isProjectsPage) {
-                            context.go('/projects');
-                          }
-                        },
-                      ),
-                      const SizedBox(width: 28),
-                      HoverNavItem(
-                        label: "Experience",
-                        isActive: isExperiencePage,
-                        activeColor: accentColor,
-                        isDarkMode: isDark,
-                        onTap: () {
-                          if (!isExperiencePage) {
-                            context.go('/experience');
-                          }
-                        },
-                      ),
-                      const SizedBox(width: 28),
-                      HoverNavItem(
-                        label: "About",
-                        isActive: isAboutPage,
-                        activeColor: accentColor,
-                        isDarkMode: isDark,
-                        onTap: () {
-                          if (!isAboutPage) {
-                            context.go('/about');
-                          }
-                        },
-                      ),
-                      const SizedBox(width: 28),
-                      HoverNavItem(
-                        label: "Contact",
-                        isActive: isContactPage,
-                        activeColor: accentColor,
-                        isDarkMode: isDark,
-                        onTap: () {
-                          if (!isContactPage) {
-                            context.go('/contact');
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              // Actions (Align Right)
-              Align(
-                alignment: Alignment.centerRight,
-                child: buildActions(),
-              ),
-            ],
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: isDark ? const Color(0x26FFFFFF) : const Color(0x1F000000),
+              width: 1,
+            ),
           ),
-        ),
+          child: Stack(
+        alignment: Alignment.center,
+        children: [
+          // Logo (Align Left)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: GestureDetector(
+              onTap: () {
+                if (isSubPage) {
+                  context.go('/');
+                } else {
+                  context.read<HomeViewModel>().scrollToTop();
+                }
+              },
+              child: MouseRegion(
+                cursor: SystemMouseCursors.none,
+                child: Text(
+                  "Mariz.",
+                  style: GoogleFonts.outfit(
+                    color: primaryTextColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: -0.5,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // Nav Links (Center)
+          if (!isMobileView)
+            Align(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  HoverNavItem(
+                    label: 'Home',
+                    isActive: activeSection == 'Home' && !isSubPage,
+                    isDarkMode: isDark,
+                    activeColor: accentColor,
+                    onTap: () {
+                      if (isSubPage) {
+                        context.go('/');
+                      } else {
+                        context.read<HomeViewModel>().scrollToTop();
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 28),
+                  HoverNavItem(
+                    label: 'Projects',
+                    isActive: isProjectsPage || activeSection == 'Projects',
+                    isDarkMode: isDark,
+                    activeColor: accentColor,
+                    onTap: () {
+                      if (!isProjectsPage) {
+                        context.go('/projects');
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 28),
+                  HoverNavItem(
+                    label: 'Experience',
+                    isActive: isExperiencePage || activeSection == 'Experience',
+                    isDarkMode: isDark,
+                    activeColor: accentColor,
+                    onTap: () {
+                      if (!isExperiencePage) {
+                        context.go('/experience');
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 28),
+                  HoverNavItem(
+                    label: 'About',
+                    isActive: isAboutPage || activeSection == 'About',
+                    isDarkMode: isDark,
+                    activeColor: accentColor,
+                    onTap: () {
+                      if (!isAboutPage) {
+                        context.go('/about');
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 28),
+                  HoverNavItem(
+                    label: 'Contact',
+                    isActive: isContactPage || activeSection == 'Contact',
+                    isDarkMode: isDark,
+                    activeColor: accentColor,
+                    onTap: () {
+                      if (!isContactPage) {
+                        context.go('/contact');
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          // Actions (Align Right)
+          Align(
+            alignment: Alignment.centerRight,
+            child: buildActions(),
+          ),
+        ],
       ),
+    ),
+  ),
+);
+
+    return Padding(
+      padding: appBarPadding,
+      child: kIsWeb
+          ? appBarContent
+          : LiquidGlass.withOwnLayer(
+              shape: const LiquidRoundedRectangle(
+                borderRadius: 16,
+                side: BorderSide(
+                  color: Color(0x1F000000),
+                  width: 1,
+                ),
+              ),
+              settings: const LiquidGlassSettings(
+                blur: 16.0,
+                glassColor: Colors.transparent,
+              ),
+              child: appBarContent,
+            ),
     );
   }
 }

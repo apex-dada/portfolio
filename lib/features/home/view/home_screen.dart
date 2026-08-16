@@ -10,8 +10,6 @@ import 'package:portfolio/features/home/widgets/live_clock_widget.dart';
 import 'package:portfolio/features/home/widgets/toggle_widget.dart';
 import 'package:portfolio/features/home/widgets/what_i_do_widget.dart';
 import 'package:portfolio/features/home/widgets/tech_stack_widget.dart';
-import 'package:portfolio/shared/widgets/video_background.dart';
-
 import 'package:portfolio/shared/widgets/footer_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -116,9 +114,14 @@ class HomeScreen extends StatelessWidget {
           width: double.infinity,
           child: Stack(
             children: [
-              // Video background layer
-              const Positioned.fill(
-                child: VideoBackground(),
+              // Background image layer
+              Positioned.fill(
+                child: Image.asset(
+                  isDarkMode
+                      ? 'assets/background/background_2.jpg'
+                      : 'assets/background/finalfr.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
               // Content layer
               Positioned.fill(

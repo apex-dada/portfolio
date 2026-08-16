@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 
@@ -353,7 +355,18 @@ class _BentoCardState extends State<BentoCard> {
       child: cardContent,
     );
 
-    Widget cardWidget = widget.enableGlass
+    Widget blurredContainer = ClipRRect(
+      borderRadius: BorderRadius.circular(widget.borderRadius),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaX: widget.glassBlur,
+          sigmaY: widget.glassBlur,
+        ),
+        child: containerWidget,
+      ),
+    );
+
+    Widget cardWidget = (widget.enableGlass && !kIsWeb)
         ? LiquidGlass.withOwnLayer(
             shape: LiquidRoundedRectangle(
               borderRadius: widget.borderRadius,
@@ -370,7 +383,7 @@ class _BentoCardState extends State<BentoCard> {
               border: Border.all(color: finalBorderColor, width: widget.borderWidth),
               borderRadius: BorderRadius.circular(widget.borderRadius),
             ),
-            child: containerWidget,
+            child: widget.enableGlass ? blurredContainer : containerWidget,
           );
 
     return MouseRegion(

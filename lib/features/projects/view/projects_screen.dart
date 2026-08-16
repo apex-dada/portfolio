@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/shared/widgets/app_bar_widget.dart';
 import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
-import 'package:portfolio/shared/widgets/video_background.dart';
 import 'package:portfolio/features/projects/widgets/project_tech_stack_card.dart';
 import 'package:portfolio/features/projects/widgets/project_overview_card.dart';
 import 'package:portfolio/features/projects/widgets/project_carousel_card.dart';
@@ -116,8 +115,13 @@ class ProjectsScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           body: Stack(
             children: [
-              const Positioned.fill(
-                child: VideoBackground(),
+              Positioned.fill(
+                child: Image.asset(
+                  isDark
+                      ? 'assets/background/background_2.jpg'
+                      : 'assets/background/finalfr.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
               Container(
             height: double.infinity,

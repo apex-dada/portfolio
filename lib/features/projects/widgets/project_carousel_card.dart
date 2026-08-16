@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
@@ -146,27 +147,45 @@ class _ProjectCarouselCardState extends State<ProjectCarouselCard>
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: LiquidGlass.withOwnLayer(
-                          shape: const LiquidRoundedRectangle(
-                            borderRadius: 14,
-                            side: BorderSide(
-                              color: Color(0x1F000000),
-                              width: 1,
-                            ),
-                          ),
-                          settings: const LiquidGlassSettings(
-                            blur: 12.0,
-                            glassColor: Colors.transparent,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(14),
-                            child: Image.asset(
-                              screenshotPath,
-                              fit: BoxFit.cover,
-                              height: double.infinity,
-                            ),
-                          ),
-                        ),
+                        child: kIsWeb
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(14),
+                                  border: Border.all(
+                                    color: const Color(0x1F000000),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Image.asset(
+                                    screenshotPath,
+                                    fit: BoxFit.cover,
+                                    height: double.infinity,
+                                  ),
+                                ),
+                              )
+                            : LiquidGlass.withOwnLayer(
+                                shape: const LiquidRoundedRectangle(
+                                  borderRadius: 14,
+                                  side: BorderSide(
+                                    color: Color(0x1F000000),
+                                    width: 1,
+                                  ),
+                                ),
+                                settings: const LiquidGlassSettings(
+                                  blur: 12.0,
+                                  glassColor: Colors.transparent,
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Image.asset(
+                                    screenshotPath,
+                                    fit: BoxFit.cover,
+                                    height: double.infinity,
+                                  ),
+                                ),
+                              ),
                       ),
                     );
                   },
