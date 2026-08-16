@@ -29,7 +29,7 @@ class WhatIDoWidget extends StatelessWidget {
             decoration: const BoxDecoration(
               color: Colors.transparent,
             ),
-            child: Icon(icon, size: 18, color: Colors.white),
+            child: Icon(icon, size: 18, color: const Color(0xFF3DDC84)),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -72,19 +72,13 @@ class WhatIDoWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header Bar
-          Row(
-            children: [
-              const Icon(Icons.work_outline_rounded, size: 16, color: Colors.white),
-              const SizedBox(width: 8),
-              Text(
-                "What I Do",
-                style: GoogleFonts.outfit(
-                  color: primaryTextColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
+          Text(
+            "What I Do",
+            style: GoogleFonts.outfit(
+              color: const Color(0xFF3DDC84),
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 12),
 

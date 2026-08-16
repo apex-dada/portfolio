@@ -15,12 +15,13 @@ class ExperienceScreen extends StatelessWidget {
       return const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ExperienceTimelineCard(),
+            SizedBox(width: double.infinity, child: ExperienceTimelineCard()),
             SizedBox(height: 16),
-            ExperienceServicesCard(),
+            SizedBox(height: 480, width: double.infinity, child: ExperienceServicesCard()),
             SizedBox(height: 16),
-            SizedBox(height: 340, child: ExperienceWorkflowCard()), // Workflow list needs bounds on mobile
+            SizedBox(height: 340, width: double.infinity, child: ExperienceWorkflowCard()),
           ],
         ),
       );
@@ -30,10 +31,12 @@ class ExperienceScreen extends StatelessWidget {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 32, vertical: 24),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Row 1: Timeline (flex 6), Services (flex 4)
           SizedBox(
-            height: 340,
+            height: 480,
+            width: double.infinity,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -47,6 +50,7 @@ class ExperienceScreen extends StatelessWidget {
           // Row 2: Workflow timeline scroll list (flex 10)
           SizedBox(
             height: 340,
+            width: double.infinity,
             child: ExperienceWorkflowCard(),
           ),
         ],

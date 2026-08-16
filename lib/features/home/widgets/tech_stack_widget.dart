@@ -4,31 +4,25 @@ import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
 
-class TechStackItem {
-  final String name;
-  final String? logoAsset;
-  final IconData? fallbackIcon;
-
-  const TechStackItem(this.name, {this.logoAsset, this.fallbackIcon});
-}
-
 class TechStackWidget extends StatelessWidget {
   const TechStackWidget({super.key});
 
-  static const List<TechStackItem> _stackItems = [
-    TechStackItem("Flutter", logoAsset: "assets/stack/flutter.png"),
-    TechStackItem("Dart", logoAsset: "assets/stack/dart.png"),
-    TechStackItem("Android", logoAsset: "assets/stack/android-logo.jpg"),
-    TechStackItem("iOS", fallbackIcon: Icons.apple_rounded),
-    TechStackItem("Bloc", logoAsset: "assets/stack/block.png"),
-    TechStackItem("Riverpod", logoAsset: "assets/stack/riverpod_logo.png"),
-    TechStackItem("Firebase", logoAsset: "assets/stack/firebase.png"),
-    TechStackItem("Supabase", logoAsset: "assets/stack/supabase.webp"),
-    TechStackItem("SQLite", logoAsset: "assets/stack/sqlite.webp"),
-    TechStackItem("Drift", fallbackIcon: Icons.storage_rounded),
-    TechStackItem("Git", fallbackIcon: Icons.alt_route_rounded),
-    TechStackItem("GitHub", logoAsset: "assets/stack/github-logo-png_seeklogo-304612.png"),
-    TechStackItem("Android Studio", logoAsset: "assets/stack/android-studio.png"),
+  static const List<String> _stackItems = [
+    "Flutter",
+    "Dart",
+    "Android",
+    "iOS",
+    "Bloc",
+    "Riverpod",
+    "Firebase",
+    "Supabase",
+    "SQLite",
+    "Drift",
+    "Git",
+    "GitHub",
+    "Play Store",
+    "App Store",
+    "Android Studio",
   ];
 
   @override
@@ -37,7 +31,6 @@ class TechStackWidget extends StatelessWidget {
     final cardColor = context.select<HomeViewModel, Color>((vm) => vm.cardColor);
     final borderColor = context.select<HomeViewModel, Color>((vm) => vm.borderColor);
     final hoverBorderColor = context.select<HomeViewModel, Color>((vm) => vm.hoverBorderColor);
-    final primaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.primaryTextColor);
 
     const greenAccent = Color(0xFF3DDC84);
 
@@ -50,19 +43,13 @@ class TechStackWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header Bar
-          Row(
-            children: [
-              const Icon(Icons.layers_rounded, size: 18, color: greenAccent),
-              const SizedBox(width: 8),
-              Text(
-                "Tech Stack",
-                style: GoogleFonts.outfit(
-                  color: primaryTextColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
+          Text(
+            "Tech Stack",
+            style: GoogleFonts.outfit(
+              color: greenAccent,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 16),
 
@@ -73,54 +60,19 @@ class TechStackWidget extends StatelessWidget {
               child: Wrap(
                 spacing: 8,
                 runSpacing: 8,
-                children: _stackItems.map((item) {
+                children: _stackItems.map((name) {
                   return BentoCard(
                     backgroundColor: isDark ? const Color(0xFF1E2129) : const Color(0xFFF4F6F9),
                     borderColor: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
                     hoverBorderColor: isDark ? const Color(0x33FFFFFF) : const Color(0x33000000),
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (item.logoAsset != null) ...[
-                          Container(
-                            padding: const EdgeInsets.all(3),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Image.asset(
-                              item.logoAsset!,
-                              width: 14,
-                              height: 14,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                        ] else if (item.fallbackIcon != null) ...[
-                          Container(
-                            padding: const EdgeInsets.all(3),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Icon(
-                              item.fallbackIcon!,
-                              size: 14,
-                              color: Colors.black87,
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                        ],
-                        Text(
-                          item.name,
-                          style: GoogleFonts.inter(
-                            color: isDark ? Colors.white : Colors.black87,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    child: Text(
+                      name,
+                      style: GoogleFonts.inter(
+                        color: isDark ? Colors.white : Colors.black87,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   );
                 }).toList(),
