@@ -55,27 +55,32 @@ class TechStackWidget extends StatelessWidget {
 
           // Stack Tags Wrap
           Expanded(
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: _stackItems.map((name) {
-                  return BentoCard(
-                    backgroundColor: isDark ? const Color(0xFF1E2129) : const Color(0xFFF4F6F9),
-                    borderColor: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
-                    hoverBorderColor: isDark ? const Color(0x33FFFFFF) : const Color(0x33000000),
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    child: Text(
-                      name,
-                      style: GoogleFonts.inter(
-                        color: isDark ? Colors.white : Colors.black87,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  );
-                }).toList(),
+            child: ScrollConfiguration(
+              behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+              child: SingleChildScrollView(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: _stackItems.map((name) {
+                      return BentoCard(
+                        backgroundColor: isDark ? const Color(0xFF1E2129) : const Color(0xFFF4F6F9),
+                        borderColor: isDark ? const Color(0x1AFFFFFF) : const Color(0x1F000000),
+                        hoverBorderColor: isDark ? const Color(0x33FFFFFF) : const Color(0x33000000),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        child: Text(
+                          name,
+                          style: GoogleFonts.inter(
+                            color: isDark ? Colors.white : Colors.black87,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
               ),
             ),
           ),

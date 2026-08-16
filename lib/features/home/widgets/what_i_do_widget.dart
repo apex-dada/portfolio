@@ -84,30 +84,37 @@ class WhatIDoWidget extends StatelessWidget {
 
           // Items List
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                buildItem(
-                  icon: Icons.phone_iphone_rounded,
-                  title: "Mobile Development",
-                  description: "Building cross-platform mobile apps with Flutter.",
+            child: ScrollConfiguration(
+              behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    buildItem(
+                      icon: Icons.phone_iphone_rounded,
+                      title: "Mobile Development",
+                      description: "Building cross-platform mobile apps with Flutter.",
+                    ),
+                    const SizedBox(height: 10),
+                    buildItem(
+                      icon: Icons.brush_rounded,
+                      title: "UI/UX Implementation",
+                      description: "Turning ideas into beautiful, responsive interfaces.",
+                    ),
+                    const SizedBox(height: 10),
+                    buildItem(
+                      icon: Icons.layers_rounded,
+                      title: "State Management",
+                      description: "Expert in Bloc, Provider & Riverpod.",
+                    ),
+                    const SizedBox(height: 10),
+                    buildItem(
+                      icon: Icons.code_rounded,
+                      title: "API Integration",
+                      description: "Connecting apps with robust backends & third-party APIs.",
+                    ),
+                  ],
                 ),
-                buildItem(
-                  icon: Icons.brush_rounded,
-                  title: "UI/UX Implementation",
-                  description: "Turning ideas into beautiful, responsive interfaces.",
-                ),
-                buildItem(
-                  icon: Icons.layers_rounded,
-                  title: "State Management",
-                  description: "Expert in Bloc, Provider & Riverpod.",
-                ),
-                buildItem(
-                  icon: Icons.code_rounded,
-                  title: "API Integration",
-                  description: "Connecting apps with robust backends & third-party APIs.",
-                ),
-              ],
+              ),
             ),
           ),
         ],

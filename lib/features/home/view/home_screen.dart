@@ -21,14 +21,15 @@ class HomeScreen extends StatelessWidget {
       return const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             HeroProfileWidget(),
             SizedBox(height: 16),
             HighlightsBarWidget(),
             SizedBox(height: 16),
-            SizedBox(height: 340, child: WhatIDoWidget()),
+            SizedBox(height: 380, child: WhatIDoWidget()),
             SizedBox(height: 16),
-            SizedBox(height: 220, child: TechStackWidget()),
+            SizedBox(height: 240, child: TechStackWidget()),
             SizedBox(height: 16),
             SizedBox(height: 140, child: LiveClockWidget()),
             SizedBox(height: 16),

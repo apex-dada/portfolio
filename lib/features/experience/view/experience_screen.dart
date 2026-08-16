@@ -19,7 +19,7 @@ class ExperienceScreen extends StatelessWidget {
           children: [
             SizedBox(width: double.infinity, child: ExperienceTimelineCard()),
             SizedBox(height: 16),
-            SizedBox(height: 480, width: double.infinity, child: ExperienceServicesCard()),
+            SizedBox(height: 400, width: double.infinity, child: ExperienceServicesCard()),
             SizedBox(height: 16),
             SizedBox(height: 340, width: double.infinity, child: ExperienceWorkflowCard()),
           ],
@@ -35,7 +35,7 @@ class ExperienceScreen extends StatelessWidget {
         children: [
           // Row 1: Timeline (flex 6), Services (flex 4)
           SizedBox(
-            height: 480,
+            height: 400,
             width: double.infinity,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,

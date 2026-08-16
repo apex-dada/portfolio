@@ -21,7 +21,7 @@ class HeroProfileWidget extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isMobile = constraints.maxWidth < 750;
+        final isMobile = constraints.maxWidth < 550;
 
         Widget leftContent = Column(
           crossAxisAlignment: CrossAxisAlignment.start,
