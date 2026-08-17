@@ -89,29 +89,14 @@ class AppBarWidget extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.asset(
-                                      'assets/images/website_logo.webp',
-                                      width: 28,
-                                      height: 28,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    "Mariz.",
-                                    style: GoogleFonts.outfit(
-                                      color: primaryTextColor,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: -0.5,
-                                    ),
-                                  ),
-                                ],
+                              Text(
+                                "Mariz.",
+                                style: GoogleFonts.outfit(
+                                  color: primaryTextColor,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: -0.5,
+                                ),
                               ),
                               IconButton(
                                 onPressed: () => Navigator.pop(context),
@@ -355,29 +340,14 @@ class AppBarWidget extends StatelessWidget {
                   },
                   child: MouseRegion(
                     cursor: SystemMouseCursors.none,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            'assets/images/website_logo.webp',
-                            width: 28,
-                            height: 28,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          "Mariz.",
-                          style: GoogleFonts.outfit(
-                            color: primaryTextColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: -0.5,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      "Mariz.",
+                      style: GoogleFonts.outfit(
+                        color: primaryTextColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: -0.5,
+                      ),
                     ),
                   ),
                 ),
