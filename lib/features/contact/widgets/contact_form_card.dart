@@ -223,32 +223,32 @@ class _ContactFormCardState extends State<ContactFormCard> {
             maxLines: 3,
           ),
           const SizedBox(height: 14),
-          Align(
-            alignment: Alignment.centerRight,
+          SizedBox(
+            width: double.infinity,
+            height: 44,
             child: ElevatedButton.icon(
               onPressed: _isSubmitting ? null : () => _submitForm(context),
               icon: _isSubmitting
                   ? SizedBox(
-                      width: 14,
-                      height: 14,
+                      width: 16,
+                      height: 16,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
                         color: isDark ? Colors.black : Colors.white,
                       ),
                     )
-                  : const Icon(Icons.send_rounded, size: 14),
+                  : const Icon(Icons.send_rounded, size: 16),
               label: Text(
                 _isSubmitting ? "Sending..." : "Send Message",
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.w600,
-                  fontSize: 13.5,
+                  fontSize: 14,
                 ),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryTextColor,
                 foregroundColor: isDark ? Colors.black : Colors.white,
                 elevation: 0,
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
