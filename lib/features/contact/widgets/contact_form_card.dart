@@ -33,22 +33,23 @@ class _ContactFormCardState extends State<ContactFormCard> {
   }
 
   Future<void> _submitForm(BuildContext context) async {
+    final homeViewModel = context.read<HomeViewModel>();
     final name = _nameController.text.trim();
     final email = _emailController.text.trim();
     final message = _messageController.text.trim();
 
     if (email.isEmpty) {
-      context.read<HomeViewModel>().showSnackBar(context, "Please enter your email address.");
+      homeViewModel.showSnackBar(context, "Please enter your email address.");
       return;
     }
 
     if (!_isValidEmail(email)) {
-      context.read<HomeViewModel>().showSnackBar(context, "Please enter a valid email address.");
+      homeViewModel.showSnackBar(context, "Please enter a valid email address.");
       return;
     }
 
     if (message.isEmpty) {
-      context.read<HomeViewModel>().showSnackBar(context, "Please enter a message or project inquiry.");
+      homeViewModel.showSnackBar(context, "Please enter a message or project inquiry.");
       return;
     }
 
@@ -71,27 +72,26 @@ class _ContactFormCardState extends State<ContactFormCard> {
 
       final data = jsonDecode(response.body);
 
-      if (mounted) {
-        if (response.statusCode == 200 && data['success'] == true) {
-          _nameController.clear();
-          _emailController.clear();
-          _messageController.clear();
-          context.read<HomeViewModel>().showSnackBar(
-            context,
-            "Message sent successfully! I'll get back to you soon.",
-          );
-        } else {
-          final errorMessage = data['error'] ?? "Failed to send message. Please try again.";
-          context.read<HomeViewModel>().showSnackBar(context, errorMessage);
-        }
+      if (!mounted) return;
+
+      if (response.statusCode == 200 && data['success'] == true) {
+        _nameController.clear();
+        _emailController.clear();
+        _messageController.clear();
+        homeViewModel.showSnackBar(
+          this.context,
+          "Message sent successfully! I'll get back to you soon.",
+        );
+      } else {
+        final errorMessage = data['error'] ?? "Failed to send message. Please try again.";
+        homeViewModel.showSnackBar(this.context, errorMessage);
       }
     } catch (e) {
-      if (mounted) {
-        context.read<HomeViewModel>().showSnackBar(
-          context,
-          "Error sending message. Please try emailing directly at kaziwoaej@gmail.com",
-        );
-      }
+      if (!mounted) return;
+      homeViewModel.showSnackBar(
+        this.context,
+        "Error sending message. Please try emailing directly at kaziwoaej@gmail.com",
+      );
     } finally {
       if (mounted) {
         setState(() {

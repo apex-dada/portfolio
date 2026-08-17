@@ -6,6 +6,7 @@ import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
 import 'package:portfolio/features/experience/widgets/experience_timeline_card.dart';
 import 'package:portfolio/features/experience/widgets/experience_services_card.dart';
 import 'package:portfolio/features/experience/widgets/experience_workflow_card.dart';
+import 'package:portfolio/shared/widgets/footer_widget.dart';
 
 class ExperienceScreen extends StatelessWidget {
   const ExperienceScreen({super.key});
@@ -96,7 +97,17 @@ class ExperienceScreen extends StatelessWidget {
                         constraints: const BoxConstraints(maxWidth: 1200),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 76.0),
-                          child: buildBody(size, isMobile),
+                          child: Column(
+                            children: [
+                              buildBody(size, isMobile),
+                              const SizedBox(height: 16),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 32),
+                                child: const FooterWidget(),
+                              ),
+                              const SizedBox(height: 24),
+                            ],
+                          ),
                         ),
                       ),
                     ),

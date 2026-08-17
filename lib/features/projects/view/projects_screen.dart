@@ -6,6 +6,7 @@ import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
 import 'package:portfolio/features/projects/widgets/project_tech_stack_card.dart';
 import 'package:portfolio/features/projects/widgets/project_overview_card.dart';
 import 'package:portfolio/features/projects/widgets/project_carousel_card.dart';
+import 'package:portfolio/shared/widgets/footer_widget.dart';
 
 class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({super.key});
@@ -149,7 +150,17 @@ class ProjectsScreen extends StatelessWidget {
                         constraints: const BoxConstraints(maxWidth: 1200),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 76.0),
-                          child: buildBody(size, isMobile),
+                          child: Column(
+                            children: [
+                              buildBody(size, isMobile),
+                              const SizedBox(height: 16),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 32),
+                                child: const FooterWidget(),
+                              ),
+                              const SizedBox(height: 24),
+                            ],
+                          ),
                         ),
                       ),
                     ),

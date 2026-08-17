@@ -143,7 +143,11 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   buildBody(isMobile),
                                   const SizedBox(height: 16),
-                                  const FooterWidget(),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 32),
+                                    child: const FooterWidget(),
+                                  ),
+                                  const SizedBox(height: 24),
                                 ],
                               ),
                             ),

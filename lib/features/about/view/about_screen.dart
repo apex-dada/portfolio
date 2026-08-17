@@ -9,6 +9,7 @@ import 'package:portfolio/features/about/widgets/about_education_widget.dart';
 import 'package:portfolio/features/about/widgets/about_hobbies_widget.dart';
 import 'package:portfolio/features/about/widgets/about_core_values_widget.dart';
 import 'package:portfolio/features/about/widgets/about_soft_skills_widget.dart';
+import 'package:portfolio/shared/widgets/footer_widget.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -118,7 +119,17 @@ class AboutScreen extends StatelessWidget {
                         constraints: const BoxConstraints(maxWidth: 1200),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 76.0),
-                          child: buildBody(size, isMobile),
+                          child: Column(
+                            children: [
+                              buildBody(size, isMobile),
+                              const SizedBox(height: 16),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 32),
+                                child: const FooterWidget(),
+                              ),
+                              const SizedBox(height: 24),
+                            ],
+                          ),
                         ),
                       ),
                     ),

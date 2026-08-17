@@ -6,6 +6,7 @@ import 'package:portfolio/shared/widgets/auto_hiding_header.dart';
 import 'package:portfolio/features/contact/widgets/contact_form_card.dart';
 import 'package:portfolio/features/contact/widgets/contact_info_card.dart';
 import 'package:portfolio/features/contact/widgets/contact_socials_card.dart';
+import 'package:portfolio/shared/widgets/footer_widget.dart';
 
 class ContactScreen extends StatelessWidget {
   const ContactScreen({super.key});
@@ -96,7 +97,17 @@ class ContactScreen extends StatelessWidget {
                         constraints: const BoxConstraints(maxWidth: 1200),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 76.0),
-                          child: buildBody(size, isMobile),
+                          child: Column(
+                            children: [
+                              buildBody(size, isMobile),
+                              const SizedBox(height: 16),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 32),
+                                child: const FooterWidget(),
+                              ),
+                              const SizedBox(height: 24),
+                            ],
+                          ),
                         ),
                       ),
                     ),
