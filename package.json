@@ -5,5 +5,8 @@
   "scripts": {
     "build": "bash vercel-build.sh",
     "vercel-build": "bash vercel-build.sh"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.16"
   }
 }

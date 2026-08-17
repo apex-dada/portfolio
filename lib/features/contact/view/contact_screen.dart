@@ -35,7 +35,7 @@ class ContactScreen extends StatelessWidget {
         children: [
           // Row 1: Form (flex 6), Details (flex 4)
           SizedBox(
-            height: 340,
+            height: 365,
             width: double.infinity,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,

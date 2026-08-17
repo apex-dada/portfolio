@@ -1,11 +1,105 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:portfolio/features/home/provider/home_viewmodel.dart';
 import 'package:portfolio/core/widgets/bento_card.dart';
 
-class ContactFormCard extends StatelessWidget {
+class ContactFormCard extends StatefulWidget {
   const ContactFormCard({super.key});
+
+  @override
+  State<ContactFormCard> createState() => _ContactFormCardState();
+}
+
+class _ContactFormCardState extends State<ContactFormCard> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
+
+  bool _isSubmitting = false;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  bool _isValidEmail(String email) {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email.trim());
+  }
+
+  Future<void> _submitForm(BuildContext context) async {
+    final name = _nameController.text.trim();
+    final email = _emailController.text.trim();
+    final message = _messageController.text.trim();
+
+    if (email.isEmpty) {
+      context.read<HomeViewModel>().showSnackBar(context, "Please enter your email address.");
+      return;
+    }
+
+    if (!_isValidEmail(email)) {
+      context.read<HomeViewModel>().showSnackBar(context, "Please enter a valid email address.");
+      return;
+    }
+
+    if (message.isEmpty) {
+      context.read<HomeViewModel>().showSnackBar(context, "Please enter a message or project inquiry.");
+      return;
+    }
+
+    setState(() {
+      _isSubmitting = true;
+    });
+
+    try {
+      final endpoint = Uri.base.replace(path: '/api/contact', query: '');
+
+      final response = await http.post(
+        endpoint,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'name': name.isEmpty ? 'Portfolio Visitor' : name,
+          'email': email,
+          'message': message,
+        }),
+      ).timeout(const Duration(seconds: 15));
+
+      final data = jsonDecode(response.body);
+
+      if (mounted) {
+        if (response.statusCode == 200 && data['success'] == true) {
+          _nameController.clear();
+          _emailController.clear();
+          _messageController.clear();
+          context.read<HomeViewModel>().showSnackBar(
+            context,
+            "Message sent successfully! I'll get back to you soon.",
+          );
+        } else {
+          final errorMessage = data['error'] ?? "Failed to send message. Please try again.";
+          context.read<HomeViewModel>().showSnackBar(context, errorMessage);
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        context.read<HomeViewModel>().showSnackBar(
+          context,
+          "Error sending message. Please try emailing directly at kaziwoaej@gmail.com",
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSubmitting = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,37 +111,39 @@ class ContactFormCard extends StatelessWidget {
     final secondaryTextColor = context.select<HomeViewModel, Color>((vm) => vm.secondaryTextColor);
     final accentColor = isDark ? const Color(0xFF3DDC84) : const Color(0xFF007AFF);
 
-    Widget buildTextField() {
+    Widget buildInputField({
+      required TextEditingController controller,
+      required String hintText,
+      int maxLines = 1,
+    }) {
       return Container(
-        height: 44,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
           color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.03),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: borderColor,
             width: 1.0,
           ),
         ),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: TextField(
-            style: GoogleFonts.inter(
-              color: primaryTextColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
+        child: TextField(
+          controller: controller,
+          maxLines: maxLines,
+          style: GoogleFonts.inter(
+            color: primaryTextColor,
+            fontSize: 13.5,
+            fontWeight: FontWeight.w500,
+          ),
+          decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: GoogleFonts.inter(
+              color: secondaryTextColor.withValues(alpha: 0.6),
+              fontSize: 13.5,
+              fontWeight: FontWeight.w400,
             ),
-            decoration: InputDecoration(
-              hintText: "Your email address",
-              hintStyle: GoogleFonts.inter(
-                color: secondaryTextColor,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-              border: InputBorder.none,
-              isDense: true,
-              contentPadding: EdgeInsets.zero,
-            ),
+            border: InputBorder.none,
+            isDense: true,
+            contentPadding: EdgeInsets.zero,
           ),
         ),
       );
@@ -58,7 +154,7 @@ class ContactFormCard extends StatelessWidget {
       backgroundColor: cardColor,
       borderColor: borderColor,
       hoverBorderColor: hoverBorderColor,
-      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 22),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -72,78 +168,92 @@ class ContactFormCard extends StatelessWidget {
               letterSpacing: 2.0,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           Text(
             "Have a project in mind? Let's connect.",
             style: GoogleFonts.outfit(
               color: primaryTextColor,
-              fontSize: 22,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               letterSpacing: -0.5,
-              height: 1.3,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
           LayoutBuilder(
             builder: (context, constraints) {
-              final useColumn = constraints.maxWidth < 320;
-              if (useColumn) {
+              final isNarrow = constraints.maxWidth < 450;
+              if (isNarrow) {
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    buildTextField(),
+                    buildInputField(
+                      controller: _nameController,
+                      hintText: "Your Name (Optional)",
+                    ),
                     const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () => context.read<HomeViewModel>().showSnackBar(context, "Project request sent successfully!"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryTextColor,
-                        foregroundColor: isDark ? Colors.black : Colors.white,
-                        elevation: 0,
-                        minimumSize: const Size(double.infinity, 44),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: Text(
-                        "Send",
-                        style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                        ),
-                      ),
+                    buildInputField(
+                      controller: _emailController,
+                      hintText: "Your Email Address *",
                     ),
                   ],
                 );
               }
-
               return Row(
                 children: [
                   Expanded(
-                    child: buildTextField(),
-                  ),
-                  const SizedBox(width: 12),
-                  ElevatedButton(
-                    onPressed: () => context.read<HomeViewModel>().showSnackBar(context, "Project request sent successfully!"),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryTextColor,
-                      foregroundColor: isDark ? Colors.black : Colors.white,
-                      elevation: 0,
-                      minimumSize: const Size(100, 44),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                    child: buildInputField(
+                      controller: _nameController,
+                      hintText: "Your Name (Optional)",
                     ),
-                    child: Text(
-                      "Send",
-                      style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                      ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: buildInputField(
+                      controller: _emailController,
+                      hintText: "Your Email Address *",
                     ),
                   ),
                 ],
               );
             },
+          ),
+          const SizedBox(height: 10),
+          buildInputField(
+            controller: _messageController,
+            hintText: "Tell me about your project or inquiry... *",
+            maxLines: 3,
+          ),
+          const SizedBox(height: 14),
+          Align(
+            alignment: Alignment.centerRight,
+            child: ElevatedButton.icon(
+              onPressed: _isSubmitting ? null : () => _submitForm(context),
+              icon: _isSubmitting
+                  ? SizedBox(
+                      width: 14,
+                      height: 14,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: isDark ? Colors.black : Colors.white,
+                      ),
+                    )
+                  : const Icon(Icons.send_rounded, size: 14),
+              label: Text(
+                _isSubmitting ? "Sending..." : "Send Message",
+                style: GoogleFonts.inter(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13.5,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primaryTextColor,
+                foregroundColor: isDark ? Colors.black : Colors.white,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
           ),
         ],
       ),
